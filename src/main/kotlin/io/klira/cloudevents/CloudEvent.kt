@@ -1,12 +1,10 @@
 package io.klira.cloudevents
 
-import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.OffsetDateTime
 import java.time.ZoneId
 import java.time.ZoneOffset
-import java.time.ZonedDateTime
 
 /**
  * Tries to model version 0.1 of Cloud Events
