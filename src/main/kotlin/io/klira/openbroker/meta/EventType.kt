@@ -26,19 +26,19 @@ enum class EventTypePrivateUnsecuredLoan(val clazz: Class<*> = Nothing::class.ja
     }
 
     companion object {
+        @JvmStatic
     	operator fun invoke(input: String): EventTypePrivateUnsecuredLoan {
             return values()
                 .firstOrNull { it.toString() == input }
                 ?: throw IllegalArgumentException("Input does not map to a valid type: '$input'")
         }
-
+        @JvmStatic
         operator fun invoke(clazz: Class<*>): EventTypePrivateUnsecuredLoan {
             return values()
                 .filter { it.clazz != Nothing::class.java }
                 .firstOrNull { it.clazz == clazz }
                 ?: throw IllegalArgumentException("Class does not map to a valid type: '$clazz'")
         }
-
         const val NAME_SPACE = "org.open-broker"
         const val VERSION = "v0"
         const val REGION = "se"
