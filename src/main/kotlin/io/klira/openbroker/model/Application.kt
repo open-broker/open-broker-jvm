@@ -21,7 +21,7 @@ data class Application(
     /**
      * Custom, vendor-specific extensions to the schema
      */
-    val extensions: Any? = null, //TODO What am I?
+    val extensions: Map<String, Any> = emptyMap(),
 
     /**
      * The amount that the customer wishes to borrow
@@ -50,6 +50,12 @@ data class Application(
 
         require(refinanceAmount <= loanAmount) {
             "refinanceAmount ($refinanceAmount) may not be greater than loanAmount ($loanAmount)."
+        }
+
+        extensions.keys.forEach { key ->
+            require(key.matches(issuerRegex)) {
+                "Key for extension is not a valid format: '$key'"
+            }
         }
     }
 }
