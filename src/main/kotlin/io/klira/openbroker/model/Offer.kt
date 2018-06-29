@@ -38,7 +38,7 @@ data class Offer(
 
         mustRefinance.requireMin(0, "mustRefinance")
         arrangementFee.requireMin(0, "arrangementFee")
-        termFee.requireMin(1, "termFee")
+        termFee.requireMin(0, "termFee")
         invoiceFee.requireMin(0, "invoiceFee")
         termMonths.requireMin(1, "termMonths")
     }
