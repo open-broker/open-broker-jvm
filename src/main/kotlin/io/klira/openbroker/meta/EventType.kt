@@ -7,6 +7,7 @@ import io.klira.openbroker.events.OfferAccepted
 import io.klira.openbroker.events.OfferRejected
 import io.klira.openbroker.events.Offering
 import io.klira.openbroker.events.Rejection
+import io.klira.openbroker.events.StatusUpdated
 
 //org.open-broker.v0.se.PrivateUnsecuredLoanApplication
 
@@ -18,7 +19,7 @@ enum class EventTypePrivateUnsecuredLoan(val clazz: Class<*> = Nothing::class.ja
     OFFER_REJECTED(OfferRejected::class.java),
     OFFERING(Offering::class.java),
     REJECTION(Rejection::class.java),
-    STATUS_UPDATED;
+    STATUS_UPDATED(StatusUpdated::class.java);
 
     override fun toString(): String {
         return "$NAME_SPACE.$VERSION.$REGION.PrivateUnsecuredLoan${name.pascalCase()}"
