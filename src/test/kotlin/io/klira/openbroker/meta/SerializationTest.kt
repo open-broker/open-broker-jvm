@@ -1,12 +1,13 @@
 package io.klira.openbroker.meta
 
-import com.fasterxml.jackson.databind.JsonNode
 import io.klira.cloudevents.CloudEvent
-import io.klira.cloudevents.serialize.cloudEventJson
+import io.klira.cloudevents.serialize.cloudEvent
+import io.klira.cloudevents.serialize.jsonString
 import io.klira.openbroker.model.Address
 import io.klira.openbroker.model.Applicant
 import io.klira.openbroker.model.Application
 import io.klira.openbroker.events.ApplicationCreated
+import io.klira.openbroker.events.StatusUpdated
 import io.klira.openbroker.model.BankAccount
 import io.klira.openbroker.model.DataProtectionContext
 import io.klira.openbroker.model.EmploymentStatus
@@ -16,7 +17,8 @@ import io.klira.openbroker.model.HousingType
 import io.klira.openbroker.model.MaritalStatus
 import io.klira.openbroker.model.Reference
 import io.klira.openbroker.model.Responsibility
-import io.klira.openbroker.serialize.parseEvent
+import io.klira.openbroker.model.Status
+import io.klira.openbroker.serialize.openBrokerEvent
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -67,7 +69,7 @@ class SerializationTest {
             dataProtectionContext = DataProtectionContext.FICTIONAL
         )
 
-        val jsonEvent: CloudEvent<JsonNode> = cloudEventJson(
+        val jsonEvent: CloudEvent<ApplicationCreated> = cloudEvent(
             event = appCreated,
             eventType = EventTypePrivateUnsecuredLoan.APPLICATION_CREATED.toString(),
             eventTypeVersion = "v0",
@@ -79,10 +81,21 @@ class SerializationTest {
     }
 
     @Test
-    fun testDeserializeOpenBrokerApplicationCreate() {
-        val event: CloudEvent<JsonNode> = cloudEventJson(TestObjects.fullApplicationCreatedJson)
-        val applicationCreated: ApplicationCreated = parseEvent<ApplicationCreated>(event)!!
+    fun testDeserializeOpenBrokerApplicationCreateToType() {
+        val event: CloudEvent<ApplicationCreated> = cloudEvent(TestObjects.fullApplicationCreatedJson)
+        assertNotNull(event.data)
+        val applicationCreated: ApplicationCreated = event.data!!
         assertEquals("1", applicationCreated.brokerReference.id)
         assertEquals("Strömberg", applicationCreated.application.applicant.tentativeAddress?.lastName)
+    }
+
+    @Test
+    fun testSerializeAndDeserializeOpenBrokerEvent() {
+        val updated = StatusUpdated(Reference("1", "io.klira"), Status.CONTRACT_SIGNED)
+        val originalEvent: CloudEvent<StatusUpdated> = openBrokerEvent(event = updated, source = "io.klira.something")
+        val serialized: String = jsonString(originalEvent)
+        val deserializedEvent: CloudEvent<StatusUpdated> = cloudEvent(serialized)
+
+        assertEquals(originalEvent, deserializedEvent)
     }
 }
