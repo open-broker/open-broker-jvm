@@ -59,7 +59,7 @@ class SerializationTest {
             ),
             loanAmount = 20_000,
             termMonths = 24,
-            extensions = null
+            extensions = mapOf("io.klira.someExtensionProperty" to 42)
         )
         val appCreated = ApplicationCreated(
             application = app,

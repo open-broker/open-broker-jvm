@@ -71,7 +71,10 @@ object TestObjects {
 					"responsibility": "MAIN_APPLICANT"
 				}
 			],
-			"extensions": null,
+			"extensions": {
+			    "io.klira.someExtensionProperty": 42,
+				"io.klira.someOtherExtensionProperty": 10000
+			},
 			"loanAmount": 20000,
 			"loanPurpose": "OTHER",
 			"refinanceAmount": 0,
@@ -156,7 +159,9 @@ object TestObjects {
 					"responsibility": "MAIN_APPLICANT"
 				}
 			],
-			"extensions": null,
+			"extensions": {
+			    "io.klira.someExtensionProperty": 42
+			},
 			"loanAmount": 20000,
 			"loanPurpose": "OTHER",
 			"refinanceAmount": 0,
