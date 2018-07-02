@@ -35,6 +35,7 @@ inline fun <reified T: OpenBrokerEvent> openBrokerEvent(
         eventType = EventTypePrivateUnsecuredLoan(T::class.java).toString(),
         eventTypeVersion = EventTypePrivateUnsecuredLoan.VERSION,
         source = source,
+        contentType = "application/json",
         timestamp = timestamp,
         eventId = eventId
     )
