@@ -22,7 +22,11 @@ data class Disbursed(
     val amountBrokered: Int
 ) {
     init {
-        amountDisbursed.requireMin(0, "amountDisbursed")
+        amountDisbursed.requireMin(1, "amountDisbursed")
     	amountBrokered.requireMin(0, "amountBrokered")
+
+        require(amountBrokered <= amountDisbursed) {
+            "amountBrokered ($amountBrokered) must be equal to or less than amountDisbursed ($amountDisbursed)"
+        }
     }
 }
