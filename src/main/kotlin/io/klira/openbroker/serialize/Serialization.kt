@@ -14,7 +14,7 @@ fun <T: OpenBrokerEvent> openBrokerEvent(
     timestamp: Instant = Instant.now(),
     eventId: String = UUID.randomUUID().toString()
 ): CloudEvent<T> {
-    return cloudEvent(
+    return CloudEvent(
         event = event,
         eventType = eventType.toString(),
         eventTypeVersion = EventTypePrivateUnsecuredLoan.VERSION,
@@ -31,7 +31,7 @@ inline fun <reified T: OpenBrokerEvent> openBrokerEvent(
     timestamp: Instant = Instant.now(),
     eventId: String = UUID.randomUUID().toString()
 ): CloudEvent<T> {
-    return cloudEvent(
+    return CloudEvent(
         event = event,
         eventType = EventTypePrivateUnsecuredLoan(T::class.java).toString(),
         eventTypeVersion = EventTypePrivateUnsecuredLoan.VERSION,

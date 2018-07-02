@@ -5,6 +5,7 @@ import java.time.LocalDateTime
 import java.time.OffsetDateTime
 import java.time.ZoneId
 import java.time.ZoneOffset
+import java.util.UUID
 
 /**
  * Tries to model version 0.1 of Cloud Events
@@ -74,6 +75,27 @@ data class CloudEvent<T>(
      */
     val data: T?
 ) {
+
+    constructor(
+        event: T,
+        eventType: String,
+        eventTypeVersion: String? = null,
+        source: String,
+        contentType: String? = null,
+        timestamp: Instant = Instant.now(),
+        eventId: String = UUID.randomUUID().toString()
+    ): this(
+        eventType = eventType,
+        eventTypeVersion = eventTypeVersion,
+        source = source,
+        cloudEventsVersion = CLOUD_EVENTS_VERSION,
+        eventID = eventId,
+        eventTime = parseEventTime(timestamp),
+        contentType = contentType,
+        data = event
+    )
+
+
     init {
         require(eventType.isNotEmpty()) { "eventType must be a non-empty string" }
 
@@ -93,6 +115,8 @@ data class CloudEvent<T>(
         }
     }
 }
+
+internal const val CLOUD_EVENTS_VERSION = "0.1"
 
 private val year = Regex("[1-9]\\d{3}")
 private val month = Regex("[0-1]\\d")

@@ -70,7 +70,7 @@ class SerializationTest {
             dataProtectionContext = DataProtectionContext.FICTIONAL
         )
 
-        val jsonEvent: CloudEvent<ApplicationCreated> = cloudEvent(
+        val jsonEvent: CloudEvent<ApplicationCreated> = CloudEvent(
             event = appCreated,
             eventType = EventTypePrivateUnsecuredLoan.APPLICATION_CREATED.toString(),
             eventTypeVersion = "v0",
