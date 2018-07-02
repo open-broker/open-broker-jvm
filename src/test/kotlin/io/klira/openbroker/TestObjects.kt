@@ -1,4 +1,4 @@
-package io.klira.openbroker.meta
+package io.klira.openbroker
 
 object TestObjects {
     internal val fullApplicationCreatedJson =

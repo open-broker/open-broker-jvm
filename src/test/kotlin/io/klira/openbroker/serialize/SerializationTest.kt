@@ -1,13 +1,15 @@
-package io.klira.openbroker.meta
+package io.klira.openbroker.serialize
 
 import io.klira.cloudevents.CloudEvent
 import io.klira.cloudevents.serialize.cloudEvent
 import io.klira.cloudevents.serialize.jsonString
+import io.klira.openbroker.TestObjects
 import io.klira.openbroker.model.Address
 import io.klira.openbroker.model.Applicant
 import io.klira.openbroker.model.Application
 import io.klira.openbroker.events.ApplicationCreated
 import io.klira.openbroker.events.StatusUpdated
+import io.klira.openbroker.meta.EventTypePrivateUnsecuredLoan
 import io.klira.openbroker.model.BankAccount
 import io.klira.openbroker.model.DataProtectionContext
 import io.klira.openbroker.model.EmploymentStatus
@@ -18,7 +20,6 @@ import io.klira.openbroker.model.MaritalStatus
 import io.klira.openbroker.model.Reference
 import io.klira.openbroker.model.Responsibility
 import io.klira.openbroker.model.Status
-import io.klira.openbroker.serialize.openBrokerEvent
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertTrue
