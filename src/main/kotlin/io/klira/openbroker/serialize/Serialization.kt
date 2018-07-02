@@ -1,11 +1,10 @@
 package io.klira.openbroker.serialize
 
 import io.klira.cloudevents.CloudEvent
-import io.klira.cloudevents.serialize.cloudEvent
 import io.klira.openbroker.events.OpenBrokerEvent
 import io.klira.openbroker.meta.EventTypePrivateUnsecuredLoan
 import java.time.Instant
-import java.util.*
+import java.util.UUID
 
 fun <T: OpenBrokerEvent> openBrokerEvent(
     event: T,
