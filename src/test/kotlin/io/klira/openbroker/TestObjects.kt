@@ -190,7 +190,7 @@ object TestObjects {
             },
             "contentType" : "application/json",
             "data": {
-			    "providerOfferReference": {
+			    "brokerReference": {
 				    "id": "12345",
 					"issuer": "io.klira"
 				},
@@ -218,7 +218,7 @@ object TestObjects {
             },
             "contentType" : "application/json",
             "data": {
-			    "providerOfferReference": {
+			    "brokerReference": {
 				    "id": "12345",
 					"issuer": "io.klira"
 				}
