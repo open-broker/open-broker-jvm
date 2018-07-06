@@ -20,7 +20,7 @@ data class Disbursed(
      * of loans refinanced within the lender.
      */
     val amountBrokered: Int
-) {
+): OpenBrokerEvent {
     init {
         amountDisbursed.requireMin(1, "amountDisbursed")
     	amountBrokered.requireMin(0, "amountBrokered")
