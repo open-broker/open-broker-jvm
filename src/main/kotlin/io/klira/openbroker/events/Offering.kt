@@ -8,7 +8,7 @@ import io.klira.openbroker.model.Reference
  * An offer for a loan
  */
 data class Offering(
-    val brokerReference: Reference,
+    override val brokerReference: Reference,
     val offer: Offer,
     val loanInsurance: LoanInsuranceOffer? = null
 ): OpenBrokerEvent

@@ -7,7 +7,7 @@ import io.klira.openbroker.requireMin
  * An event indicating that a private unsecured loan has been disbursed
  */
 data class Disbursed(
-    val brokerReference: Reference,
+    override val brokerReference: Reference,
 
     /**
      * The total amount disbursed to the customer of the loan being brokered

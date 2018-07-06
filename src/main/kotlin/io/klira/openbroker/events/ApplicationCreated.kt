@@ -10,6 +10,6 @@ import io.klira.openbroker.model.Reference
  */
 data class ApplicationCreated(
     val application: Application,
-    val brokerReference: Reference,
+    override val brokerReference: Reference,
     val dataProtectionContext: DataProtectionContext
 ): OpenBrokerEvent

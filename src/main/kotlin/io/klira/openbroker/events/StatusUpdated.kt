@@ -10,7 +10,7 @@ data class StatusUpdated(
     /**
      * A reference-id used by the broker
      */
-    val brokerReference: Reference,
+    override val brokerReference: Reference,
 
     /**
      * The new status of the application

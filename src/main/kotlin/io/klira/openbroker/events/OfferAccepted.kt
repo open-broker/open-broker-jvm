@@ -5,7 +5,7 @@ import io.klira.openbroker.model.Reference
 import io.klira.openbroker.requireMin
 
 data class OfferAccepted(
-    val brokerReference: Reference,
+    override val brokerReference: Reference,
     val bankAccount: BankAccount? = null,
     val requestedCredit: Int? = null
 ): OpenBrokerEvent
