@@ -46,7 +46,7 @@ data class CloudEvent<T>(
      */
     val eventID: String,
     /**
-     * Timestamp of when the event happened, formatted as specified in RFC 3986
+     * Timestamp of when the event happened, formatted as specified in RFC 3339
      */
     val eventTime: String? = null, // RFC 3339
     /**
