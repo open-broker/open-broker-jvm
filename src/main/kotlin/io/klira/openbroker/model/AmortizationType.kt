@@ -13,8 +13,8 @@ enum class AmortizationType {
 
     /**
      * The amount paid for amortization each month is fixed, while the interest
-     * rate will be lower over time, meaning that the total monthly cost for
+     * payment will be lower over time, meaning that the total monthly cost for
      * the loan will decrease over time
      */
-    FIXED_LINE
+    STRAIGHT_LINE
 }
