@@ -13,8 +13,8 @@ data class Offer(
     val arrangementFee: Int,
     val termFee: Int,
     val invoiceFee: Int,
-    val termMonths: Int
-
+    val termMonths: Int,
+    val amortizationType: AmortizationType
 ) {
     init {
         val interestRateRegex = Regex("^[0-9]+(.[0-9]+)?$")
