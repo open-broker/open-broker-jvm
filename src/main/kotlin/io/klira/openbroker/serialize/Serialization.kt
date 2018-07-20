@@ -1,8 +1,8 @@
 package io.klira.openbroker.serialize
 
-import io.klira.cloudevents.CloudEvent
 import io.klira.openbroker.events.OpenBrokerEvent
 import io.klira.openbroker.meta.EventTypePrivateUnsecuredLoan
+import org.openbroker.cloudevents.CloudEvent
 import java.time.Instant
 import java.util.UUID
 
@@ -14,7 +14,7 @@ fun <T: OpenBrokerEvent> openBrokerEvent(
     eventId: String = UUID.randomUUID().toString()
 ): CloudEvent<T> {
     return CloudEvent(
-        event = event,
+        data = event,
         eventType = eventType.toString(),
         eventTypeVersion = EventTypePrivateUnsecuredLoan.VERSION,
         source = source,
@@ -31,7 +31,7 @@ inline fun <reified T: OpenBrokerEvent> openBrokerEvent(
     eventId: String = UUID.randomUUID().toString()
 ): CloudEvent<T> {
     return CloudEvent(
-        event = event,
+        data = event,
         eventType = EventTypePrivateUnsecuredLoan(T::class.java).toString(),
         eventTypeVersion = EventTypePrivateUnsecuredLoan.VERSION,
         source = source,

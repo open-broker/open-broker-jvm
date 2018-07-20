@@ -7,7 +7,7 @@ apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'idea'
 
-group = 'io.kotlin'
+group = 'org.openbroker'
 version = '1.0-SNAPSHOT'
 description = 'Library for Open Broker'
 
@@ -25,6 +25,7 @@ repositories {
     jcenter()
     mavenCentral()
     maven { url "https://dl.bintray.com/kotlin/kotlinx" }
+    maven { url "https://jitpack.io" }
 }
 
 dependencies {
@@ -33,9 +34,9 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:0.23.3'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.23.3'
 
-    // Logging
-    implementation 'io.github.microutils:kotlin-logging:1.4.9'
-    runtime 'ch.qos.logback:logback-classic:1.2.3'
+    // Cloud Events
+    implementation 'com.github.open-broker:cloud-events-jvm:96665ee598'
+    implementation 'com.github.open-broker:cloud-events-jvm:96665ee598:sources'
 
     // Jackson
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version:'2.9.6'
@@ -74,5 +75,5 @@ kotlin {
 
 task wrapper(type: Wrapper) {
     description = 'Generates gradlew[.bat] scripts for faster execution'
-    gradleVersion = '4.8'
+    gradleVersion = '4.8.1'
 }

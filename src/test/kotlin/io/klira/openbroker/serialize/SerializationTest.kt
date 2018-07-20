@@ -1,8 +1,5 @@
 package io.klira.openbroker.serialize
 
-import io.klira.cloudevents.CloudEvent
-import io.klira.cloudevents.serialize.cloudEvent
-import io.klira.cloudevents.serialize.jsonString
 import io.klira.openbroker.TestObjects
 import io.klira.openbroker.model.Address
 import io.klira.openbroker.model.Applicant
@@ -24,6 +21,9 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import org.openbroker.cloudevents.CloudEvent
+import org.openbroker.cloudevents.cloudEvent
+import org.openbroker.cloudevents.jsonString
 
 class SerializationTest {
 
@@ -71,7 +71,7 @@ class SerializationTest {
         )
 
         val jsonEvent: CloudEvent<ApplicationCreated> = CloudEvent(
-            event = appCreated,
+            data = appCreated,
             eventType = EventTypePrivateUnsecuredLoan.APPLICATION_CREATED.toString(),
             eventTypeVersion = "v0",
             source = "https://some-domain.io"
