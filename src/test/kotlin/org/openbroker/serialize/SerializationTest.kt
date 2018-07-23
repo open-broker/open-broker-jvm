@@ -1,22 +1,22 @@
 package org.openbroker.serialize
 
-import io.klira.openbroker.TestObjects
-import io.klira.openbroker.model.Address
-import io.klira.openbroker.model.Applicant
-import io.klira.openbroker.model.Application
-import io.klira.openbroker.events.ApplicationCreated
-import io.klira.openbroker.events.StatusUpdated
-import io.klira.openbroker.meta.EventTypePrivateUnsecuredLoan
-import io.klira.openbroker.model.BankAccount
-import io.klira.openbroker.model.DataProtectionContext
-import io.klira.openbroker.model.EmploymentStatus
-import io.klira.openbroker.model.ExistingLoan
-import io.klira.openbroker.model.ExistingLoanType
-import io.klira.openbroker.model.HousingType
-import io.klira.openbroker.model.MaritalStatus
-import io.klira.openbroker.model.Reference
-import io.klira.openbroker.model.Responsibility
-import io.klira.openbroker.model.Status
+import org.openbroker.TestObjects
+import org.openbroker.model.Address
+import org.openbroker.model.Applicant
+import org.openbroker.model.Application
+import org.openbroker.events.ApplicationCreated
+import org.openbroker.events.StatusUpdated
+import org.openbroker.meta.EventTypePrivateUnsecuredLoan
+import org.openbroker.model.BankAccount
+import org.openbroker.model.DataProtectionContext
+import org.openbroker.model.EmploymentStatus
+import org.openbroker.model.ExistingLoan
+import org.openbroker.model.ExistingLoanType
+import org.openbroker.model.HousingType
+import org.openbroker.model.MaritalStatus
+import org.openbroker.model.Reference
+import org.openbroker.model.Responsibility
+import org.openbroker.model.Status
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -62,11 +62,11 @@ class SerializationTest {
             ),
             loanAmount = 20_000,
             termMonths = 24,
-            extensions = mapOf("io.klira.someExtensionProperty" to 42)
+            extensions = mapOf("org.someExtensionProperty" to 42)
         )
         val appCreated = ApplicationCreated(
             application = app,
-            brokerReference = Reference("1", "io.klira"),
+            brokerReference = Reference("1", "org"),
             dataProtectionContext = DataProtectionContext.FICTIONAL
         )
 
@@ -92,8 +92,8 @@ class SerializationTest {
 
     @Test
     fun testSerializeAndDeserializeOpenBrokerEvent() {
-        val updated = StatusUpdated(Reference("1", "io.klira"), Status.CONTRACT_SIGNED)
-        val originalEvent: CloudEvent<StatusUpdated> = openBrokerEvent(event = updated, source = "io.klira.something")
+        val updated = StatusUpdated(Reference("1", "org"), Status.CONTRACT_SIGNED)
+        val originalEvent: CloudEvent<StatusUpdated> = openBrokerEvent(event = updated, source = "org.something")
         val serialized: String = jsonString(originalEvent)
         val deserializedEvent: CloudEvent<StatusUpdated> = cloudEvent(serialized)
 

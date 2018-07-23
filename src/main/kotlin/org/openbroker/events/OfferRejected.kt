@@ -1,6 +1,6 @@
 package org.openbroker.events
 
-import io.klira.openbroker.model.Reference
+import org.openbroker.model.Reference
 
 /**
  * An event that may be sent by the broker to indicate that

@@ -1,6 +1,6 @@
 package org.openbroker.model
 
-import io.klira.openbroker.requireMin
+import org.openbroker.requireMin
 
 class Applicant(
     val ssn: String,

@@ -1,6 +1,6 @@
 package org.openbroker.events
 
-import io.klira.openbroker.model.Reference
+import org.openbroker.model.Reference
 
 /**
  *  An event indicating that the application was rejected

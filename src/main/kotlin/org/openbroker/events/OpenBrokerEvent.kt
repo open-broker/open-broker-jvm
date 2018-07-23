@@ -1,6 +1,6 @@
 package org.openbroker.events
 
-import io.klira.openbroker.model.Reference
+import org.openbroker.model.Reference
 
 /**
  * An interface for all Open Broker events

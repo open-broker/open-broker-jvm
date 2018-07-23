@@ -1,8 +1,8 @@
 package org.openbroker.events
 
-import io.klira.openbroker.model.Application
-import io.klira.openbroker.model.DataProtectionContext
-import io.klira.openbroker.model.Reference
+import org.openbroker.model.Application
+import org.openbroker.model.DataProtectionContext
+import org.openbroker.model.Reference
 
 /**
  * An event indicating the creation of an application

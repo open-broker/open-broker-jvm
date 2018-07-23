@@ -1,7 +1,7 @@
 package org.openbroker.events
 
-import io.klira.openbroker.model.Reference
-import io.klira.openbroker.requireMin
+import org.openbroker.model.Reference
+import org.openbroker.requireMin
 
 /**
  * An event indicating that a private unsecured loan has been disbursed

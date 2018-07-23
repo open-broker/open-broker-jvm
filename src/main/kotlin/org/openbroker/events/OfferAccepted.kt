@@ -1,8 +1,8 @@
 package org.openbroker.events
 
-import io.klira.openbroker.model.BankAccount
-import io.klira.openbroker.model.Reference
-import io.klira.openbroker.requireMin
+import org.openbroker.model.BankAccount
+import org.openbroker.model.Reference
+import org.openbroker.requireMin
 
 data class OfferAccepted(
     override val brokerReference: Reference,

@@ -1,15 +1,13 @@
 package org.openbroker.meta
 
-import io.klira.openbroker.events.ApplicationCreated
-import io.klira.openbroker.events.DelayedProcessing
-import io.klira.openbroker.events.Disbursed
-import io.klira.openbroker.events.OfferAccepted
-import io.klira.openbroker.events.OfferRejected
-import io.klira.openbroker.events.Offering
-import io.klira.openbroker.events.Rejection
-import io.klira.openbroker.events.StatusUpdated
-
-//org.open-broker.v0.se.PrivateUnsecuredLoanApplication
+import org.openbroker.events.ApplicationCreated
+import org.openbroker.events.DelayedProcessing
+import org.openbroker.events.Disbursed
+import org.openbroker.events.OfferAccepted
+import org.openbroker.events.OfferRejected
+import org.openbroker.events.Offering
+import org.openbroker.events.Rejection
+import org.openbroker.events.StatusUpdated
 
 enum class EventTypePrivateUnsecuredLoan(val clazz: Class<*> = Nothing::class.java) {
     APPLICATION_CREATED(ApplicationCreated::class.java),

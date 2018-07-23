@@ -1,8 +1,8 @@
 package org.openbroker.events
 
-import io.klira.openbroker.model.LoanInsuranceOffer
-import io.klira.openbroker.model.Offer
-import io.klira.openbroker.model.Reference
+import org.openbroker.model.LoanInsuranceOffer
+import org.openbroker.model.Offer
+import org.openbroker.model.Reference
 
 /**
  * An offer for a loan

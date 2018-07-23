@@ -1,7 +1,7 @@
 package org.openbroker.events
 
-import io.klira.openbroker.model.Reference
-import io.klira.openbroker.model.Status
+import org.openbroker.model.Reference
+import org.openbroker.model.Status
 
 /**
  * An event indicating an update to the status of a loan being brokered
