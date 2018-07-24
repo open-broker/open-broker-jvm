@@ -1,5 +1,11 @@
 package org.openbroker
 
+import org.openbroker.cloudevents.jsonString
+import org.openbroker.events.Offering
+import org.openbroker.model.AmortizationType
+import org.openbroker.model.Offer
+import org.openbroker.model.Reference
+
 object TestObjects {
     internal val mainApplicant1 =
         """
@@ -323,5 +329,44 @@ object TestObjects {
 			}
         }
 
+		""".trimIndent()
+
+    // Please note that interest rate and monthly cost are
+    // not computed values but rather some random values
+    internal val loanOffering1: String =
+        """
+        {
+		    "cloudEventsVersion" : "0.1",
+            "eventType" : "org.open-broker.v0.se.PrivateUnsecuredLoanOffering",
+            "eventTypeVersion" : "v0",
+            "source" : "/mycontext",
+            "eventID" : "C234-1234-1234",
+            "eventTime" : "2018-04-05T17:31:00Z",
+            "extensions" : {
+              "comExampleExtension" : "value"
+            },
+            "contentType" : "application/json",
+            "data": {
+                "brokerReference": {
+                    "id": "9",
+                    "issuer": "io.klira"
+                },
+                "offer": {
+                    "effectiveInterestRate": "0.125",
+                    "nominalInterestRate": "0.118",
+                    "minOfferedCredit": 65000,
+                    "offeredCredit": 67000,
+                    "maxOfferedCredit": 70000,
+                    "monthlyCost": 2324,
+                    "mustRefinance": 55000,
+                    "arrangementFee": 50,
+                    "termFee": 12,
+                    "invoiceFee": 19,
+                    "termMonths": 36,
+                    "amortizationType": "ANNUITY"
+                },
+                "loanInsurance": null
+            }
+        }
 		""".trimIndent()
 }

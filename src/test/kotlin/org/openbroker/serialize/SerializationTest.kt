@@ -24,6 +24,9 @@ import org.junit.jupiter.api.Test
 import org.openbroker.cloudevents.CloudEvent
 import org.openbroker.cloudevents.cloudEvent
 import org.openbroker.cloudevents.jsonString
+import org.openbroker.events.Offering
+import org.openbroker.model.AmortizationType
+import org.openbroker.model.Offer
 
 class SerializationTest {
 
@@ -98,6 +101,17 @@ class SerializationTest {
         assertEquals("1", applicationCreated.brokerReference.id)
         assertEquals("Albinsson", applicationCreated.application.coApplicant?.tentativeAddress?.lastName)
         assertEquals(15, applicationCreated.application.coApplicant?.dependentChildren)
+    }
+
+    @Test
+    fun testDeserializeOpenBrokerLoanOffering() {
+        val event: CloudEvent<Offering> = cloudEvent(TestObjects.loanOffering1)
+        assertNotNull(event.data)
+        val offer: Offer = event.data!!.offer
+        assertEquals(65_000, offer.minOfferedCredit)
+        assertEquals(67_000, offer.offeredCredit)
+        assertEquals(70_000, offer.maxOfferedCredit)
+        assertEquals(AmortizationType.ANNUITY, offer.amortizationType)
     }
 
     @Test
