@@ -82,12 +82,22 @@ class SerializationTest {
     }
 
     @Test
-    fun testDeserializeOpenBrokerApplicationCreateToType() {
+    fun testDeserializeOpenBrokerApplicationCreatedToType() {
         val event: CloudEvent<ApplicationCreated> = cloudEvent(TestObjects.fullApplicationCreatedJson)
         assertNotNull(event.data)
         val applicationCreated: ApplicationCreated = event.data!!
         assertEquals("1", applicationCreated.brokerReference.id)
         assertEquals("Strömberg", applicationCreated.application.applicant.tentativeAddress?.lastName)
+    }
+
+    @Test
+    fun testDeserializeOpenBrokerApplicationCreatedWithCoApplicantToType() {
+        val event: CloudEvent<ApplicationCreated> = cloudEvent(TestObjects.fullApplicationCreatedWitCoApplicantJson)
+        assertNotNull(event.data)
+        val applicationCreated: ApplicationCreated = event.data!!
+        assertEquals("1", applicationCreated.brokerReference.id)
+        assertEquals("Albinsson", applicationCreated.application.coApplicant?.tentativeAddress?.lastName)
+        assertEquals(15, applicationCreated.application.coApplicant?.dependentChildren)
     }
 
     @Test
