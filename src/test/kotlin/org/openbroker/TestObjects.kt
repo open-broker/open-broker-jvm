@@ -91,6 +91,7 @@ object TestObjects {
         }
 		""".trimIndent()
 
+    @JvmField
     internal val fullApplicationCreatedJson =
         """
 		{
@@ -142,6 +143,7 @@ object TestObjects {
 }
 	""".trimIndent()
 
+    @JvmField
     internal val fullApplicationCreatedWitCoApplicantJson =
         """
 		{
@@ -193,6 +195,7 @@ object TestObjects {
 }
 	""".trimIndent()
 
+    @JvmField
     internal val invalidEventType =
         """
 {
@@ -280,6 +283,7 @@ object TestObjects {
 }
 		""".trimIndent()
 
+    @JvmField
     internal val acceptOffer =
         """
         {
@@ -308,6 +312,7 @@ object TestObjects {
 
 		""".trimIndent()
 
+    @JvmField
     internal val rejectOffer =
         """
         {
