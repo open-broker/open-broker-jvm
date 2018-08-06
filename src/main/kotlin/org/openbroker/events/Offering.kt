@@ -7,7 +7,7 @@ import org.openbroker.model.Reference
 /**
  * An offer for a loan
  */
-data class Offering(
+data class Offering @JvmOverloads constructor(
     override val brokerReference: Reference,
     val offer: Offer,
     val loanInsurance: LoanInsuranceOffer? = null

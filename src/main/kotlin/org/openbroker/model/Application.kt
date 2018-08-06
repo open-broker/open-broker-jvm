@@ -2,7 +2,7 @@ package org.openbroker.model
 
 import org.openbroker.requireMin
 
-data class Application(
+data class Application @JvmOverloads constructor(
     /**
      * The primary applicant to the loan
      */
