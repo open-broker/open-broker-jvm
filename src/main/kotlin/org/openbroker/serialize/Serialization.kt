@@ -6,7 +6,7 @@ import org.openbroker.cloudevents.CloudEvent
 import java.time.Instant
 import java.util.UUID
 
-fun <T: OpenBrokerEvent> openBrokerEvent(
+@JvmOverloads fun <T: OpenBrokerEvent> openBrokerEvent(
     event: T,
     eventType: EventTypePrivateUnsecuredLoan,
     source: String,

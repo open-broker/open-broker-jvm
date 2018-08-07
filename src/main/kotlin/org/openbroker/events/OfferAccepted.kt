@@ -4,7 +4,7 @@ import org.openbroker.model.BankAccount
 import org.openbroker.model.Reference
 import org.openbroker.requireMin
 
-data class OfferAccepted(
+data class OfferAccepted @JvmOverloads constructor(
     override val brokerReference: Reference,
     val bankAccount: BankAccount? = null,
     val requestedCredit: Int? = null

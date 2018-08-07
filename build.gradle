@@ -35,8 +35,8 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.23.3'
 
     // Cloud Events
-    implementation 'com.github.open-broker:cloud-events-jvm:be747152'
-    implementation 'com.github.open-broker:cloud-events-jvm:be747152:sources'
+    implementation 'com.github.open-broker:cloud-events-jvm:514409df8f'
+    implementation 'com.github.open-broker:cloud-events-jvm:514409df8f:sources'
 
     // Jackson
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version:'2.9.6'
