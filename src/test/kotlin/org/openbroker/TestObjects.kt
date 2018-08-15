@@ -1,11 +1,5 @@
 package org.openbroker
 
-import org.openbroker.cloudevents.jsonString
-import org.openbroker.events.Offering
-import org.openbroker.model.AmortizationType
-import org.openbroker.model.Offer
-import org.openbroker.model.Reference
-
 object TestObjects {
     internal val mainApplicant1 =
         """
