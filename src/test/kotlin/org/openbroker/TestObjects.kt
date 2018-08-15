@@ -26,6 +26,7 @@ object TestObjects {
             "childSupportReceivedMonthly": null,
             "childSupportPaidMonthly": null,
             "maritalStatus": "COHABITING",
+			"paymentRemark": false,
             "bankAccount": {
                 "clearingNo": "8888",
                 "accountNo": "00000003"
@@ -68,6 +69,7 @@ object TestObjects {
             "childSupportReceivedMonthly": 700,
             "childSupportPaidMonthly": 3000,
             "maritalStatus": "MARRIED",
+            "paymentRemark": true,
             "bankAccount": {
                 "clearingNo": "8888",
                 "accountNo": "00000003"
@@ -228,6 +230,7 @@ object TestObjects {
 				"childSupportReceivedMonthly": null,
 				"childSupportPaidMonthly": null,
 				"maritalStatus": "COHABITING",
+                "paymentRemark": false,
 				"bankAccount": {
 					"clearingNo": "8888",
 					"accountNo": "00000003"

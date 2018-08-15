@@ -48,6 +48,7 @@ class SerializationTest {
             bankAccount = BankAccount("8888", "00000003"),
             citizenships = listOf("SE"),
             countriesOfResidence = listOf("SE"),
+            paymentRemark = false,
             taxResidentOf = listOf("SE"),
             tentativeAddress = Address(
                 firstName = "Christin",
