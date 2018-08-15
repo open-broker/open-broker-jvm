@@ -20,7 +20,7 @@ object TestObjects {
             "childSupportReceivedMonthly": null,
             "childSupportPaidMonthly": null,
             "maritalStatus": "COHABITING",
-			"paymentRemark": false,
+            "paymentRemark": false,
             "bankAccount": {
                 "clearingNo": "8888",
                 "accountNo": "00000003"
@@ -208,24 +208,24 @@ object TestObjects {
     "data": {
 		"application": {
 			"applicant": {
-				"ssn": "198712167249",
-				"phone": "+46705431052",
-				"secondaryPhone": [],
-				"emailAddress": "anton@zensum.se",
-				"employmentStatus": "FULL_TIME",
-				"employmentStatusSinceYear": 2017,
-				"employmentStatusSinceMonth": 2,
-				"dependentChildren": 0,
-				"housingType": "RENTED",
-				"housingCostPerMonth": 3000,
-				"employerName": "Zensum AB",
-				"employerPhone": "+46811122233",
-				"monthlyIncome": 10000,
-				"childSupportReceivedMonthly": null,
-				"childSupportPaidMonthly": null,
-				"maritalStatus": "COHABITING",
+                "ssn": "198712167249",
+                "phone": "+46705431052",
+                "secondaryPhone": [],
+                "emailAddress": "anton@zensum.se",
+                "employmentStatus": "FULL_TIME",
+                "employmentStatusSinceYear": 2017,
+                "employmentStatusSinceMonth": 2,
+                "dependentChildren": 0,
+                "housingType": "RENTED",
+                "housingCostPerMonth": 3000,
+                "employerName": "Zensum AB",
+                "employerPhone": "+46811122233",
+                "monthlyIncome": 10000,
+                "childSupportReceivedMonthly": null,
+                "childSupportPaidMonthly": null,
+                "maritalStatus": "COHABITING",
                 "paymentRemark": false,
-				"bankAccount": {
+                "bankAccount": {
 					"clearingNo": "8888",
 					"accountNo": "00000003"
 				},
