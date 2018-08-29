@@ -20,7 +20,7 @@ class Applicant @JvmOverloads constructor(
     val childSupportPaidMonthly: Int? = null,
     val maritalStatus: MaritalStatus,
     val paymentRemark: Boolean,
-    val bankAccount: BankAccount,
+    val bankAccount: BankAccount? = null,
     val citizenships: List<String>,
     val countriesOfResidence: List<String>,
     val taxResidentOf: List<String>,
