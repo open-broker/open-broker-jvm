@@ -8,7 +8,7 @@ data class Offer(
     val minOfferedCredit: Int,
     val offeredCredit: Int,
     val maxOfferedCredit: Int,
-    val monthlyCost: Int,
+    val monthlyCost: Int? = null,
     val mustRefinance: Int,
     val arrangementFee: Int,
     val termFee: Int,
