@@ -77,12 +77,16 @@ fun totalCostOfLoan(
     termFee: Int,
     termMonths: Int
 ): BigDecimal {
-    //val loan = BigDecimal(loanAmount)
-    //val totalInterestCost: BigDecimal = totalInterestRateCosts(loanAmount, nominalAnnualInterestRate, termMonths)
-    //val totalTermFeesCost = BigDecimal(termFee * termMonths)
-    //return loan + totalInterestCost + totalTermFeesCost
+    val monthlyCost: BigDecimal = monthlyCostForRateAndAmortization(loanAmount, nominalAnnualInterestRate, termMonths)
+    val monthlyTermCost = BigDecimal(termFee)
+    return (monthlyCost + monthlyTermCost).multiply(BigDecimal(termMonths), MathContext.DECIMAL128)
+}
 
-    //return BigDecimal(loanAmount) + totalInterestRateCosts(loanAmount, nominalAnnualInterestRate, termMonths)
+fun monthlyCostForRateAndAmortization(
+    loanAmount: Int,
+    nominalAnnualInterestRate: Double,
+    termMonths: Int
+): BigDecimal {
     val monthlyRate: Double = nominalAnnualInterestRate / 12.0
     val fixedMonthlyPayment: Double = loanAmount * ((monthlyRate * Math.pow(1 + monthlyRate, termMonths.toDouble())) / (Math.pow(1 +
         monthlyRate, termMonths.toDouble()) - 1))
