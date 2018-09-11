@@ -47,21 +47,6 @@ data class Offer(
 }
 
 /**
- * Compute the effective annual interest rate
- */
-fun effectiveAnnualInterestRateXX(offeredCredit: Int, nominalAnnualInterestRate: Double, termMonths: Int, termFee: Int): String {
-    require(nominalAnnualInterestRate < 1.0) { "Bad percent value: $nominalAnnualInterestRate = ${nominalAnnualInterestRate*100}%" }
-    val annualInterestRateCost: Double = offeredCredit * nominalAnnualInterestRate
-    val years: Double = termMonths / 12.0
-    val totalInterestRateCost: Double = annualInterestRateCost * years
-    val totalTermFeeCost: Int = termFee * termMonths
-    val effectiveCost: Double = totalInterestRateCost + totalTermFeeCost
-    val effectiveInterestRate: Double = effectiveCost / offeredCredit
-    val effectiveAnnualInterestRate: Double = effectiveInterestRate / years
-    return effectiveAnnualInterestRate.toString()
-}
-
-/**
  * Compute the total cost of a loan, given the
  * @param loanAmount the amount loaned
  * @param nominalAnnualInterestRate the nominal interest rate on annual basis
@@ -93,20 +78,6 @@ fun monthlyCostForRateAndAmortization(
     return BigDecimal(fixedMonthlyPayment)
 }
 
-fun totalInterestRateCosts(
-    loanAmount: Int,
-    nominalAnnualInterestRate: Double,
-    termMonths: Int,
-    paidInterest: BigDecimal = BigDecimal.ZERO,
-    amortization: BigDecimal = BigDecimal.ZERO
-): BigDecimal {
-    //val monthlyRate: BigDecimal = BigDecimal(nominalAnnualInterestRate).divide(BigDecimal(12), MathContext.DECIMAL128)
-    val monthlyRate: Double = nominalAnnualInterestRate / 12.0
-    val fixedMonthlyPayment: Double = loanAmount * ((monthlyRate * Math.pow(1 + monthlyRate, termMonths.toDouble())) / (Math.pow(1 +
-        monthlyRate, termMonths.toDouble()) - 1))
-    return BigDecimal.ZERO
-}
-
 fun totalInterestRateCostsStraightLine(
     loanAmount: Int,
     nominalAnnualInterestRate: Double,
@@ -125,7 +96,7 @@ fun totalInterestRateCostsStraightLine(
  */
 fun effectiveInterestRate(
     loanAmount: Int,
-    nominalInterestRate: Double,
+    nominalAnnualInterestRate: Double,
     termFee: Double,
     termMonths: Int,
     loanType: AmortizationType
@@ -133,34 +104,6 @@ fun effectiveInterestRate(
     if(loanType == AmortizationType.STRAIGHT_LINE)
         throw UnsupportedOperationException()
     else {
-        val pvOfAnnuity: Double = pvOfAnnuity(nominalInterestRate, termMonths)
-        val payment: Double = pvOfAnnuity * (nominalInterestRate / 12.0) / (1 - Math.pow(1 + nominalInterestRate, - termMonths.toDouble()))
-        BigDecimal.ZERO//((payment * loanAmount * termMonths) / loanAmount.toDouble())
+        val totalCost: BigDecimal = totalCostOfLoan(loanAmount, nominalAnnualInterestRate, termFee, termMonths)
+        TODO("Continue here with APR calculation :)")
     }
-        //(Math.pow(1 + nominalInterestRate, 12.0) - 1.0) * 12
-        //((amount + nominalInterestRate * amount) + totalTermFee(termFee, termMonths)) / amount
-
-fun effectiveInterestRate(
-    loanAmount: Int,
-    totalLoanCost: Int,
-    termMonths: Int,
-    y: Double = 1.0,
-    iteration: Int = 1
-): BigDecimal {
-    return BigDecimal.ZERO
-}
-
-private tailrec fun pvOfAnnuity(nominalInterestRate: Double, termMonths: Int, paid: Double = 0.0): Double {
-    if(termMonths == 0)
-        return paid
-    val pForPeriod: Double = (1 - Math.pow(1 + nominalInterestRate, - termMonths.toDouble())) / nominalInterestRate
-    return pvOfAnnuity(nominalInterestRate, termMonths - 1, pForPeriod)//paid + (1 - Math.pow(1 + nominalInterestRate, - termMonths.toDouble())) /
-    // nominalInterestRate
-}
-
-private fun totalTermFee(termFee: Double, termMonths: Int): Double =
-    termFee * termMonths
-
-
-//private fun interestFromFees(termFee: Double, termMonths: Int, amount: Int): Double =
-//    pctFees(termFee, termMonths, amount) / (termMonths / 12.0f)

@@ -9,12 +9,6 @@ private const val ACCEPTABLE_ERROR: Double = 0.2
 class TotalCostForLoanTest {
 
     @Test
-    fun testComputeEffectiveInterestRate() {
-        // 9.82%
-        //assertEquals(0.0982, effectiveInterestRate(10_000, 0.05, 20.0, 24, AmortizationType.ANNUITY), 0.00001)
-    }
-
-    @Test
     fun testComputeTotalCostForSmallLoanNoTermFee() {
         val totalCost: BigDecimal = totalCostOfLoan(
             loanAmount = 10_000,
