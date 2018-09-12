@@ -97,7 +97,7 @@ fun totalInterestRateCostsStraightLine(
 fun effectiveInterestRate(
     loanAmount: Int,
     nominalAnnualInterestRate: Double,
-    termFee: Double,
+    termFee: Int,
     termMonths: Int,
     loanType: AmortizationType
 ): BigDecimal =
@@ -105,5 +105,46 @@ fun effectiveInterestRate(
         throw UnsupportedOperationException()
     else {
         val totalCost: BigDecimal = totalCostOfLoan(loanAmount, nominalAnnualInterestRate, termFee, termMonths)
-        TODO("Continue here with APR calculation :)")
+        val monthlyPayment: Double = totalCost.divide(BigDecimal(termMonths), MathContext.DECIMAL128).toDouble()
+        effectiveInterestRateAnnuity(loanAmount, monthlyPayment, termMonths)
     }
+
+private tailrec fun effectiveInterestRateAnnuity(
+    loanAmount: Int,
+    monthlyPayment: Double,
+    paymentTerms: Int,
+    accuracy: Double = 0.00000001,
+    y: Double = 1.0
+): BigDecimal {
+    if(y <= accuracy)
+        return BigDecimal(y).pow(-12, MathContext.DECIMAL128).minus(BigDecimal.ONE)
+
+    val deltaY: Double = - ((f(y, loanAmount, monthlyPayment, paymentTerms) / fPrime(y+accuracy, paymentTerms))
+        - 1)
+    return effectiveInterestRateAnnuity(loanAmount, monthlyPayment, paymentTerms, accuracy, y + deltaY)
+}
+
+private tailrec fun f(
+    y: Double,
+    loanAmount: Int,
+    monthlyPayment: Double,
+    totalPayments: Int,
+    payment: Int = 1
+): Double {
+    if(payment == totalPayments || y == Double.POSITIVE_INFINITY)
+        return y - (loanAmount/monthlyPayment)
+    val yn = Math.pow(y, payment.toDouble())
+    return f(y+yn, loanAmount, monthlyPayment, totalPayments, payment + 1)
+}
+
+private tailrec fun fPrime(
+    y: Double,
+    totalPayments: Int,
+    payment: Int = 1,
+    sum: Double = 0.0
+): Double {
+    if(payment == totalPayments || y == Double.POSITIVE_INFINITY)
+        return 1 + sum
+    val yPol: Double = Math.pow(Math.pow(payment+1.0, y), payment.toDouble())
+    return fPrime(y, totalPayments, payment + 1, sum + yPol)
+}
