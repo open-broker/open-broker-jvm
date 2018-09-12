@@ -10,4 +10,10 @@ class EffectiveInterestRateTest {
         // 9.82%
         assertEquals(0.0982, effectiveInterestRate(10_000, 0.05, 20, 24, AmortizationType.ANNUITY).toDouble(), 0.00001)
     }
+
+    @Test
+    fun testComputeEffectiveInterestRateWithoutTermFees() {
+        // 9.82%
+        assertEquals(0.0512, effectiveInterestRate(10_000, 0.05, 0, 24, AmortizationType.ANNUITY).toDouble(), 0.00001)
+    }
 }

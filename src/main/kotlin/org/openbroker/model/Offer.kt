@@ -3,6 +3,7 @@ package org.openbroker.model
 import org.openbroker.requireMin
 import java.math.BigDecimal
 import java.math.MathContext
+import kotlin.math.absoluteValue
 
 data class Offer(
     val effectiveInterestRate: String,
@@ -113,37 +114,27 @@ private tailrec fun effectiveInterestRateAnnuity(
     loanAmount: Int,
     monthlyPayment: Double,
     paymentTerms: Int,
-    accuracy: Double = 0.00000001,
-    y: Double = 1.0
+    accuracy: Double = 0.0000001,
+    estimatedApr: Double = 1.0
 ): BigDecimal {
-    if(y <= accuracy)
-        return BigDecimal(y).pow(-12, MathContext.DECIMAL128).minus(BigDecimal.ONE)
+    //if(estimatedApr <= accuracy)
+    //    return BigDecimal(estimatedApr).pow(-12, MathContext.DECIMAL128).minus(BigDecimal.ONE)
 
-    val deltaY: Double = - f(y, loanAmount, monthlyPayment, paymentTerms) / fPrime(y+accuracy, paymentTerms)
-    return effectiveInterestRateAnnuity(loanAmount, monthlyPayment, paymentTerms, accuracy, y + deltaY)
+    val y1: Double = computeDelta(estimatedApr - accuracy, loanAmount, monthlyPayment, paymentTerms)
+    val y2: Double = computeDelta(estimatedApr + accuracy, loanAmount, monthlyPayment, paymentTerms)
+    val deltaY: Double = 1.0/((y2 - y1) * accuracy)
+    val offset: Double = y1 / loanAmount
+    if(y1 < accuracy)
+        return BigDecimal(estimatedApr)
+    //val newAprEstimation: Double = Math.abs(estimatedApr - deltaY.absoluteValue)
+    val newAprEstimation: Double = if(y1 < y2) estimatedApr - offset else estimatedApr + offset
+    return effectiveInterestRateAnnuity(loanAmount, monthlyPayment, paymentTerms, accuracy, newAprEstimation)
 }
 
-private tailrec fun f(
-    y: Double,
-    loanAmount: Int,
-    monthlyPayment: Double,
-    totalPayments: Int,
-    payment: Int = 1
-): Double {
-    if(payment == totalPayments || y == Double.POSITIVE_INFINITY)
-        return y - (loanAmount/monthlyPayment)
-    val yn = Math.pow(y, payment.toDouble())
-    return f(y+yn, loanAmount, monthlyPayment, totalPayments, payment + 1)
-}
-
-private tailrec fun fPrime(
-    y: Double,
-    totalPayments: Int,
-    payment: Int = 1,
-    sum: Double = 0.0
-): Double {
-    if(payment == totalPayments || y == Double.POSITIVE_INFINITY)
-        return 1 + sum
-    val yPol: Double = Math.pow((payment+1.0) * y, payment.toDouble())
-    return fPrime(y, totalPayments, payment + 1, sum + yPol)
+private tailrec fun computeDelta(aprGuess: Double, loanAmount: Int, monthlyPayment: Double, paymentTerms: Int, paid: Double = 0.0): Double {
+    if(paymentTerms == 0)
+        return Math.abs(loanAmount - paid)
+    val divider: Double = Math.pow(1+aprGuess, paymentTerms/12.0)
+    val paymentCurrentTerm: Double = monthlyPayment * (1/divider)
+    return computeDelta(aprGuess, loanAmount, monthlyPayment, paymentTerms-1, paid + paymentCurrentTerm)
 }
