@@ -2,15 +2,16 @@ package org.openbroker.model
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.openbroker.loancosts.Annuity
 import java.math.BigDecimal
 
 private const val ACCEPTABLE_ERROR: Double = 0.2
 
-class TotalCostForLoanTest {
+class AnnuityTotalCostForLoanTest {
 
     @Test
     fun testComputeTotalCostForSmallLoanNoTermFee() {
-        val totalCost: BigDecimal = totalCostOfLoan(
+        val totalCost: BigDecimal = Annuity.totalCost(
             loanAmount = 10_000,
             nominalAnnualInterestRate = 0.05,
             termFee = 0,
@@ -22,7 +23,7 @@ class TotalCostForLoanTest {
 
     @Test
     fun testComputeTotalCostForBigLoanNoTermFee() {
-        val totalCost: BigDecimal = totalCostOfLoan(
+        val totalCost: BigDecimal = Annuity.totalCost(
             loanAmount = 200_000,
             nominalAnnualInterestRate = 0.067,
             termFee = 0,
@@ -35,7 +36,7 @@ class TotalCostForLoanTest {
 
     @Test
     fun testComputeTotalCostForSmallLoanWithTermFee() {
-        val totalCost: BigDecimal = totalCostOfLoan(
+        val totalCost: BigDecimal = Annuity.totalCost(
             loanAmount = 10_000,
             nominalAnnualInterestRate = 0.05,
             termFee = 20,
@@ -47,7 +48,7 @@ class TotalCostForLoanTest {
 
     @Test
     fun testComputeTotalCostForBigLoanWithTermFee() {
-        val totalCost: BigDecimal = totalCostOfLoan(
+        val totalCost: BigDecimal = Annuity.totalCost(
             loanAmount = 200_000,
             nominalAnnualInterestRate = 0.067,
             termFee = 60,
