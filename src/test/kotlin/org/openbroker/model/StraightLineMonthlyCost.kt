@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 import org.openbroker.loancosts.StraightLine
 import java.math.BigDecimal
 
-private const val ACCEPTABLE_ERROR: Double = 0.5
+private const val ACCEPTABLE_ERROR: Double = 0.6
 
 class StraightLineMonthlyCost {
 
@@ -14,10 +14,10 @@ class StraightLineMonthlyCost {
         val totalCost: BigDecimal = StraightLine.monthlyCost(
             loanAmount = 10_000,
             nominalAnnualInterestRate = 0.05,
-            termMonths = 24
+            termMonths = 6
         )
 
-        Assertions.assertEquals(459.0, totalCost.toDouble(), ACCEPTABLE_ERROR)
+        Assertions.assertEquals(1691.5, totalCost.toDouble(), ACCEPTABLE_ERROR)
     }
 
     @Test
@@ -25,9 +25,9 @@ class StraightLineMonthlyCost {
         val totalCost: BigDecimal = StraightLine.monthlyCost(
             loanAmount = 200_000,
             nominalAnnualInterestRate = 0.067,
-            termMonths = 96
+            termMonths = 3
         )
 
-        Assertions.assertEquals(3_200.0, totalCost.toDouble(), ACCEPTABLE_ERROR)
+        Assertions.assertEquals(67_411.33, totalCost.toDouble(), ACCEPTABLE_ERROR)
     }
 }
