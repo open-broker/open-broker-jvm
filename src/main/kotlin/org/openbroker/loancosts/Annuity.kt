@@ -10,8 +10,7 @@ object Annuity: LoanType {
         nominalAnnualInterestRate: Double,
         termFee: Int,
         termMonths: Int
-    ): BigDecimal
-    {
+    ): BigDecimal {
         val monthlyCost: BigDecimal = monthlyCost(loanAmount, nominalAnnualInterestRate, termMonths)
         val monthlyTermCost = BigDecimal(termFee)
         return (monthlyCost + monthlyTermCost).multiply(BigDecimal(termMonths), MathContext.DECIMAL128)
@@ -34,8 +33,9 @@ object Annuity: LoanType {
         termMonths: Int
     ): BigDecimal {
         val monthlyRate: Double = nominalAnnualInterestRate / 12.0
-        val fixedMonthlyPayment: Double = loanAmount * ((monthlyRate * Math.pow(1 + monthlyRate, termMonths.toDouble())) / (Math.pow(1 +
-            monthlyRate, termMonths.toDouble()) - 1))
+        val monthlyDividend: Double = monthlyRate * Math.pow(1 + monthlyRate, termMonths.toDouble())
+        val monthlyDivider: Double = Math.pow(1 + monthlyRate, termMonths.toDouble()) - 1
+        val fixedMonthlyPayment: Double = loanAmount * (monthlyDividend / monthlyDivider)
         return BigDecimal(fixedMonthlyPayment)
     }
 
@@ -47,8 +47,7 @@ object Annuity: LoanType {
         paymentTerms: Int,
         estimatedApr: Double = 1.0,
         leverage: Double = 1.0
-    ): BigDecimal
-    {
+    ): BigDecimal {
         val estimationLow: Double = estimatedApr - leverage / 5.0
         val estimationHigh: Double = estimatedApr + leverage / 5.0
         val y1: Double = computeDelta(estimationLow, loanAmount, monthlyPayment, paymentTerms)
