@@ -45,7 +45,7 @@ object Annuity: LoanType {
         loanAmount: Int,
         monthlyPayment: Double,
         paymentTerms: Int,
-        estimatedApr: Double = 1.0,
+        estimatedApr: Double = 0.5,
         leverage: Double = 1.0
     ): BigDecimal {
         val estimationLow: Double = estimatedApr - leverage / 5.0
