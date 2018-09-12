@@ -114,21 +114,18 @@ private tailrec fun effectiveInterestRateAnnuity(
     loanAmount: Int,
     monthlyPayment: Double,
     paymentTerms: Int,
-    accuracy: Double = 0.0000001,
-    estimatedApr: Double = 1.0
+    accuracy: Double = 0.000001,
+    estimatedApr: Double = 1.0,
+    leverage: Double = 1.0
 ): BigDecimal {
-    //if(estimatedApr <= accuracy)
-    //    return BigDecimal(estimatedApr).pow(-12, MathContext.DECIMAL128).minus(BigDecimal.ONE)
-
-    val y1: Double = computeDelta(estimatedApr - accuracy, loanAmount, monthlyPayment, paymentTerms)
-    val y2: Double = computeDelta(estimatedApr + accuracy, loanAmount, monthlyPayment, paymentTerms)
-    val deltaY: Double = 1.0/((y2 - y1) * accuracy)
-    val offset: Double = y1 / loanAmount
+    val estimationLow: Double = estimatedApr - leverage / 5.0
+    val estimationHigh: Double = estimatedApr + leverage / 5.0
+    val y1: Double = computeDelta(estimationLow, loanAmount, monthlyPayment, paymentTerms)
+    val y2: Double = computeDelta(estimationHigh, loanAmount, monthlyPayment, paymentTerms)
     if(y1 < accuracy)
         return BigDecimal(estimatedApr)
-    //val newAprEstimation: Double = Math.abs(estimatedApr - deltaY.absoluteValue)
-    val newAprEstimation: Double = if(y1 < y2) estimatedApr - offset else estimatedApr + offset
-    return effectiveInterestRateAnnuity(loanAmount, monthlyPayment, paymentTerms, accuracy, newAprEstimation)
+    val newAprEstimation: Double = if(y1 < y2) estimationLow else estimationHigh
+    return effectiveInterestRateAnnuity(loanAmount, monthlyPayment, paymentTerms, accuracy, newAprEstimation, y1 / loanAmount)
 }
 
 private tailrec fun computeDelta(aprGuess: Double, loanAmount: Int, monthlyPayment: Double, paymentTerms: Int, paid: Double = 0.0): Double {
