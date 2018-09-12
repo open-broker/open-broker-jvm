@@ -61,8 +61,8 @@ object Annuity: LoanType {
     private tailrec fun computeDelta(aprGuess: Double, loanAmount: Int, monthlyPayment: Double, paymentTerms: Int, paid: Double = 0.0): Double {
         if(paymentTerms == 0)
             return Math.abs(loanAmount - paid)
-        val divider: Double = Math.pow(1+aprGuess, paymentTerms/12.0)
-        val paymentCurrentTerm: Double = monthlyPayment * (1/divider)
-        return computeDelta(aprGuess, loanAmount, monthlyPayment, paymentTerms-1, paid + paymentCurrentTerm)
+        val divider: Double = Math.pow(1 + aprGuess, paymentTerms / 12.0)
+        val paymentCurrentTerm: Double = monthlyPayment * (1 / divider)
+        return computeDelta(aprGuess, loanAmount, monthlyPayment, paymentTerms - 1, paid + paymentCurrentTerm)
     }
 }
