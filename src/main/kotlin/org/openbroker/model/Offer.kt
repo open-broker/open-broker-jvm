@@ -119,8 +119,7 @@ private tailrec fun effectiveInterestRateAnnuity(
     if(y <= accuracy)
         return BigDecimal(y).pow(-12, MathContext.DECIMAL128).minus(BigDecimal.ONE)
 
-    val deltaY: Double = - ((f(y, loanAmount, monthlyPayment, paymentTerms) / fPrime(y+accuracy, paymentTerms))
-        - 1)
+    val deltaY: Double = - f(y, loanAmount, monthlyPayment, paymentTerms) / fPrime(y+accuracy, paymentTerms)
     return effectiveInterestRateAnnuity(loanAmount, monthlyPayment, paymentTerms, accuracy, y + deltaY)
 }
 
@@ -145,6 +144,6 @@ private tailrec fun fPrime(
 ): Double {
     if(payment == totalPayments || y == Double.POSITIVE_INFINITY)
         return 1 + sum
-    val yPol: Double = Math.pow(Math.pow(payment+1.0, y), payment.toDouble())
+    val yPol: Double = Math.pow((payment+1.0) * y, payment.toDouble())
     return fPrime(y, totalPayments, payment + 1, sum + yPol)
 }
