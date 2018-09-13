@@ -10,7 +10,7 @@ class Applicant @JvmOverloads constructor(
     val employmentStatus: EmploymentStatus,
     val employmentStatusSinceYear: Int,
     val employmentStatusSinceMonth: Int,
-    dependentChildren: Int,
+    val dependentChildren: Int,
     val housingType: HousingType,
     val housingCostPerMonth: Int,
     val employerName: String? = null,
@@ -26,7 +26,6 @@ class Applicant @JvmOverloads constructor(
     val taxResidentOf: List<String>,
     val tentativeAddress: Address? = null
 ) {
-    val dependentChildren: Int = dependentChildren.coerceAtMost(15)
 
     init {
         val ssnRegex = Regex("^[0-9]{12}$")
@@ -43,7 +42,7 @@ class Applicant @JvmOverloads constructor(
 
         require(employmentStatusSinceYear in 1900..3000)
         require(employmentStatusSinceMonth in 1..12)
-        this.dependentChildren.requireMin(0, "dependentChildren")
+        require(dependentChildren in 0..15)
         housingCostPerMonth.requireMin(0, "housingCostPerMonth")
         monthlyIncome.requireMin(0, "monthlyIncome")
         childSupportReceivedMonthly.requireMin(0, "childSupportReceivedMonthly")
