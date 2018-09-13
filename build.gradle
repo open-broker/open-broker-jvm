@@ -31,8 +31,6 @@ repositories {
 dependencies {
     // Kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:0.23.3'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.23.3'
 
     // Cloud Events
     implementation 'com.github.open-broker:cloud-events-jvm:514409df8f'
