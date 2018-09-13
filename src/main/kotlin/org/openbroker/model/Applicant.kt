@@ -2,7 +2,7 @@ package org.openbroker.model
 
 import org.openbroker.requireMin
 
-class Applicant @JvmOverloads constructor(
+data class Applicant @JvmOverloads constructor(
     val ssn: String,
     val phone: String? = null,
     val secondaryPhone: List<String> = emptyList(),
