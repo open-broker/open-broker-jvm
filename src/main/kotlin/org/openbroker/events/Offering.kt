@@ -10,5 +10,5 @@ import org.openbroker.model.Reference
 data class Offering @JvmOverloads constructor(
     override val brokerReference: Reference,
     val offer: Offer,
-    val loanInsurance: LoanInsuranceOffer? = null
+    val loanInsuranceOffer: LoanInsuranceOffer? = null
 ): OpenBrokerEvent
