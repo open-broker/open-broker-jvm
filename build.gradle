@@ -33,8 +33,8 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
     // Cloud Events
-    implementation 'com.github.open-broker:cloud-events-jvm:76dfa0814'
-    implementation 'com.github.open-broker:cloud-events-jvm:76dfa0814:sources'
+    implementation 'com.github.open-broker:cloud-events-jvm:41e703c21'
+    implementation 'com.github.open-broker:cloud-events-jvm:41e703c21:sources'
 
     // Jackson
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version:'2.9.6'
