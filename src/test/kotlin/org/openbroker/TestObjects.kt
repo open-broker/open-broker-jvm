@@ -367,7 +367,7 @@ object TestObjects {
                     "termMonths": 36,
                     "amortizationType": "ANNUITY"
                 },
-                "loanInsurance": null
+                "loanInsuranceOffer": null
             }
         }
 		""".trimIndent()
