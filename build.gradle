@@ -41,8 +41,8 @@ dependencies {
     implementation group: 'com.fasterxml.jackson.module', name: 'jackson-module-kotlin', version:'2.9.6'
     implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version:'2.9.6'
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.2.0")
-    testRuntime("org.junit.jupiter:junit-jupiter-engine:5.2.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.3.1")
+    testRuntime("org.junit.jupiter:junit-jupiter-engine:5.3.1")
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
@@ -73,5 +73,5 @@ kotlin {
 
 task wrapper(type: Wrapper) {
     description = 'Generates gradlew[.bat] scripts for faster execution'
-    gradleVersion = '4.8.1'
+    gradleVersion = '4.10.2'
 }
