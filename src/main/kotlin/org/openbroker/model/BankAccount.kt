@@ -20,7 +20,14 @@ data class BankAccount(
     val accountNo: String
 ) {
     init {
-    	require(clearingNo.matches(clearingNumberRegex)) { "Invalid clearing number" }
-        require(accountNo.matches(accountNumberRegex)) { "Invalid account number" }
+        require(clearingNo.matches(clearingNumberRegex)) {
+            "Invalid clearing number with format '${obfuscateDigits(clearingNo)}'"
+        }
+        require(accountNo.matches(accountNumberRegex)) {
+            "Invalid account number with format '${obfuscateDigits(accountNo)}'"
+        }
     }
+
+    private fun obfuscateDigits(number: String): String =
+        number.replace(Regex("\\d"), "*")
 }
