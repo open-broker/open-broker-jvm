@@ -1,6 +1,9 @@
 package org.openbroker.model
 
 import org.openbroker.requireMin
+import java.math.BigDecimal
+import java.math.MathContext
+import kotlin.math.absoluteValue
 
 data class Offer(
     val effectiveInterestRate: String,
