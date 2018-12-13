@@ -25,6 +25,8 @@ data class Reference(
         require(issuer.matches(issuerRegex)) {
             "Issuer '$issuer' does not match regex for issuer"
         }
+
+        require(id.isNotBlank()) { "id in reference must not be blank" }
     }
 
     /**
