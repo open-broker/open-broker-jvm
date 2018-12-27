@@ -12,12 +12,12 @@ import org.openbroker.events.StatusUpdated
 enum class EventTypePrivateUnsecuredLoan(val clazz: Class<*> = Nothing::class.java) {
     APPLICATION_CREATED(ApplicationCreated::class.java),
     DELAYED_PROCESSING(DelayedProcessing::class.java),
-    DISBURSED(Disbursed::class.java),
-    OFFER_ACCEPTED(OfferAccepted::class.java),
-    OFFER_REJECTED(OfferRejected::class.java),
     OFFERING(Offering::class.java),
     REJECTION(Rejection::class.java),
-    STATUS_UPDATED(StatusUpdated::class.java);
+    OFFER_ACCEPTED(OfferAccepted::class.java),
+    OFFER_REJECTED(OfferRejected::class.java),
+    STATUS_UPDATED(StatusUpdated::class.java),
+    DISBURSED(Disbursed::class.java);
 
     override fun toString(): String {
         return "$NAME_SPACE.$VERSION.$REGION.PrivateUnsecuredLoan${name.pascalCase()}"
