@@ -25,6 +25,7 @@ import org.openbroker.cloudevents.CloudEvent
 import org.openbroker.cloudevents.cloudEvent
 import org.openbroker.cloudevents.jsonString
 import org.openbroker.events.Offering
+import org.openbroker.events.OpenBrokerEvent
 import org.openbroker.model.AmortizationType
 import org.openbroker.model.Offer
 
@@ -123,5 +124,15 @@ class SerializationTest {
         val deserializedEvent: CloudEvent<StatusUpdated> = cloudEvent(serialized)
 
         assertEquals(originalEvent, deserializedEvent)
+    }
+
+    @Test
+    fun testSerializeAndDeserializeUnknownOpenBrokerEvent() {
+        val updated = StatusUpdated(Reference("1", "org"), Status.CONTRACT_SIGNED)
+        val originalEvent: CloudEvent<StatusUpdated> = openBrokerEvent(event = updated, source = "org.something")
+        val serialized: String = jsonString(originalEvent)
+        val deserializedEvent: CloudEvent<out OpenBrokerEvent> = parseOpenBrokerEvent(serialized)
+        val castedEvent: CloudEvent<StatusUpdated> = deserializedEvent as CloudEvent<StatusUpdated>
+        assertEquals(originalEvent, castedEvent)
     }
 }

@@ -6,10 +6,11 @@ import org.openbroker.events.Disbursed
 import org.openbroker.events.OfferAccepted
 import org.openbroker.events.OfferRejected
 import org.openbroker.events.Offering
+import org.openbroker.events.OpenBrokerEvent
 import org.openbroker.events.Rejection
 import org.openbroker.events.StatusUpdated
 
-enum class EventTypePrivateUnsecuredLoan(val clazz: Class<*> = Nothing::class.java) {
+enum class EventTypePrivateUnsecuredLoan(val clazz: Class<out OpenBrokerEvent>) {
     APPLICATION_CREATED(ApplicationCreated::class.java),
     DELAYED_PROCESSING(DelayedProcessing::class.java),
     OFFERING(Offering::class.java),
