@@ -54,7 +54,7 @@ inline fun <reified T: OpenBrokerEvent> openBrokerEvent(
 }
 
 private typealias EventType = EventTypePrivateUnsecuredLoan
-private inline fun <reified T: OpenBrokerEvent> parse(json: String): CloudEvent<T>
+private inline fun <reified T: OpenBrokerEvent> parse(json: String): T
     = jacksonObjectMapper().readValue(json)
 
 fun parseOpenBrokerEvent(payload: String): CloudEvent<OpenBrokerEvent> {
@@ -62,14 +62,14 @@ fun parseOpenBrokerEvent(payload: String): CloudEvent<OpenBrokerEvent> {
     val data: String = jacksonObjectMapper().writeValueAsString(cloudEvent.data)
     val eventType = EventType(cloudEvent.eventType)
     val eventData: OpenBrokerEvent = when(eventType) {
-        EventType.APPLICATION_CREATED -> jacksonObjectMapper().readValue<ApplicationCreated>(data)
-        EventType.DELAYED_PROCESSING -> jacksonObjectMapper().readValue<DelayedProcessing>(data)
-        EventType.OFFERING -> jacksonObjectMapper().readValue<Offering>(data)
-        EventTypePrivateUnsecuredLoan.REJECTION -> jacksonObjectMapper().readValue<Rejection>(data)
-        EventTypePrivateUnsecuredLoan.OFFER_ACCEPTED -> jacksonObjectMapper().readValue<OfferAccepted>(data)
-        EventTypePrivateUnsecuredLoan.OFFER_REJECTED -> jacksonObjectMapper().readValue<OfferRejected>(data)
-        EventTypePrivateUnsecuredLoan.STATUS_UPDATED -> jacksonObjectMapper().readValue<StatusUpdated>(data)
-        EventTypePrivateUnsecuredLoan.DISBURSED -> jacksonObjectMapper().readValue<Disbursed>(data)
+        EventType.APPLICATION_CREATED -> parse<ApplicationCreated>(data)
+        EventType.DELAYED_PROCESSING -> parse<DelayedProcessing>(data)
+        EventType.OFFERING -> parse<Offering>(data)
+        EventType.REJECTION -> parse<Rejection>(data)
+        EventType.OFFER_ACCEPTED -> parse<OfferAccepted>(data)
+        EventType.OFFER_REJECTED -> parse<OfferRejected>(data)
+        EventType.STATUS_UPDATED -> parse<StatusUpdated>(data)
+        EventType.DISBURSED -> parse<Disbursed>(data)
     }
     return CloudEvent(
         eventType = cloudEvent.eventType,
