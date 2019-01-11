@@ -71,16 +71,41 @@ fun parseOpenBrokerEvent(payload: String): CloudEvent<OpenBrokerEvent> {
         EventType.STATUS_UPDATED -> parse<StatusUpdated>(data)
         EventType.DISBURSED -> parse<Disbursed>(data)
     }
+    return cloudEvent.withData(eventData)
+}
+
+fun restoreOpenBrokerEvent(event: CloudEvent<*>): CloudEvent<OpenBrokerEvent>? {
+    if(event.data == null)
+        return null
+    val data: String = jacksonObjectMapper().writeValueAsString(event.data)
+    val type  = EventTypePrivateUnsecuredLoan(event.eventType)
+    val openBrokerEvent: OpenBrokerEvent = when(type) {
+        EventType.APPLICATION_CREATED -> parse<ApplicationCreated>(data)
+        EventType.DELAYED_PROCESSING -> parse<DelayedProcessing>(data)
+        EventType.OFFERING -> parse<Offering>(data)
+        EventType.REJECTION -> parse<Rejection>(data)
+        EventType.OFFER_ACCEPTED -> parse<OfferAccepted>(data)
+        EventType.OFFER_REJECTED -> parse<OfferRejected>(data)
+        EventType.STATUS_UPDATED -> parse<StatusUpdated>(data)
+        EventType.DISBURSED -> parse<Disbursed>(data)
+    }
+
+    return event.withData(openBrokerEvent)
+}
+
+fun <T: OpenBrokerEvent> CloudEvent<*>.withData(data: T): CloudEvent<OpenBrokerEvent> {
+    if(this.data == data)
+        return this as CloudEvent<OpenBrokerEvent>
     return CloudEvent(
-        eventType = cloudEvent.eventType,
-        eventTypeVersion = cloudEvent.eventTypeVersion,
-        source = cloudEvent.source,
-        cloudEventsVersion = cloudEvent.cloudEventsVersion,
-        contentType = cloudEvent.contentType,
-        eventID = cloudEvent.eventID,
-        eventTime = cloudEvent.eventTime,
-        extensions = cloudEvent.extensions,
-        schemaURL = cloudEvent.schemaURL,
-        data = eventData
+        eventType = this.eventType,
+        eventTypeVersion = this.eventTypeVersion,
+        data = data,
+        schemaURL = this.schemaURL,
+        extensions = this.extensions,
+        eventTime = this.eventTime,
+        eventID = this.eventID,
+        contentType = this.contentType,
+        cloudEventsVersion = this.cloudEventsVersion,
+        source = this.source
     )
 }

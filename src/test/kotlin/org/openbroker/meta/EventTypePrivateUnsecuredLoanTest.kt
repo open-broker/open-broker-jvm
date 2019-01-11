@@ -3,6 +3,7 @@ package org.openbroker.meta
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
+
 class EventTypePrivateUnsecuredLoanTest {
 
     @Test
