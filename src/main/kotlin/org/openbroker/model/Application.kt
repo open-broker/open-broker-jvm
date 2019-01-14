@@ -21,7 +21,7 @@ data class Application @JvmOverloads constructor(
     /**
      * Custom, vendor-specific extensions to the schema
      */
-    val extensions: Map<String, Any> = emptyMap(),
+    val extensions: Map<String, Any>? = emptyMap(),
 
     /**
      * The amount that the customer wishes to borrow
@@ -52,7 +52,7 @@ data class Application @JvmOverloads constructor(
             "refinanceAmount ($refinanceAmount) may not be greater than loanAmount ($loanAmount)."
         }
 
-        extensions.keys.forEach { key ->
+        extensions?.keys?.forEach { key ->
             require(key.matches(issuerRegex)) {
                 "Key for extension is not a valid format: '$key'"
             }
