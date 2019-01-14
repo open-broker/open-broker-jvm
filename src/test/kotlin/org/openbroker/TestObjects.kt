@@ -365,7 +365,8 @@ object TestObjects {
                     "termFee": 12,
                     "invoiceFee": 19,
                     "termMonths": 36,
-                    "amortizationType": "ANNUITY"
+                    "amortizationType": "ANNUITY",
+                    "comment": "Copy of driver's licence for customer is required"
                 },
                 "loanInsuranceOffer": null
             }

@@ -17,7 +17,14 @@ data class Offer(
     val termFee: Int,
     val invoiceFee: Int,
     val termMonths: Int,
-    val amortizationType: AmortizationType
+    val amortizationType: AmortizationType,
+    /**
+     * An optional human-readable comment about the offer, presenting
+     * extra information about the offer, such as if it is only valid
+     * under certain conditions or it is mandated that the customer
+     * present necessary means of identification or other document.
+     */
+    val comment: String? = null
 ) {
     init {
         val interestRateRegex = Regex("^[0-9]+(.[0-9]+)?$")
