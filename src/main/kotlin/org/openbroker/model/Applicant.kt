@@ -33,11 +33,17 @@ data class Applicant @JvmOverloads constructor(
 
         val phoneRegex = Regex("^\\+[1-9][0-9]{1,14}\$")
         phone?.let {
-            require(it.matches(phoneRegex)) { "Invalid phone number" }
+            require(it.matches(phoneRegex)) {
+                "Invalid primary phone number: '$it'"
+            }
         }
-        require(secondaryPhone.all { it.matches(phoneRegex) }) { "Invalid secondary phone number" }
+        require(secondaryPhone.all { it.matches(phoneRegex) }) {
+            "Invalid secondary phone number in $secondaryPhone"
+        }
         employerPhone?.let {
-            require(it.matches(phoneRegex)) { "Invalid phone number" }
+            require(it.matches(phoneRegex)) {
+                "Invalid employer phone number: '$it'"
+            }
         }
 
         require(employmentStatusSinceYear in 1900..3000)
