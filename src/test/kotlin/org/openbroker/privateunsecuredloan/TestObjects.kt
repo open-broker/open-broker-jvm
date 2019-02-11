@@ -1,4 +1,4 @@
-package org.openbroker
+package org.openbroker.privateunsecuredloan
 
 object TestObjects {
     internal val mainApplicant1 =

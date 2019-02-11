@@ -1,6 +1,6 @@
 package org.openbroker.privateunsecuredloan.serialize
 
-import org.openbroker.TestObjects
+import org.openbroker.privateunsecuredloan.TestObjects
 import org.openbroker.privateunsecuredloan.events.ApplicationCreated
 import org.openbroker.privateunsecuredloan.events.StatusUpdated
 import org.openbroker.privateunsecuredloan.meta.EventTypePrivateUnsecuredLoan

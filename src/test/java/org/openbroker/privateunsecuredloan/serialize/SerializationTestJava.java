@@ -1,7 +1,7 @@
 package org.openbroker.privateunsecuredloan.serialize;
 
 import org.junit.jupiter.api.Test;
-import org.openbroker.TestObjects;
+import org.openbroker.privateunsecuredloan.TestObjects;
 import org.openbroker.cloudevents.CloudEvent;
 import org.openbroker.cloudevents.SerializationKt;
 import org.openbroker.privateunsecuredloan.events.ApplicationCreated;

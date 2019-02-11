@@ -4,7 +4,7 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import org.openbroker.TestObjects
+import org.openbroker.privateunsecuredloan.TestObjects
 import org.openbroker.cloudevents.CloudEvent
 import org.openbroker.cloudevents.cloudEvent
 import org.openbroker.privateunsecuredloan.events.ApplicationCreated

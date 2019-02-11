@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import org.openbroker.TestObjects
+import org.openbroker.privateunsecuredloan.TestObjects
 import org.openbroker.cloudevents.CloudEvent
 import org.openbroker.cloudevents.cloudEvent
 import org.openbroker.privateunsecuredloan.events.ApplicationCreated
