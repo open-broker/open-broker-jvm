@@ -1,4 +1,4 @@
-package org.openbroker.privateunsecuredloan.serialize;
+package org.openbroker.common.serialize;
 
 import org.junit.jupiter.api.Test;
 import org.openbroker.privateunsecuredloan.TestObjects;

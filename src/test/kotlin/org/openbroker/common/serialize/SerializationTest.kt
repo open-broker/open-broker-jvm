@@ -1,4 +1,4 @@
-package org.openbroker.privateunsecuredloan.serialize
+package org.openbroker.common.serialize
 
 import org.openbroker.privateunsecuredloan.TestObjects
 import org.openbroker.privateunsecuredloan.events.ApplicationCreated

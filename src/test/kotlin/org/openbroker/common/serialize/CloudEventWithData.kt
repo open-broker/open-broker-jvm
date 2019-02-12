@@ -1,4 +1,4 @@
-package org.openbroker.privateunsecuredloan.serialize
+package org.openbroker.common.serialize
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue

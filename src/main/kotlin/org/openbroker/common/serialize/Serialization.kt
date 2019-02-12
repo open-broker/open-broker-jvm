@@ -1,4 +1,4 @@
-package org.openbroker.privateunsecuredloan.serialize
+package org.openbroker.common.serialize
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
@@ -7,7 +7,6 @@ import org.openbroker.cloudevents.CloudEvent
 import org.openbroker.common.OpenBrokerEvent
 import org.openbroker.common.meta.EventType
 import org.openbroker.common.meta.eventType
-import org.openbroker.common.meta.eventTypeExists
 import java.time.Instant
 import java.util.*
 
