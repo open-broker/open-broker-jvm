@@ -1,6 +1,7 @@
 package org.openbroker.mortgage.events
 
 import org.openbroker.common.model.DataProtectionContext
+import org.openbroker.common.model.InformationContext
 import org.openbroker.common.model.Reference
 import org.openbroker.mortgage.model.Application
 
@@ -11,5 +12,5 @@ import org.openbroker.mortgage.model.Application
 data class ApplicationCreated(
     override val brokerReference: Reference,
     val application: Application,
-    val dataProtectionContext: DataProtectionContext
-): MortgageEvent
+    override val dataProtectionContext: DataProtectionContext
+): MortgageEvent, InformationContext

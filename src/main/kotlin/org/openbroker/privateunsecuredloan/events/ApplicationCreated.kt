@@ -1,6 +1,7 @@
 package org.openbroker.privateunsecuredloan.events
 
 import org.openbroker.common.model.DataProtectionContext
+import org.openbroker.common.model.InformationContext
 import org.openbroker.common.model.Reference
 
 /**
@@ -10,5 +11,5 @@ import org.openbroker.common.model.Reference
 data class ApplicationCreated(
     val application: org.openbroker.privateunsecuredloan.model.Application,
     override val brokerReference: Reference,
-    val dataProtectionContext: DataProtectionContext
-): PrivateUnsecuredLoanEvent
+    override val dataProtectionContext: DataProtectionContext
+): PrivateUnsecuredLoanEvent, InformationContext
