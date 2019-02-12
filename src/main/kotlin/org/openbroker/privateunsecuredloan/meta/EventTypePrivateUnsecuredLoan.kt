@@ -10,6 +10,7 @@ import org.openbroker.privateunsecuredloan.events.PrivateUnsecuredLoanEvent
 import org.openbroker.privateunsecuredloan.events.Rejection
 import org.openbroker.privateunsecuredloan.events.StatusUpdated
 
+@Deprecated("Use generic interface EventTypeFactory for PrivateUnsecuredLoan SE")
 enum class EventTypePrivateUnsecuredLoan(val clazz: Class<out PrivateUnsecuredLoanEvent>) {
     APPLICATION_CREATED(ApplicationCreated::class.java),
     DELAYED_PROCESSING(DelayedProcessing::class.java),
@@ -26,7 +27,7 @@ enum class EventTypePrivateUnsecuredLoan(val clazz: Class<out PrivateUnsecuredLo
 
     companion object {
         @JvmStatic
-    	operator fun invoke(input: String): EventTypePrivateUnsecuredLoan {
+        operator fun invoke(input: String): EventTypePrivateUnsecuredLoan {
             return values()
                 .firstOrNull { it.toString() == input }
                 ?: throw IllegalArgumentException("Input does not map to a valid type: '$input'")

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import org.openbroker.privateunsecuredloan.events.PrivateUnsecuredLoanEvent
 import org.openbroker.privateunsecuredloan.meta.EventTypePrivateUnsecuredLoan
 import org.openbroker.cloudevents.CloudEvent
+import org.openbroker.common.OpenBrokerEvent
 import org.openbroker.privateunsecuredloan.events.ApplicationCreated
 import org.openbroker.privateunsecuredloan.events.DelayedProcessing
 import org.openbroker.privateunsecuredloan.events.Disbursed
@@ -17,9 +18,9 @@ import org.openbroker.privateunsecuredloan.events.StatusUpdated
 import java.time.Instant
 import java.util.UUID
 
-@JvmOverloads fun <T: PrivateUnsecuredLoanEvent> openBrokerEvent(
+@JvmOverloads fun <T: OpenBrokerEvent> openBrokerEvent(
     event: T,
-    eventType: EventTypePrivateUnsecuredLoan,
+    eventType: Class<T>,
     source: String,
     timestamp: Instant = Instant.now(),
     eventId: String = UUID.randomUUID().toString()
@@ -35,7 +36,7 @@ import java.util.UUID
     )
 }
 
-inline fun <reified T: PrivateUnsecuredLoanEvent> openBrokerEvent(
+inline fun <reified T: OpenBrokerEvent> openBrokerEvent(
     event: T,
     source: String,
     timestamp: Instant = Instant.now(),
@@ -73,12 +74,17 @@ fun parseOpenBrokerEvent(payload: String): CloudEvent<PrivateUnsecuredLoanEvent>
     return cloudEvent.withData(eventData)
 }
 
+fun cloudEventType(payload: String): String {
+    val node: JsonNode = jacksonObjectMapper().readValue(payload)
+    return node["eventType"]?.textValue() ?: throw IllegalArgumentException("EventType was null")
+}
+
 fun restoreOpenBrokerEvent(event: CloudEvent<*>): CloudEvent<PrivateUnsecuredLoanEvent>? {
     if(event.data == null)
         return null
     val data: String = jacksonObjectMapper().writeValueAsString(event.data)
     val type  = EventTypePrivateUnsecuredLoan(event.eventType)
-    val privateUnsecuedLoanEvent: PrivateUnsecuredLoanEvent = when(type) {
+    val privateUnsecuredLoanEvent: PrivateUnsecuredLoanEvent = when(type) {
         EventType.APPLICATION_CREATED -> parse<ApplicationCreated>(data)
         EventType.DELAYED_PROCESSING -> parse<DelayedProcessing>(data)
         EventType.OFFERING -> parse<Offering>(data)
@@ -89,12 +95,12 @@ fun restoreOpenBrokerEvent(event: CloudEvent<*>): CloudEvent<PrivateUnsecuredLoa
         EventType.DISBURSED -> parse<Disbursed>(data)
     }
 
-    return event.withData(privateUnsecuedLoanEvent)
+    return event.withData(privateUnsecuredLoanEvent)
 }
 
-fun <T: PrivateUnsecuredLoanEvent> CloudEvent<*>.withData(data: T): CloudEvent<PrivateUnsecuredLoanEvent> {
+fun <T: OpenBrokerEvent> CloudEvent<*>.withData(data: T): CloudEvent<OpenBrokerEvent> {
     if(this.data == data)
-        return this as CloudEvent<PrivateUnsecuredLoanEvent>
+        return this as CloudEvent<OpenBrokerEvent>
     return CloudEvent(
         eventType = this.eventType,
         eventTypeVersion = this.eventTypeVersion,
