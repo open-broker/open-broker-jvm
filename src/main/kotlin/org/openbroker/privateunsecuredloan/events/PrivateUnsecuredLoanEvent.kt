@@ -1,13 +1,8 @@
 package org.openbroker.privateunsecuredloan.events
 
-import org.openbroker.common.model.Reference
+import org.openbroker.common.OpenBrokerEvent
 
 /**
  * An interface for all Private Unsecured Loan events
  */
-interface PrivateUnsecuredLoanEvent {
-    /**
-     * A reference-id used by the broker to identify the application
-     */
-    val brokerReference: Reference
-}
+interface PrivateUnsecuredLoanEvent: OpenBrokerEvent
