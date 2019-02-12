@@ -1,10 +1,10 @@
 package org.openbroker.common.serialize;
 
 import org.junit.jupiter.api.Test;
-import org.openbroker.privateunsecuredloan.TestObjects;
 import org.openbroker.cloudevents.CloudEvent;
+import org.openbroker.se.privateunsecuredloan.TestObjects;
 import org.openbroker.cloudevents.SerializationKt;
-import org.openbroker.privateunsecuredloan.events.ApplicationCreated;
+import org.openbroker.se.privateunsecuredloan.events.ApplicationCreated;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

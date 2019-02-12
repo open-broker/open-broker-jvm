@@ -1,8 +1,8 @@
 package org.openbroker.common.meta
 
 import org.openbroker.common.OpenBrokerEvent
-import org.openbroker.mortgage.EventTypeMortgageSweden
-import org.openbroker.privateunsecuredloan.EventTypePrivateUnsecuredLoanSweden
+import org.openbroker.se.mortgage.EventTypeMortgageSweden
+import org.openbroker.se.privateunsecuredloan.EventTypePrivateUnsecuredLoanSweden
 
 /**
  * An EventType acts as bridge between the formal type
@@ -21,7 +21,7 @@ data class EventType<T: OpenBrokerEvent>(
 }
 
 private val knownOpenBrokerDomains: List<EventTypeFactory<*>> = listOf(
-    EventTypePrivateUnsecuredLoanSweden,
+    org.openbroker.se.privateunsecuredloan.EventTypePrivateUnsecuredLoanSweden,
     EventTypeMortgageSweden
 )
 

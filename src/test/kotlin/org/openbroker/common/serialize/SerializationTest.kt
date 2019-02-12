@@ -1,19 +1,19 @@
 package org.openbroker.common.serialize
 
-import org.openbroker.privateunsecuredloan.TestObjects
-import org.openbroker.privateunsecuredloan.events.ApplicationCreated
-import org.openbroker.privateunsecuredloan.events.StatusUpdated
-import org.openbroker.privateunsecuredloan.meta.EventTypePrivateUnsecuredLoan
+import org.openbroker.se.privateunsecuredloan.TestObjects
+import org.openbroker.se.privateunsecuredloan.events.ApplicationCreated
+import org.openbroker.se.privateunsecuredloan.events.StatusUpdated
+import org.openbroker.se.privateunsecuredloan.meta.EventTypePrivateUnsecuredLoan
 import org.openbroker.common.model.BankAccount
 import org.openbroker.common.model.DataProtectionContext
 import org.openbroker.common.model.EmploymentStatus
-import org.openbroker.privateunsecuredloan.model.ExistingLoan
-import org.openbroker.privateunsecuredloan.model.ExistingLoanType
+import org.openbroker.se.privateunsecuredloan.model.ExistingLoan
+import org.openbroker.se.privateunsecuredloan.model.ExistingLoanType
 import org.openbroker.common.model.HousingType
 import org.openbroker.common.model.MaritalStatus
 import org.openbroker.common.model.Reference
-import org.openbroker.privateunsecuredloan.model.Responsibility
-import org.openbroker.privateunsecuredloan.model.Status
+import org.openbroker.se.privateunsecuredloan.model.Responsibility
+import org.openbroker.se.privateunsecuredloan.model.Status
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -23,10 +23,11 @@ import org.openbroker.cloudevents.cloudEvent
 import org.openbroker.cloudevents.jsonString
 import org.openbroker.common.OpenBrokerEvent
 import org.openbroker.common.model.Address
-import org.openbroker.privateunsecuredloan.events.Offering
-import org.openbroker.privateunsecuredloan.model.Applicant
-import org.openbroker.privateunsecuredloan.model.Application
-import org.openbroker.privateunsecuredloan.model.Offer
+import org.openbroker.se.privateunsecuredloan.events.Offering
+import org.openbroker.se.privateunsecuredloan.model.AmortizationType
+import org.openbroker.se.privateunsecuredloan.model.Applicant
+import org.openbroker.se.privateunsecuredloan.model.Application
+import org.openbroker.se.privateunsecuredloan.model.Offer
 
 class SerializationTest {
 
@@ -112,7 +113,7 @@ class SerializationTest {
         assertEquals(65_000, offer.minOfferedCredit)
         assertEquals(67_000, offer.offeredCredit)
         assertEquals(70_000, offer.maxOfferedCredit)
-        assertEquals(org.openbroker.privateunsecuredloan.model.AmortizationType.ANNUITY, offer.amortizationType)
+        assertEquals(AmortizationType.ANNUITY, offer.amortizationType)
     }
 
     @Test
