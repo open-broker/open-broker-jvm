@@ -14,7 +14,7 @@ interface EventTypeFactory<T: OpenBrokerEvent> {
 
     operator fun invoke(type: String): EventType<out T> {
         return values()
-            .firstOrNull { it.toString() == type }
+            .firstOrNull { it.name == type }
             ?: throw IllegalArgumentException("Input does not map to a valid type: '$type'")
     }
 
@@ -41,14 +41,31 @@ data class EventTypeQualifier(
 }
 
 data class EventType<T: OpenBrokerEvent>(val clazz: Class<out T>, val qualifier: EventTypeQualifier) {
-    override fun toString(): String = "$qualifier${clazz.canonicalName}"
+    val name: String = "$qualifier${clazz.simpleName}"
+    override fun toString(): String = name
 }
 
 fun <T: OpenBrokerEvent> eventType(clazz: Class<out T>): EventType<T> {
-    when {
-        clazz in EventTypePrivateUnsecuredLoanSweden -> TODO()
-        clazz in EventTypeMortgageSweden -> TODO()
+    return when(clazz) {
+        in EventTypePrivateUnsecuredLoanSweden -> EventTypePrivateUnsecuredLoanSweden(clazz)
+        in EventTypeMortgageSweden -> EventTypeMortgageSweden(clazz)
         else -> throw java.lang.IllegalArgumentException("Unsupported class $clazz")
+    } as EventType<T>
+}
+
+fun <T: OpenBrokerEvent> eventType(eventType: String): EventType<T> {
+    return when(eventType) {
+        in EventTypePrivateUnsecuredLoanSweden -> EventTypePrivateUnsecuredLoanSweden(eventType)
+        in EventTypeMortgageSweden -> EventTypeMortgageSweden(eventType)
+        else -> throw java.lang.IllegalArgumentException("Unsupported class $eventType")
+    } as EventType<T>
+}
+
+fun eventTypeExists(eventType: String): Boolean {
+    return when(eventType) {
+        in EventTypePrivateUnsecuredLoanSweden -> true
+        in EventTypeMortgageSweden -> true
+        else -> false
     }
 }
 

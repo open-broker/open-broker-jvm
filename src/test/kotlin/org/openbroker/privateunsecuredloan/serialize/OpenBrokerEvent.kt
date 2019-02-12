@@ -10,16 +10,16 @@ import org.junit.jupiter.api.assertThrows
 import org.openbroker.privateunsecuredloan.TestObjects
 import org.openbroker.cloudevents.CloudEvent
 import org.openbroker.cloudevents.cloudEvent
+import org.openbroker.common.OpenBrokerEvent
 import org.openbroker.privateunsecuredloan.events.ApplicationCreated
-import org.openbroker.privateunsecuredloan.events.PrivateUnsecuredLoanEvent
 
-class RestorePrivateUnsecuredLoanEvent {
+class OpenBrokerEvent {
 
     @Test
     fun testCloudEventWithSameData() {
         val event: CloudEvent<ApplicationCreated> = cloudEvent(TestObjects.fullApplicationCreatedJson)
         val eventErasedType: CloudEvent<*> = event.copy()
-        val eventRestoredType: CloudEvent<PrivateUnsecuredLoanEvent>? = restoreOpenBrokerEvent(eventErasedType)
+        val eventRestoredType: CloudEvent<OpenBrokerEvent>? = restoreOpenBrokerEvent(eventErasedType)
         assertNotNull(eventRestoredType)
         assertEquals(eventRestoredType, event)
     }
@@ -29,7 +29,7 @@ class RestorePrivateUnsecuredLoanEvent {
         val event: CloudEvent<ApplicationCreated> = cloudEvent(TestObjects.fullApplicationCreatedJson)
         val serialized: String = jacksonObjectMapper().writeValueAsString(event)
         val deserialized: CloudEvent<*> = jacksonObjectMapper().readValue(serialized)
-        val eventRestoredType: CloudEvent<PrivateUnsecuredLoanEvent>? = restoreOpenBrokerEvent(deserialized)
+        val eventRestoredType: CloudEvent<OpenBrokerEvent>? = restoreOpenBrokerEvent(deserialized)
         assertNotNull(eventRestoredType)
         assertEquals(eventRestoredType, event)
     }
@@ -43,7 +43,7 @@ class RestorePrivateUnsecuredLoanEvent {
     @Test
     fun testCloudEventWithNullData() {
         val event: CloudEvent<String> = CloudEvent(eventType = "SomeType", data = null, source = "test")
-        val eventRestoredType: CloudEvent<PrivateUnsecuredLoanEvent>? = restoreOpenBrokerEvent(event)
+        val eventRestoredType: CloudEvent<OpenBrokerEvent>? = restoreOpenBrokerEvent(event)
         assertNull(eventRestoredType)
     }
 }

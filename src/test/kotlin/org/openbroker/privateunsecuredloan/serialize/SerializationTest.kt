@@ -21,9 +21,9 @@ import org.junit.jupiter.api.Test
 import org.openbroker.cloudevents.CloudEvent
 import org.openbroker.cloudevents.cloudEvent
 import org.openbroker.cloudevents.jsonString
+import org.openbroker.common.OpenBrokerEvent
 import org.openbroker.common.model.Address
 import org.openbroker.privateunsecuredloan.events.Offering
-import org.openbroker.privateunsecuredloan.events.PrivateUnsecuredLoanEvent
 import org.openbroker.privateunsecuredloan.model.Applicant
 import org.openbroker.privateunsecuredloan.model.Application
 import org.openbroker.privateunsecuredloan.model.Offer
@@ -130,7 +130,7 @@ class SerializationTest {
         val updated = StatusUpdated(Reference("1", "org"), Status.CONTRACT_SIGNED)
         val originalEvent: CloudEvent<StatusUpdated> = openBrokerEvent(event = updated, source = "org.something")
         val serialized: String = jsonString(originalEvent)
-        val deserializedEvent: CloudEvent<out PrivateUnsecuredLoanEvent> = parseOpenBrokerEvent(serialized)
+        val deserializedEvent: CloudEvent<out OpenBrokerEvent> = parseOpenBrokerEvent(serialized)
         val castedEvent: CloudEvent<StatusUpdated> = deserializedEvent as CloudEvent<StatusUpdated>
         assertEquals(originalEvent, castedEvent)
     }
