@@ -35,9 +35,7 @@ data class Applicant @JvmOverloads constructor(
     val savingsStocks: Int = 0,
     val savingsOther: Int = 0,
     val paymentRemarks: Int,
-    val citizenships: List<String>,
-    val countriesOfResidence: List<String>,
-    val taxResidentOf: List<String>,
+    val swedishCitizen: Boolean,
     val tentativeAddress: Address? = null
 ) {
 
