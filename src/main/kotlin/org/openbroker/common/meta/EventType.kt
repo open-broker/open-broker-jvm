@@ -21,7 +21,7 @@ data class EventType<T: OpenBrokerEvent>(
 }
 
 private val knownOpenBrokerDomains: List<EventTypeFactory<*>> = listOf(
-    org.openbroker.se.privateunsecuredloan.EventTypePrivateUnsecuredLoanSweden,
+    EventTypePrivateUnsecuredLoanSweden,
     EventTypeMortgageSweden
 )
 

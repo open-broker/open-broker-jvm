@@ -2,7 +2,7 @@ package org.openbroker.common.meta
 
 import org.openbroker.common.OpenBrokerEvent
 
-interface EventTypeFactory<T: OpenBrokerEvent> {
+interface EventTypeFactory<T: OpenBrokerEvent>: Comparator<T> {
     val qualifier: EventTypeQualifier
     val classes: List<Class<out T>>
 
@@ -24,4 +24,10 @@ interface EventTypeFactory<T: OpenBrokerEvent> {
 
     operator fun contains(type: String): Boolean = type.startsWith(qualifier.toString())
     operator fun contains(clazz: Class<*>): Boolean = clazz in classes
+
+    override fun compare(p0: T, p1: T): Int {
+        val i0: Int = classes.indexOf(p0::class.java)
+        val i1: Int = classes.indexOf(p1::class.java)
+        return i0 - i1
+    }
 }
