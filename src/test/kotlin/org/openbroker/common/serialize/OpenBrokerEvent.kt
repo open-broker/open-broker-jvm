@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import org.openbroker.se.privateunsecuredloan.TestObjects
+import org.openbroker.se.privateunsecuredloan.TestObjectsJson
 import org.openbroker.cloudevents.CloudEvent
 import org.openbroker.cloudevents.cloudEvent
 import org.openbroker.common.OpenBrokerEvent
@@ -17,7 +17,7 @@ class OpenBrokerEvent {
 
     @Test
     fun testCloudEventWithSameData() {
-        val event: CloudEvent<ApplicationCreated> = cloudEvent(TestObjects.fullApplicationCreatedJson)
+        val event: CloudEvent<ApplicationCreated> = cloudEvent(TestObjectsJson.fullApplicationCreatedJson)
         val eventErasedType: CloudEvent<*> = event.copy()
         val eventRestoredType: CloudEvent<OpenBrokerEvent>? = restoreOpenBrokerEvent(eventErasedType)
         assertNotNull(eventRestoredType)
@@ -26,7 +26,7 @@ class OpenBrokerEvent {
 
     @Test
     fun testCloudEventWithErasedTypeViaJacksonData() {
-        val event: CloudEvent<ApplicationCreated> = cloudEvent(TestObjects.fullApplicationCreatedJson)
+        val event: CloudEvent<ApplicationCreated> = cloudEvent(TestObjectsJson.fullApplicationCreatedJson)
         val serialized: String = jacksonObjectMapper().writeValueAsString(event)
         val deserialized: CloudEvent<*> = jacksonObjectMapper().readValue(serialized)
         val eventRestoredType: CloudEvent<OpenBrokerEvent>? = restoreOpenBrokerEvent(deserialized)

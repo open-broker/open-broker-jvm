@@ -1,6 +1,6 @@
 package org.openbroker.se.privateunsecuredloan
 
-object TestObjects {
+object TestObjectsJson {
     internal val mainApplicant1 =
         """
         {

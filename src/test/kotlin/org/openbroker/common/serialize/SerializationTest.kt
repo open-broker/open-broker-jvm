@@ -1,6 +1,6 @@
 package org.openbroker.common.serialize
 
-import org.openbroker.se.privateunsecuredloan.TestObjects
+import org.openbroker.se.privateunsecuredloan.TestObjectsJson
 import org.openbroker.se.privateunsecuredloan.events.ApplicationCreated
 import org.openbroker.se.privateunsecuredloan.events.StatusUpdated
 import org.openbroker.se.privateunsecuredloan.meta.EventTypePrivateUnsecuredLoan
@@ -88,7 +88,7 @@ class SerializationTest {
 
     @Test
     fun testDeserializeOpenBrokerApplicationCreatedToType() {
-        val event: CloudEvent<ApplicationCreated> = cloudEvent(TestObjects.fullApplicationCreatedJson)
+        val event: CloudEvent<ApplicationCreated> = cloudEvent(TestObjectsJson.fullApplicationCreatedJson)
         assertNotNull(event.data)
         val applicationCreated: ApplicationCreated = event.data!!
         assertEquals("1", applicationCreated.brokerReference.id)
@@ -97,7 +97,7 @@ class SerializationTest {
 
     @Test
     fun testDeserializeOpenBrokerApplicationCreatedWithCoApplicantToType() {
-        val event: CloudEvent<ApplicationCreated> = cloudEvent(TestObjects.fullApplicationCreatedWitCoApplicantJson)
+        val event: CloudEvent<ApplicationCreated> = cloudEvent(TestObjectsJson.fullApplicationCreatedWitCoApplicantJson)
         assertNotNull(event.data)
         val applicationCreated: ApplicationCreated = event.data!!
         assertEquals("1", applicationCreated.brokerReference.id)
@@ -107,7 +107,7 @@ class SerializationTest {
 
     @Test
     fun testDeserializeOpenBrokerLoanOffering() {
-        val event: CloudEvent<Offering> = cloudEvent(TestObjects.loanOffering1)
+        val event: CloudEvent<Offering> = cloudEvent(TestObjectsJson.loanOffering1)
         assertNotNull(event.data)
         val offer: Offer = event.data!!.offer
         assertEquals(65_000, offer.minOfferedCredit)
