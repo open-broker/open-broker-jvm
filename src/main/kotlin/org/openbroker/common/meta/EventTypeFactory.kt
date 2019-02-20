@@ -30,4 +30,12 @@ interface EventTypeFactory<T: OpenBrokerEvent>: Comparator<T> {
         val i1: Int = classes.indexOf(p1::class.java)
         return i0 - i1
     }
+
+    fun eventTypeComparator(): Comparator<EventType<T>> {
+        return Comparator { p0, p1 ->
+            val i0: Int = classes.indexOf(p0.clazz)
+            val i1: Int = classes.indexOf(p1.clazz)
+            i0 - i1
+        }
+    }
 }
