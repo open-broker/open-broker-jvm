@@ -1,4 +1,4 @@
-package org.openbroker.common.model
+package org.openbroker.se.model
 
 enum class HousingType {
     /**

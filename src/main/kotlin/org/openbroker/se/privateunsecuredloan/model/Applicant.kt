@@ -1,10 +1,10 @@
 package org.openbroker.se.privateunsecuredloan.model
 
 import org.openbroker.common.model.Address
-import org.openbroker.common.model.BankAccount
-import org.openbroker.common.model.EmploymentStatus
-import org.openbroker.common.model.HousingType
-import org.openbroker.common.model.MaritalStatus
+import org.openbroker.se.model.BankAccount
+import org.openbroker.se.model.EmploymentStatus
+import org.openbroker.se.model.HousingType
+import org.openbroker.se.model.MaritalStatus
 import org.openbroker.common.requireMin
 
 data class Applicant @JvmOverloads constructor(

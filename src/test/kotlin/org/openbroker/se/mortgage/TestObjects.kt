@@ -2,11 +2,11 @@ package org.openbroker.se.mortgage
 
 import org.openbroker.cloudevents.CloudEvent
 import org.openbroker.common.model.Address
-import org.openbroker.common.model.BankAccount
+import org.openbroker.se.model.BankAccount
 import org.openbroker.common.model.DataProtectionContext
-import org.openbroker.common.model.EmploymentStatus
-import org.openbroker.common.model.HousingType
-import org.openbroker.common.model.MaritalStatus
+import org.openbroker.se.model.EmploymentStatus
+import org.openbroker.se.model.HousingType
+import org.openbroker.se.model.MaritalStatus
 import org.openbroker.common.model.Reference
 import org.openbroker.common.openBrokerEvent
 import org.openbroker.se.mortgage.events.ApplicationCreated
