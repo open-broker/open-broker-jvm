@@ -7,45 +7,6 @@ import org.openbroker.cloudevents.CloudEvent
 import org.openbroker.common.OpenBrokerEvent
 import org.openbroker.common.meta.EventType
 import org.openbroker.common.meta.eventType
-import java.time.Instant
-import java.util.*
-
-@JvmOverloads fun <T: OpenBrokerEvent> openBrokerEvent(
-    event: T,
-    eventType: Class<T>,
-    source: String,
-    timestamp: Instant = Instant.now(),
-    eventId: String = UUID.randomUUID().toString()
-): CloudEvent<T> {
-    val type = org.openbroker.common.meta.eventType(eventType)
-    return CloudEvent(
-        data = event,
-        eventType = type.name,
-        eventTypeVersion = type.qualifier.version,
-        source = source,
-        contentType = "application/json",
-        timestamp = timestamp,
-        eventId = eventId
-    )
-}
-
-inline fun <reified T: OpenBrokerEvent> openBrokerEvent(
-    event: T,
-    source: String,
-    timestamp: Instant = Instant.now(),
-    eventId: String = UUID.randomUUID().toString()
-): CloudEvent<T> {
-    val type = eventType(event::class.java)
-    return CloudEvent(
-        data = event,
-        eventType = type.name,
-        eventTypeVersion = type.qualifier.version,
-        source = source,
-        contentType = "application/json",
-        timestamp = timestamp,
-        eventId = eventId
-    )
-}
 
 private inline fun <reified T: OpenBrokerEvent> parse(json: String): T =
     jacksonObjectMapper().readValue(json)

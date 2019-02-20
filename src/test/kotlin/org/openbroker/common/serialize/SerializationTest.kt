@@ -23,6 +23,7 @@ import org.openbroker.cloudevents.cloudEvent
 import org.openbroker.cloudevents.jsonString
 import org.openbroker.common.OpenBrokerEvent
 import org.openbroker.common.model.Address
+import org.openbroker.common.openBrokerEvent
 import org.openbroker.se.privateunsecuredloan.events.Offering
 import org.openbroker.se.privateunsecuredloan.model.AmortizationType
 import org.openbroker.se.privateunsecuredloan.model.Applicant

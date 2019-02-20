@@ -8,7 +8,7 @@ import org.openbroker.common.model.EmploymentStatus
 import org.openbroker.common.model.HousingType
 import org.openbroker.common.model.MaritalStatus
 import org.openbroker.common.model.Reference
-import org.openbroker.common.serialize.openBrokerEvent
+import org.openbroker.common.openBrokerEvent
 import org.openbroker.se.privateunsecuredloan.events.ApplicationCreated
 import org.openbroker.se.privateunsecuredloan.events.DelayedProcessing
 import org.openbroker.se.privateunsecuredloan.events.Disbursed
