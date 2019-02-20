@@ -2,7 +2,7 @@ package org.openbroker.se.privateunsecuredloan
 
 import org.openbroker.cloudevents.CloudEvent
 import org.openbroker.common.model.Address
-import org.openbroker.se.model.BankAccount
+import org.openbroker.common.model.BankAccount
 import org.openbroker.common.model.DataProtectionContext
 import org.openbroker.se.model.EmploymentStatus
 import org.openbroker.se.model.HousingType
