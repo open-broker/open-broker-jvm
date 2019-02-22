@@ -1,6 +1,7 @@
 package org.openbroker.common.meta
 
 import org.openbroker.common.OpenBrokerEvent
+import org.openbroker.no.privateunsecuredloan.EventTypePrivateUnsecuredLoanNorway
 import org.openbroker.se.mortgage.EventTypeMortgageSweden
 import org.openbroker.se.privateunsecuredloan.EventTypePrivateUnsecuredLoanSweden
 
@@ -22,6 +23,7 @@ data class EventType<T: OpenBrokerEvent>(
 
 private val knownOpenBrokerDomains: List<EventTypeFactory<*>> = listOf(
     EventTypePrivateUnsecuredLoanSweden,
+    EventTypePrivateUnsecuredLoanNorway,
     EventTypeMortgageSweden
 )
 
