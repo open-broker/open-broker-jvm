@@ -1,4 +1,4 @@
-package org.openbroker.common.serialize;
+package org.openbroker.se.serialize;
 
 import org.junit.jupiter.api.Test;
 import org.openbroker.cloudevents.CloudEvent;

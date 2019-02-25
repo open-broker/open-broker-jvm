@@ -1,7 +1,8 @@
-package org.openbroker.common;
+package org.openbroker.se;
 
 import org.junit.jupiter.api.Test;
 import org.openbroker.cloudevents.CloudEvent;
+import org.openbroker.common.OpenBrokerEventKt;
 import org.openbroker.common.model.BankAccount;
 import org.openbroker.common.model.Reference;
 import org.openbroker.se.privateunsecuredloan.events.OfferAccepted;
