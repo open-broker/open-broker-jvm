@@ -4,7 +4,7 @@ private val clearingNumberRegex = Regex("^[1-9][0-9]{3}\$")
 private val accountNumberRegex = Regex("^[0-9]{1,11}$")
 
 /**
- * A Swedish bank account consisting of a clearing number and an
+ * A bank account consisting of a clearing number and an
  * account number
  */
 data class BankAccount(
