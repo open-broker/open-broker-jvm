@@ -41,7 +41,7 @@ object TestObjectsJson {
             "taxResidentOf": [
                 "NO"
             ],
-            "education": UNIVERSITY_SHORT,
+            "education": "UNIVERSITY_SHORT",
             "tentativeAddress": {
                 "firstName": "Jane",
                 "lastName": "Doe",
@@ -92,7 +92,7 @@ object TestObjectsJson {
             "taxResidentOf": [
                 "NO"
             ],
-            "education": UNIVERSITY_LONG,
+            "education": "UNIVERSITY_LONG",
             "tentativeAddress": {
                 "firstName": "John",
                 "lastName": "Doe",
