@@ -1,4 +1,4 @@
-package org.openbroker.common.serialize
+package org.openbroker.se.serialize
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
@@ -8,6 +8,7 @@ import org.openbroker.se.privateunsecuredloan.TestObjectsJson
 import org.openbroker.cloudevents.CloudEvent
 import org.openbroker.cloudevents.cloudEvent
 import org.openbroker.common.OpenBrokerEvent
+import org.openbroker.common.serialize.withData
 import org.openbroker.se.privateunsecuredloan.events.ApplicationCreated
 
 class CloudEventWithData {
