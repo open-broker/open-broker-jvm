@@ -16,8 +16,9 @@ object EventTypePrivateUnsecuredLoanNorway: EventTypeFactory<PrivateUnsecuredLoa
         org.openbroker.no.privateunsecuredloan.events.Message::class.java,
         org.openbroker.no.privateunsecuredloan.events.Rejection::class.java,
         org.openbroker.no.privateunsecuredloan.events.Offering::class.java,
-        org.openbroker.no.privateunsecuredloan.events.OfferAccepted::class.java,
         org.openbroker.no.privateunsecuredloan.events.OfferRejected::class.java,
+        org.openbroker.no.privateunsecuredloan.events.OfferAccepted::class.java,
+        org.openbroker.no.privateunsecuredloan.events.ContractSigned::class.java,
         org.openbroker.no.privateunsecuredloan.events.Disbursed::class.java
     )
 }
