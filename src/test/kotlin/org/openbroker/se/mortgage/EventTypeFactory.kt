@@ -20,7 +20,7 @@ class EventTypeFactory {
             )
                 .map { it.data!! }
                 .toList()
-                .sortedWith(EventTypeMortgageSweden)
+                .sortedWith(MortgageSweden)
 
             assertEquals(applicationCreated1.data!!, events[0])
             assertEquals(offering1.data!!, events[1])

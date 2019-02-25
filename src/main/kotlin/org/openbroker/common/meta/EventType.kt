@@ -1,8 +1,8 @@
 package org.openbroker.common.meta
 
 import org.openbroker.common.OpenBrokerEvent
-import org.openbroker.se.mortgage.EventTypeMortgageSweden
-import org.openbroker.se.privateunsecuredloan.EventTypePrivateUnsecuredLoanSweden
+import org.openbroker.se.mortgage.MortgageSweden
+import org.openbroker.se.privateunsecuredloan.PrivateUnsecuredLoanSweden
 
 /**
  * An EventType acts as bridge between the formal type
@@ -10,19 +10,24 @@ import org.openbroker.se.privateunsecuredloan.EventTypePrivateUnsecuredLoanSwede
  * property in a CloudEvent, and the corresponding class
  * that this event type represents.
  */
-data class EventType<T: OpenBrokerEvent>(
-    val clazz: Class<out T>,
-    val qualifier: EventTypeQualifier
-): Comparable<EventType<T>> {
-    val name: String = "$qualifier${clazz.simpleName}"
-    override fun toString(): String = name
-    override fun compareTo(other: EventType<T>): Int =
-        this.name.compareTo(other.name)
+//@Deprecated("Use EventType interface instead", level = DeprecationLevel.WARNING)
+//data class EventType<T: OpenBrokerEvent>(
+//    val clazz: Class<out T>,
+//    val qualifier: EventTypeQualifier
+//): Comparable<EventType<T>> {
+//    val name: String = "$qualifier${clazz.simpleName}"
+//    override fun toString(): String = name
+//    override fun compareTo(other: EventType<T>): Int =
+//        this.name.compareTo(other.name)
+//}
+
+interface EventType<T: OpenBrokerEvent>{
+    val clazz: Class<out T>
 }
 
 private val knownOpenBrokerDomains: List<EventTypeFactory<*>> = listOf(
-    EventTypePrivateUnsecuredLoanSweden,
-    EventTypeMortgageSweden
+    PrivateUnsecuredLoanSweden,
+    MortgageSweden
 )
 
 fun <T: OpenBrokerEvent> eventType(clazz: Class<out T>): EventType<T> {
