@@ -334,7 +334,7 @@ object TestObjectsJson {
 		""".trimIndent()
 
     // Please note that interest rate and monthly cost are
-    // not computed events but rather some random events
+    // not computed value but rather some random values
     internal val loanOffering1: String =
         """
         {
