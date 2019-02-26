@@ -7,7 +7,7 @@ internal val issuerRegex = Regex("^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z
 /**
  *  A reference used for identification of an event. Consisting of two
  *  parts an issuer domain name of the form `com.example`, and an
- *  arbitrary id string. The values, taken together must be unique.
+ *  arbitrary id string. The events, taken together must be unique.
  *  In other words, the issuing organization can issue an ID once only.
  */
 data class Reference(
