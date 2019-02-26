@@ -14,6 +14,7 @@ public class EventTypeTest {
         switch (event) {
             case APPLICATION_CREATED:
                 assertEquals(PrivateUnsecuredLoanSweden.APPLICATION_CREATED.getClazz(), event.getClazz());
+                assertEquals(PrivateUnsecuredLoanSweden.APPLICATION_CREATED.eventName().getFullName(), eventTypeName);
                 return;
             case OFFERING: fail();
             case DELAYED_PROCESSING: fail();
