@@ -21,7 +21,7 @@ class EventTypeFactory {
             )
                 .map { it.data!! }
                 .toList()
-                .sortedWith(EventTypePrivateUnsecuredLoanNorway)
+                .sortedWith(PrivateUnsecuredLoanNorway)
 
             assertEquals(applicationCreated.data!!, events[0])
             assertEquals(message.data!!, events[1])
@@ -47,7 +47,7 @@ class EventTypeFactory {
             )
                 .map { it.data!! }
                 .toList()
-                .sortedWith(EventTypePrivateUnsecuredLoanNorway)
+                .sortedWith(PrivateUnsecuredLoanNorway)
 
             assertEquals(applicationCreated.data!!, events[0])
             assertEquals(message1.data!!, events[1])
