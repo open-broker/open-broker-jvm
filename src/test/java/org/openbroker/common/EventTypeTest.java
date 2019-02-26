@@ -15,6 +15,8 @@ public class EventTypeTest {
             case APPLICATION_CREATED:
                 assertEquals(PrivateUnsecuredLoanSweden.APPLICATION_CREATED.getClazz(), event.getClazz());
                 return;
+            case OFFERING: fail();
+            case DELAYED_PROCESSING: fail();
             default: fail();
         }
     }
