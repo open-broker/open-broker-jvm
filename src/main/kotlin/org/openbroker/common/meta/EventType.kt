@@ -10,16 +10,6 @@ import org.openbroker.se.privateunsecuredloan.PrivateUnsecuredLoanSweden
  * property in a CloudEvent, and the corresponding class
  * that this event type represents.
  */
-//@Deprecated("Use EventType interface instead", level = DeprecationLevel.WARNING)
-//data class EventType<T: OpenBrokerEvent>(
-//    val clazz: Class<out T>,
-//    val qualifier: EventTypeQualifier
-//): Comparable<EventType<T>> {
-//    val name: String = "$qualifier${clazz.simpleName}"
-//    override fun toString(): String = name
-//    override fun compareTo(other: EventType<T>): Int =
-//        this.name.compareTo(other.name)
-//}
 
 interface EventType<T: OpenBrokerEvent>{
     val clazz: Class<out T>
