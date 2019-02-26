@@ -350,10 +350,33 @@ object TestObjectsJson {
                     "termFee": 12,
                     "invoiceFee": 19,
                     "termMonths": 36,
-                    "amortizationType": "ANNUITY",
-                    "comment": "Copy of driver's licence for customer is required"
+                    "amortizationType": "ANNUITY"
                 },
                 "loanInsuranceOffer": null
+            }
+        }
+		""".trimIndent()
+
+    internal val message: String =
+        """
+        {
+		    "cloudEventsVersion" : "0.1",
+            "eventType" : "org.open-broker.v0.no.PrivateUnsecuredLoanMessage",
+            "eventTypeVersion" : "v0",
+            "source" : "/mycontext",
+            "eventID" : "C234-1234-1234",
+            "eventTime" : "2018-04-05T17:31:00Z",
+            "extensions" : {
+              "comExampleExtension" : "value"
+            },
+            "contentType" : "application/json",
+            "data": {
+                "brokerReference": {
+                    "id": "9",
+                    "issuer": "io.klira"
+                },
+                "message": "Hello World",
+                "requiresAction": false
             }
         }
 		""".trimIndent()
