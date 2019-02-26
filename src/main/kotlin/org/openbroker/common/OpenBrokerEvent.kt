@@ -1,6 +1,7 @@
 package org.openbroker.common
 
 import org.openbroker.cloudevents.CloudEvent
+import org.openbroker.common.meta.EventType
 import org.openbroker.common.meta.eventType
 import org.openbroker.common.model.Reference
 import java.time.Instant
@@ -25,11 +26,11 @@ fun <T: OpenBrokerEvent> openBrokerEvent(
     timestamp: Instant = Instant.now(),
     eventId: String = UUID.randomUUID().toString()
 ): CloudEvent<T> {
-    val type = org.openbroker.common.meta.eventType(eventType)
+    val type: EventType<T> = org.openbroker.common.meta.eventType(eventType)
     return CloudEvent(
         data = event,
-        eventType = type.name,
-        eventTypeVersion = type.qualifier.version,
+        eventType = type.eventName().toString(),
+        eventTypeVersion = type.eventName().qualifier.version,
         source = source,
         contentType = "application/json",
         timestamp = timestamp,
@@ -46,8 +47,8 @@ inline fun <reified T: OpenBrokerEvent> openBrokerEvent(
     val type = eventType(event::class.java)
     return CloudEvent(
         data = event,
-        eventType = type.name,
-        eventTypeVersion = type.qualifier.version,
+        eventType = type.eventName().toString(),
+        eventTypeVersion = type.eventName().qualifier.version,
         source = source,
         contentType = "application/json",
         timestamp = timestamp,

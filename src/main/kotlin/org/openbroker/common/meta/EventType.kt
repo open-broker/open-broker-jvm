@@ -23,6 +23,7 @@ import org.openbroker.se.privateunsecuredloan.PrivateUnsecuredLoanSweden
 
 interface EventType<T: OpenBrokerEvent>{
     val clazz: Class<out T>
+    fun eventName(): QualifiedName
 }
 
 private val knownOpenBrokerDomains: List<EventTypeFactory<*>> = listOf(

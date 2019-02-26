@@ -3,6 +3,7 @@ package org.openbroker.se.mortgage
 import org.openbroker.common.meta.EventType
 import org.openbroker.common.meta.EventTypeFactory
 import org.openbroker.common.meta.EventTypeQualifier
+import org.openbroker.common.meta.QualifiedName
 import org.openbroker.se.mortgage.events.MortgageEvent
 import org.openbroker.se.mortgage.events.ApplicationCreated
 import org.openbroker.se.mortgage.events.ApplicationRejection
@@ -26,6 +27,8 @@ enum class MortgageSweden(
     CONTRACT_SIGNED(ContractSigned::class.java),
     DISBURSED(Disbursed::class.java),
     MESSAGE(Message::class.java);
+
+    override fun eventName(): QualifiedName = qualifier.withClass(clazz)
 
     companion object: EventTypeFactory<MortgageEvent> {
         override fun values(): Array<out EventType<MortgageEvent>> = MortgageSweden.values()

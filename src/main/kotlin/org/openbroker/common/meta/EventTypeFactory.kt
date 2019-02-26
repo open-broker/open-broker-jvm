@@ -8,7 +8,7 @@ interface EventTypeFactory<T: OpenBrokerEvent>: Comparator<T> {
 
     operator fun invoke(type: String): EventType<out T> {
         return values()
-            .firstOrNull { qualifier.withClass(it.clazz) == type }
+            .firstOrNull { it.eventName().fullName == type }
             ?: throw IllegalArgumentException("Input does not map to a valid type: '$type'")
     }
 
