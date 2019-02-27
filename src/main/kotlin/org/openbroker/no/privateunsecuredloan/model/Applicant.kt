@@ -1,7 +1,7 @@
 package org.openbroker.no.privateunsecuredloan.model
 
 import org.openbroker.common.model.Address
-import org.openbroker.common.model.BankAccount
+import org.openbroker.no.model.BankAccount
 import org.openbroker.common.requireMin
 import org.openbroker.no.model.EmploymentStatus
 import org.openbroker.no.model.HousingType

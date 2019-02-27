@@ -1,10 +1,10 @@
-package org.openbroker.common.model
+package org.openbroker.no.model
 
 private val clearingNumberRegex = Regex("^[1-9][0-9]{3}\$")
 private val accountNumberRegex = Regex("^[0-9]{1,11}$")
 
 /**
- * A bank account consisting of a clearing number and an
+ * A Norwegian bank account consisting of a clearing number and an
  * account number
  */
 data class BankAccount(

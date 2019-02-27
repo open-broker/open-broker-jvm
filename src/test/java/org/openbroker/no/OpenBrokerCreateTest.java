@@ -3,7 +3,7 @@ package org.openbroker.no;
 import org.junit.jupiter.api.Test;
 import org.openbroker.cloudevents.CloudEvent;
 import org.openbroker.common.OpenBrokerEventKt;
-import org.openbroker.common.model.BankAccount;
+import org.openbroker.no.model.BankAccount;
 import org.openbroker.common.model.Reference;
 import org.openbroker.no.privateunsecuredloan.events.OfferAccepted;
 

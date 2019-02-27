@@ -4,7 +4,7 @@ import org.openbroker.se.privateunsecuredloan.TestObjectsJson
 import org.openbroker.se.privateunsecuredloan.events.ApplicationCreated
 import org.openbroker.se.privateunsecuredloan.events.StatusUpdated
 import org.openbroker.se.privateunsecuredloan.meta.EventTypePrivateUnsecuredLoan
-import org.openbroker.common.model.BankAccount
+import org.openbroker.se.model.BankAccount
 import org.openbroker.common.model.DataProtectionContext
 import org.openbroker.se.model.EmploymentStatus
 import org.openbroker.se.privateunsecuredloan.model.ExistingLoan

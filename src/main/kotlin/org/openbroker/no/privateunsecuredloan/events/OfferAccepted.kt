@@ -1,6 +1,6 @@
 package org.openbroker.no.privateunsecuredloan.events
 
-import org.openbroker.common.model.BankAccount
+import org.openbroker.no.model.BankAccount
 import org.openbroker.common.model.Reference
 import org.openbroker.common.requireMin
 
