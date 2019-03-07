@@ -3,7 +3,7 @@ package org.openbroker.se.mortgage.model
 import org.openbroker.common.requireMin
 
 data class Offer(
-    val effectiveInterestRate: String,
+    val effectiveInterestRate: String? = null,
     val nominalInterestRate: String,
     val monthlyCost: Int? = null,
     val arrangementFee: Int,
