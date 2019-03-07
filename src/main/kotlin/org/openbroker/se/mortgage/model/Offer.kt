@@ -10,11 +10,14 @@ data class Offer(
     val termFee: Int,
     val invoiceFee: Int,
     val termYears: Int? = null,
-    val expires: String? = null
+    val expires: String? = null,
+    val comment: String? = null
 ) {
     init {
-        require(effectiveInterestRate.matches(interestRateRegex)) {
-            "Bad format of effective interest rate: '$effectiveInterestRate'"
+        effectiveInterestRate?.let { rate ->
+            require(rate.matches(interestRateRegex)) {
+                "Bad format of effective interest rate: '$rate'"
+            }
         }
 
         require(nominalInterestRate.matches(interestRateRegex)) {
