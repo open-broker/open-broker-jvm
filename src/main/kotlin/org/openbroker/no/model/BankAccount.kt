@@ -1,6 +1,6 @@
 package org.openbroker.no.model
 
-private val clearingNumberRegex = Regex("^[1-9][0-9]{3}\$")
+private val clearingNumberRegex = Regex("^[1-9][0-9]{3}$")
 private val accountNumberRegex = Regex("^[0-9]{1,11}$")
 
 /**
