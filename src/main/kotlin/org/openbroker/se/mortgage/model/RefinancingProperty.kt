@@ -5,6 +5,7 @@ import org.openbroker.common.requireMin
 data class RefinancingProperty(
     val propertyAddress: PropertyAddress,
     val propertyType: PropertyType,
+    val interestRate: String,
     val assessedValue: Int,
     val squareMeters: Int,
     val existingMortgage: Int,
@@ -20,8 +21,15 @@ data class RefinancingProperty(
         existingMortgage.requireMin(0, "existingMortgage")
         monthlyCost.requireMin(0, "monthlyCost")
         rooms.requireMin(1, "rooms")
+        require(interestRate.matches(interestRateRegex)) {
+            "Value interestRate has invalid format: '$interestRate'"
+        }
         require(ownershipShare in 1..100) {
             "Value for ownershipShare must be 1 <= 100, was $ownershipShare"
         }
+    }
+
+    companion object {
+        private val interestRateRegex = Regex("^\\d\\.\\d+\$")
     }
 }
