@@ -1,4 +1,4 @@
-package org.openbroker.se.privateunsecuredloan.model
+package org.openbroker.common.model
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test

@@ -1,10 +1,11 @@
-package org.openbroker.common;
+package org.openbroker.no;
 
 import org.junit.jupiter.api.Test;
 import org.openbroker.cloudevents.CloudEvent;
-import org.openbroker.se.model.BankAccount;
+import org.openbroker.common.OpenBrokerEventKt;
+import org.openbroker.no.model.BankAccount;
 import org.openbroker.common.model.Reference;
-import org.openbroker.se.privateunsecuredloan.events.OfferAccepted;
+import org.openbroker.no.privateunsecuredloan.events.OfferAccepted;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

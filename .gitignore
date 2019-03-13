@@ -27,5 +27,4 @@ build
 
 # Environment variables for Docker
 .env
-.attach_pid14534
-.attach_pid14698
+.attach_pid*
