@@ -5,5 +5,5 @@ import org.openbroker.common.model.Reference
 
 data class OfferAccepted constructor(
     override val brokerReference: Reference,
-    val bankAccount: BankAccount
+    val bankAccount: BankAccount? = null
 ): MortgageEvent
