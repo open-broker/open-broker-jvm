@@ -20,6 +20,6 @@ data class Address(
     }
 
     companion object {
-    	val postalCodeRegex = Regex("\\d{5}")
+        val postalCodeRegex = Regex("\\d{3}\\s?\\d{2}")
     }
 }
