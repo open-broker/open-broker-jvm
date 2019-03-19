@@ -27,8 +27,8 @@ data class Applicant @JvmOverloads constructor(
     val housingSinceYear: Int,
     val housingSinceMonth: Int,
     val housingCostPerMonth: Int,
-    val monthlyIncome: Int,
-    val yearlyIncome: Int,
+    val netMonthlyIncome: Int,
+    val grossYearlyIncome: Int,
     val partnerYearlyIncome: Int,
     val maritalStatus: MaritalStatus,
     val bankAccount: BankAccount? = null,
@@ -68,8 +68,8 @@ data class Applicant @JvmOverloads constructor(
         otherIncomeReceivedMonthly.requireMin(0, "otherIncomeReceivedMonthly")
         childSupportPaidMonthly.requireMin(0, "childSupportPaidMonthly")
         housingCostPerMonth.requireMin(0, "housingCostPerMonth")
-        monthlyIncome.requireMin(0, "monthlyIncome")
-        yearlyIncome.requireMin(0, "yearlyIncome")
+        netMonthlyIncome.requireMin(0, "netMonthlyIncome")
+        grossYearlyIncome.requireMin(0, "grossYearlyIncome")
         require(citizenships.isNotEmpty())
         require(countriesOfResidence.isNotEmpty())
         require(taxResidentOf.isNotEmpty())

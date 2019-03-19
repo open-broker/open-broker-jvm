@@ -14,7 +14,6 @@ import org.openbroker.common.serialize.parseOpenBrokerEvent
 import org.openbroker.no.model.EmploymentStatus
 import org.openbroker.no.model.HousingType
 import org.openbroker.no.model.MaritalStatus
-import org.openbroker.no.privateunsecuredloan.EventTypeFactory
 import org.openbroker.no.privateunsecuredloan.TestObjectsJson
 import org.openbroker.no.privateunsecuredloan.events.ApplicationCreated
 import org.openbroker.no.privateunsecuredloan.events.ContractSigned
@@ -45,8 +44,8 @@ class SerializationTest {
             housingSinceYear = 2010,
             housingSinceMonth = 1,
             housingCostPerMonth = 10000,
-            monthlyIncome = 30000,
-            yearlyIncome = 468000,
+            netMonthlyIncome = 30000,
+            grossYearlyIncome = 468000,
             partnerYearlyIncome = 500000,
             maritalStatus = MaritalStatus.COHABITING,
             bankAccount = null,
