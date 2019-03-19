@@ -7,7 +7,7 @@ import org.openbroker.no.privateunsecuredloan.events.PrivateUnsecuredLoanEvent
 class EventTypeFactory {
 
     @Test
-    fun testCorrectSortingByComparatorWithStatusUpdatedOutOfOrder() {
+    fun testCorrectSortingByComparator() {
         TestObjectsKotlin.Scenario1.apply {
             val events: List<PrivateUnsecuredLoanEvent> = sequenceOf(
                 rejection,
@@ -25,17 +25,17 @@ class EventTypeFactory {
 
             assertEquals(applicationCreated.data!!, events[0])
             assertEquals(message.data!!, events[1])
-            assertEquals(rejection.data!!, events[2])
-            assertEquals(offering.data!!, events[3])
-            assertEquals(offerRejected.data!!, events[4])
-            assertEquals(offerAccepted.data!!, events[5])
+            assertEquals(offering.data!!, events[2])
+            assertEquals(rejection.data!!, events[3])
+            assertEquals(offerAccepted.data!!, events[4])
+            assertEquals(offerRejected.data!!, events[5])
             assertEquals(contractSigned.data!!, events[6])
             assertEquals(disbursed.data!!, events[7])
         }
     }
 
     @Test
-    fun testCorrectSortingByComparator() {
+    fun testCorrectSortingByComparatorMissingElements() {
         TestObjectsKotlin.Scenario2.apply {
             val events: List<PrivateUnsecuredLoanEvent> = sequenceOf(
                 contractSigned,

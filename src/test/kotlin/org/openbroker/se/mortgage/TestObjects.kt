@@ -94,7 +94,8 @@ object TestObjects {
                         ownershipShare = 40,
                         propertyType = PropertyType.APARTMENT,
                         rooms = 2,
-                        squareMeters = 70
+                        squareMeters = 70,
+                        interestRate = "5"
                     ),
                     extensions = emptyMap()
                 ),
