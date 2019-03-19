@@ -28,8 +28,7 @@ object TestObjectsJson {
             "partnerYearlyIncome": 500000,
             "maritalStatus": "COHABITING",
             "bankAccount": {
-                "clearingNo": "8888",
-                "accountNo": "00000003"
+                "accountNo": "12345678901"
             },
             "citizenships": [
                 "NO"
@@ -79,8 +78,7 @@ object TestObjectsJson {
             "partnerYearlyIncome": null,
             "maritalStatus": "SINGLE",
             "bankAccount": {
-                "clearingNo": "8888",
-                "accountNo": "00000003"
+                "accountNo": "12345678901"
             },
             "citizenships": [
                 "NO"
@@ -285,8 +283,7 @@ object TestObjectsJson {
 					"issuer": "io.klira"
 				},
 				"bankAccount": {
-				    "clearingNo": "8989",
-					"accountNo": "123456789"
+					"accountNo": "12345678901"
 				},
 				"requestedCredit": 25000
 			}

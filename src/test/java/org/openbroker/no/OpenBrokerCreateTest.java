@@ -14,11 +14,11 @@ public class OpenBrokerCreateTest {
     @Test
     public void testCreateOpenBrokerEvent() {
         CloudEvent<OfferAccepted> accept = OpenBrokerEventKt.create(
-            new OfferAccepted(new Reference("1", "io.klira"), new BankAccount("3300", "1234567890")),
+            new OfferAccepted(new Reference("1", "io.klira"), new BankAccount("12345678901")),
             OfferAccepted.class,
             "source"
         );
 
-        assertEquals("3300", accept.getData().getBankAccount().getClearingNo());
+        assertEquals("12345678901", accept.getData().getBankAccount().getAccountNo());
     }
 }
