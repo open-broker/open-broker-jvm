@@ -47,7 +47,7 @@ class SerializationTest {
             housingCostPerMonth = 10000,
             netMonthlyIncome = 30000,
             grossYearlyIncome = 468000,
-            partnerYearlyIncome = 500000,
+            partnerGrossYearlyIncome = 500000,
             maritalStatus = MaritalStatus.COHABITING,
             bankAccount = BankAccount("12355578901"),
             citizenships = listOf("NO", "FI"),

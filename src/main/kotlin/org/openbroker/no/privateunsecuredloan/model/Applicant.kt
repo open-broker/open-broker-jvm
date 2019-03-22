@@ -29,7 +29,7 @@ data class Applicant @JvmOverloads constructor(
     val housingCostPerMonth: Int,
     val netMonthlyIncome: Int,
     val grossYearlyIncome: Int,
-    val partnerYearlyIncome: Int,
+    val partnerGrossYearlyIncome: Int,
     val maritalStatus: MaritalStatus,
     val bankAccount: BankAccount? = null,
     val citizenships: List<String>,

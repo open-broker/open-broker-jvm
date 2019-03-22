@@ -25,7 +25,7 @@ object TestObjectsJson {
             "housingCostPerMonth": 10000,
             "netMonthlyIncome": 30000,
             "grossYearlyIncome": 468000,
-            "partnerYearlyIncome": 500000,
+            "partnerGrossYearlyIncome": 500000,
             "maritalStatus": "COHABITING",
             "bankAccount": {
                 "accountNo": "12345678901"
@@ -75,7 +75,7 @@ object TestObjectsJson {
             "housingCostPerMonth": 1000,
             "netMonthlyIncome": 25000,
             "grossYearlyIncome": 390000,
-            "partnerYearlyIncome": null,
+            "partnerGrossYearlyIncome": null,
             "maritalStatus": "SINGLE",
             "bankAccount": {
                 "accountNo": "12345678901"
