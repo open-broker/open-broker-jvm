@@ -2,6 +2,8 @@ package org.openbroker.common.meta
 
 import org.openbroker.common.OpenBrokerEvent
 
+const val NAME_SPACE: String = "org.open-broker"
+
 /**
  * Qualifier for an event. Properties used are version, region, domain
  * and namespace.
@@ -11,8 +13,8 @@ data class EventTypeQualifier(
     val region: String,
     val domain: String
 ) {
-    companion object {
-        const val NAME_SPACE: String = "org.open-broker"
+    init {
+        require(version.matches(Regex("^v\\d+$")))
     }
 
     override fun toString(): String = "$NAME_SPACE.$version.$region.$domain"
@@ -31,6 +33,8 @@ data class QualifiedName internal constructor(
     override fun toString(): String = fullName
 
     companion object {
+        private val knownDomains = listOf("PrivateUnsecuredLoan", "Mortgage")
+
         fun <T: OpenBrokerEvent> fromEvent(
             qualifier: EventTypeQualifier,
             event: T
@@ -43,6 +47,20 @@ data class QualifiedName internal constructor(
             eventClass: Class<T>
         ): QualifiedName {
             return QualifiedName(qualifier, eventClass.simpleName)
+        }
+
+        fun fromString(
+            string: String
+        ): QualifiedName {
+            require(string.startsWith(NAME_SPACE))
+            val parts: List<String> = string.split(Regex("\\."))
+            require(parts.size == 5){ "Invalid format: $string" }
+            val event: String = parts[4]
+            val domain: String = knownDomains.firstOrNull { event.startsWith(it) } ?:
+                throw IllegalArgumentException("Unable to extract domain from: $event")
+            val qualifier = EventTypeQualifier(version = parts[2], region = parts[3], domain = domain)
+            val eventType: String = event.removePrefix(domain)
+            return QualifiedName(qualifier, eventType)
         }
     }
 }
