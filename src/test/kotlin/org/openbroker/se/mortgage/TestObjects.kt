@@ -48,7 +48,7 @@ object TestObjects {
                         phone = null,
                         secondaryPhone = emptyList(),
                         emailAddress = "anton@zensum.se",
-                        paymentRemarks = 0,
+                        paymentRemark = false,
                         tentativeAddress = Address("Anton", "Österberg", "Lilla gatan", "Sthlm", "12632"),
                         swedishCitizen = true,
                         maritalStatus = MaritalStatus.COHABITING,

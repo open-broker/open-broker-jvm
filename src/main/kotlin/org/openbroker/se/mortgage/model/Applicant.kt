@@ -34,7 +34,7 @@ data class Applicant @JvmOverloads constructor(
     val savingsMutualFunds: Int = 0,
     val savingsStocks: Int = 0,
     val savingsOther: Int = 0,
-    val paymentRemarks: Int,
+    val paymentRemark: Boolean,
     val swedishCitizen: Boolean,
     val tentativeAddress: Address? = null
 ) {
@@ -81,8 +81,7 @@ data class Applicant @JvmOverloads constructor(
             savingsCash,
             savingsMutualFunds,
             savingsStocks,
-            savingsOther,
-            paymentRemarks
+            savingsOther
         ).forEach { it.requireMin(0) }
     }
 
