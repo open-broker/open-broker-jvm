@@ -106,7 +106,7 @@ object TestObjects {
 
         val rejection: CloudEvent<ApplicationRejection> = openBrokerEvent(
             ApplicationRejection(reference),
-            "se.goodcash"
+            "se.snabbacash"
         )
 
         val offering1: CloudEvent<Offering> = openBrokerEvent(
@@ -158,7 +158,7 @@ object TestObjects {
                 amountDisbursed = 240_000,
                 date = "2019-02-14"
             ),
-            source = "good-cash-se"
+            source = "se.snabbacash"
         )
     }
 

@@ -82,7 +82,7 @@ object TestObjectsKotlin {
 
         val rejection: CloudEvent<Rejection> = openBrokerEvent(
             Rejection(reference),
-            "se.goodcash"
+            "se.snabbacash"
         )
 
         val offering: CloudEvent<Offering> = openBrokerEvent(
@@ -121,7 +121,7 @@ object TestObjectsKotlin {
                 brokerReference = reference,
                 status = Status.CONTRACT_SENT_TO_CUSTOMER
             ),
-            source = "good-cash-se"
+            source = "se.snabbacash"
         )
 
         val contractSigned: CloudEvent<StatusUpdated> = openBrokerEvent(
@@ -129,7 +129,7 @@ object TestObjectsKotlin {
                 brokerReference = reference,
                 status = Status.CONTRACT_SIGNED
             ),
-            source = "good-cash-se"
+            source = "se.snabbacash"
         )
 
         val disbursed: CloudEvent<Disbursed> = openBrokerEvent(
@@ -138,7 +138,7 @@ object TestObjectsKotlin {
                 amountBrokered = 240_000,
                 amountDisbursed = 240_000
             ),
-            source = "good-cash-se"
+            source = "se.snabbacash"
         )
     }
 
@@ -205,7 +205,7 @@ object TestObjectsKotlin {
                 ),
                 loanInsuranceOffer = null
             ),
-            source = "good-cash-se"
+            source = "se.snabbacash"
         )
 
         val accepted: CloudEvent<OfferAccepted> = openBrokerEvent(
@@ -222,7 +222,7 @@ object TestObjectsKotlin {
                 brokerReference = reference,
                 status = Status.CONTRACT_SENT_TO_CUSTOMER
             ),
-            source = "good-cash-se"
+            source = "se.snabbacash"
         )
 
         val contractSigned: CloudEvent<StatusUpdated> = openBrokerEvent(
@@ -230,7 +230,7 @@ object TestObjectsKotlin {
                 brokerReference = reference,
                 status = Status.CONTRACT_SIGNED
             ),
-            source = "good-cash-se"
+            source = "se.snabbacash"
         )
 
         val disbursed: CloudEvent<Disbursed> = openBrokerEvent(
@@ -239,7 +239,7 @@ object TestObjectsKotlin {
                 amountBrokered = 240_000,
                 amountDisbursed = 240_000
             ),
-            source = "good-cash-se"
+            source = "se.snabbacash"
         )
     }
 }
