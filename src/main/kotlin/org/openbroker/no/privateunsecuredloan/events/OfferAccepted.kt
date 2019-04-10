@@ -1,12 +1,11 @@
 package org.openbroker.no.privateunsecuredloan.events
 
-import org.openbroker.no.model.BankAccount
 import org.openbroker.common.model.Reference
 import org.openbroker.common.requireMin
 
 data class OfferAccepted @JvmOverloads constructor(
     override val brokerReference: Reference,
-    val bankAccount: BankAccount? = null,
+    val bankAccount: String? = null,
     val requestedCredit: Int? = null
 ): PrivateUnsecuredLoanEvent
 {

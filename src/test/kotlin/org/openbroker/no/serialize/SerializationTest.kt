@@ -11,7 +11,6 @@ import org.openbroker.common.model.DataProtectionContext
 import org.openbroker.common.model.Reference
 import org.openbroker.common.openBrokerEvent
 import org.openbroker.common.serialize.parseOpenBrokerEvent
-import org.openbroker.no.model.BankAccount
 import org.openbroker.no.model.EmploymentStatus
 import org.openbroker.no.model.HousingType
 import org.openbroker.no.model.MaritalStatus
@@ -49,7 +48,7 @@ class SerializationTest {
             grossYearlyIncome = 468000,
             partnerGrossYearlyIncome = 500000,
             maritalStatus = MaritalStatus.COHABITING,
-            bankAccount = BankAccount("12355578901"),
+            bankAccount = "12355578901",
             citizenships = listOf("NO", "FI"),
             livedInCountrySinceYear = 1980,
             countriesOfResidence = listOf("NO"),

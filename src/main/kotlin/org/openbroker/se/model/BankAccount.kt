@@ -1,5 +1,7 @@
 package org.openbroker.se.model
 
+import org.openbroker.common.obfuscateDigits
+
 private val clearingNumberRegex = Regex("^[1-9][0-9]{3}$")
 private val accountNumberRegex = Regex("^[0-9]{1,11}$")
 
@@ -27,7 +29,4 @@ data class BankAccount(
             "Invalid account number with format '${obfuscateDigits(accountNo)}'"
         }
     }
-
-    private fun obfuscateDigits(number: String): String =
-        number.replace(Regex("\\d"), "*")
 }

@@ -1,7 +1,7 @@
 package org.openbroker.no.privateunsecuredloan.model
 
 import org.openbroker.common.model.Address
-import org.openbroker.no.model.BankAccount
+import org.openbroker.common.obfuscateDigits
 import org.openbroker.common.requireMin
 import org.openbroker.no.model.EmploymentStatus
 import org.openbroker.no.model.HousingType
@@ -31,7 +31,7 @@ data class Applicant @JvmOverloads constructor(
     val grossYearlyIncome: Int,
     val partnerGrossYearlyIncome: Int,
     val maritalStatus: MaritalStatus,
-    val bankAccount: BankAccount? = null,
+    val bankAccount: String? = null,
     val citizenships: List<String>,
     val livedInCountrySinceYear: Int,
     val countriesOfResidence: List<String>,
@@ -41,7 +41,7 @@ data class Applicant @JvmOverloads constructor(
     ) {
     init {
         val ssnRegex = Regex("^[0-9]{11}$")
-        require(ssn.matches(ssnRegex)) { "Invalid SSN" }
+        require(ssn.matches(ssnRegex)) { "Invalid SSN: '${obfuscateDigits(ssn)}'" }
 
         val phoneRegex = Regex("^\\+[1-9][0-9]{1,14}\$")
         phone?.let {
@@ -70,8 +70,15 @@ data class Applicant @JvmOverloads constructor(
         housingCostPerMonth.requireMin(0, "housingCostPerMonth")
         netMonthlyIncome.requireMin(0, "netMonthlyIncome")
         grossYearlyIncome.requireMin(0, "grossYearlyIncome")
+        val bankAccountRegex = Regex("^\\d{11}$")
+        bankAccount?.let {
+            require(it.matches(bankAccountRegex)) {
+                "Invalid bank account: '${obfuscateDigits(bankAccount)}'"
+            }
+        }
         require(citizenships.isNotEmpty())
         require(countriesOfResidence.isNotEmpty())
         require(taxResidentOf.isNotEmpty())
     }
+
 }
