@@ -43,7 +43,7 @@ object TestObjectsJson {
                 "firstName": "Jane",
                 "lastName": "Doe",
                 "address": "Exempelvägen 1",
-                "postalCode": "12345",
+                "postalCode": "1234",
                 "city": "Exempelstad"
             }
         }
@@ -91,7 +91,7 @@ object TestObjectsJson {
                 "firstName": "John",
                 "lastName": "Doe",
                 "address": "Exempelgatan 100",
-                "postalCode": "12345",
+                "postalCode": "1234",
                 "city": "Exempelstad"
             }
         }

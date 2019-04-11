@@ -1,10 +1,10 @@
 package org.openbroker.se.mortgage.model
 
-import org.openbroker.common.model.Address
 import org.openbroker.se.model.EmploymentStatus
 import org.openbroker.se.model.HousingType
 import org.openbroker.se.model.MaritalStatus
 import org.openbroker.common.requireMin
+import org.openbroker.se.model.Address
 
 data class Applicant @JvmOverloads constructor(
     val ssn: String,

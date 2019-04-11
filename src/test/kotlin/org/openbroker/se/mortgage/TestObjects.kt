@@ -1,14 +1,10 @@
 package org.openbroker.se.mortgage
 
 import org.openbroker.cloudevents.CloudEvent
-import org.openbroker.common.model.Address
-import org.openbroker.se.model.BankAccount
 import org.openbroker.common.model.DataProtectionContext
-import org.openbroker.se.model.EmploymentStatus
-import org.openbroker.se.model.HousingType
-import org.openbroker.se.model.MaritalStatus
 import org.openbroker.common.model.Reference
 import org.openbroker.common.openBrokerEvent
+import org.openbroker.se.model.*
 import org.openbroker.se.mortgage.events.ApplicationCreated
 import org.openbroker.se.mortgage.events.Disbursed
 import org.openbroker.se.mortgage.events.OfferAccepted
@@ -95,7 +91,7 @@ object TestObjects {
                         propertyType = PropertyType.APARTMENT,
                         rooms = 2,
                         squareMeters = 70,
-                        interestRate = "5"
+                        interestRate = "5.0"
                     ),
                     extensions = emptyMap()
                 ),

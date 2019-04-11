@@ -1,10 +1,10 @@
 package org.openbroker.no.privateunsecuredloan
 
 import org.openbroker.cloudevents.CloudEvent
-import org.openbroker.common.model.Address
 import org.openbroker.common.model.DataProtectionContext
 import org.openbroker.common.model.Reference
 import org.openbroker.common.openBrokerEvent
+import org.openbroker.no.model.Address
 import org.openbroker.no.model.EmploymentStatus
 import org.openbroker.no.model.HousingType
 import org.openbroker.no.model.MaritalStatus
@@ -49,7 +49,7 @@ object TestObjectsKotlin {
                         countriesOfResidence = listOf("NO"),
                         taxResidentOf = listOf("NO", "US"),
                         education = Education.UNIVERSITY_LONG,
-                        tentativeAddress = Address("Jane", "Doe", "Exempelstigen 4", "Gräsdalen", "12345")
+                        tentativeAddress = Address("Jane", "Doe", "Exempelstigen 4", "Gräsdalen", "1234")
                     ),
                     coApplicant = null,
                     termMonths = 24,
@@ -170,7 +170,7 @@ object TestObjectsKotlin {
                         countriesOfResidence = listOf("NO"),
                         taxResidentOf = listOf("NO", "US"),
                         education = Education.UNIVERSITY_LONG,
-                        tentativeAddress = Address("Jane", "Doe", "Exempelstigen 4", "Gräsdalen", "12345")
+                        tentativeAddress = Address("Jane", "Doe", "Exempelstigen 4", "Gräsdalen", "1234")
                     ),
                     coApplicant = null,
                     termMonths = 24,

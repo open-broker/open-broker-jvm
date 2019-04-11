@@ -1,8 +1,8 @@
 package org.openbroker.no.privateunsecuredloan.model
 
-import org.openbroker.common.model.Address
 import org.openbroker.common.obfuscateDigits
 import org.openbroker.common.requireMin
+import org.openbroker.no.model.Address
 import org.openbroker.no.model.EmploymentStatus
 import org.openbroker.no.model.HousingType
 import org.openbroker.no.model.MaritalStatus

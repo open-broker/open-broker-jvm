@@ -4,13 +4,9 @@ import org.openbroker.se.privateunsecuredloan.TestObjectsJson
 import org.openbroker.se.privateunsecuredloan.events.ApplicationCreated
 import org.openbroker.se.privateunsecuredloan.events.StatusUpdated
 import org.openbroker.se.privateunsecuredloan.meta.EventTypePrivateUnsecuredLoan
-import org.openbroker.se.model.BankAccount
 import org.openbroker.common.model.DataProtectionContext
-import org.openbroker.se.model.EmploymentStatus
 import org.openbroker.se.privateunsecuredloan.model.ExistingLoan
 import org.openbroker.se.privateunsecuredloan.model.ExistingLoanType
-import org.openbroker.se.model.HousingType
-import org.openbroker.se.model.MaritalStatus
 import org.openbroker.common.model.Reference
 import org.openbroker.se.privateunsecuredloan.model.Responsibility
 import org.openbroker.se.privateunsecuredloan.model.Status
@@ -22,9 +18,9 @@ import org.openbroker.cloudevents.CloudEvent
 import org.openbroker.cloudevents.cloudEvent
 import org.openbroker.cloudevents.jsonString
 import org.openbroker.common.OpenBrokerEvent
-import org.openbroker.common.model.Address
 import org.openbroker.common.openBrokerEvent
 import org.openbroker.common.serialize.parseOpenBrokerEvent
+import org.openbroker.se.model.*
 import org.openbroker.se.privateunsecuredloan.events.Offering
 import org.openbroker.se.privateunsecuredloan.model.AmortizationType
 import org.openbroker.se.privateunsecuredloan.model.Applicant

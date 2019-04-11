@@ -1,4 +1,4 @@
-package org.openbroker.common;
+package org.openbroker.se;
 
 import org.junit.jupiter.api.Test;
 import org.openbroker.se.privateunsecuredloan.PrivateUnsecuredLoanSweden;

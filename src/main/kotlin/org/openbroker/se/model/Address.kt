@@ -1,4 +1,4 @@
-package org.openbroker.common.model
+package org.openbroker.se.model
 
 data class Address(
     val firstName: String,
@@ -14,12 +14,12 @@ data class Address(
         require(address.isNotBlank())
         require(city.isNotBlank())
         require(postalCode.matches(postalCodeRegex)) {
-            "Invalids postal code: '$postalCode'"
+            "Invalid postal code: '$postalCode'"
         }
         careOf?.let { require(it.isNotBlank()) }
     }
 
     companion object {
-        val postalCodeRegex = Regex("\\d{3}\\s?\\d{2}")
+        val postalCodeRegex = Regex("^\\d{3}\\s?\\d{2}$")
     }
 }

@@ -6,11 +6,11 @@ import org.openbroker.cloudevents.CloudEvent
 import org.openbroker.cloudevents.cloudEvent
 import org.openbroker.cloudevents.jsonString
 import org.openbroker.common.OpenBrokerEvent
-import org.openbroker.common.model.Address
 import org.openbroker.common.model.DataProtectionContext
 import org.openbroker.common.model.Reference
 import org.openbroker.common.openBrokerEvent
 import org.openbroker.common.serialize.parseOpenBrokerEvent
+import org.openbroker.no.model.Address
 import org.openbroker.no.model.EmploymentStatus
 import org.openbroker.no.model.HousingType
 import org.openbroker.no.model.MaritalStatus
@@ -59,7 +59,7 @@ class SerializationTest {
                 "Doe",
                 "Exempelstigen 4",
                 "Gräsdalen",
-                "12345"
+                "1234"
             )
         )
         val app = Application(
