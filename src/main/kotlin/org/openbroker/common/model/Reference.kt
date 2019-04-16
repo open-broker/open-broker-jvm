@@ -2,7 +2,7 @@ package org.openbroker.common.model
 
 import java.nio.charset.Charset
 
-internal val issuerRegex = Regex("^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]).)+([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9])\$")
+internal val issuerRegex = Regex("^[a-zA-Z0-9]+\\.(([a-zA-Z0-9_-])|([a-zA-Z0-9_-]\\.[a-zA-Z0-9_-]))+\$")
 
 /**
  *  A reference used for identification of an event. Consisting of two

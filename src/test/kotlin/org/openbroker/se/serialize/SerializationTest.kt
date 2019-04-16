@@ -69,7 +69,7 @@ class SerializationTest {
         )
         val appCreated = ApplicationCreated(
             application = app,
-            brokerReference = Reference("1", "org"),
+            brokerReference = Reference("1", "org.example"),
             dataProtectionContext = DataProtectionContext.FICTIONAL
         )
 
@@ -116,7 +116,7 @@ class SerializationTest {
 
     @Test
     fun testSerializeAndDeserializeOpenBrokerEvent() {
-        val updated = StatusUpdated(Reference("1", "org"), Status.CONTRACT_SIGNED)
+        val updated = StatusUpdated(Reference("1", "org.example"), Status.CONTRACT_SIGNED)
         val originalEvent: CloudEvent<StatusUpdated> = openBrokerEvent(event = updated, source = "org.something")
         val serialized: String = jsonString(originalEvent)
         val deserializedEvent: CloudEvent<StatusUpdated> = cloudEvent(serialized)
@@ -126,7 +126,7 @@ class SerializationTest {
 
     @Test
     fun testSerializeAndDeserializeUnknownOpenBrokerEvent() {
-        val updated = StatusUpdated(Reference("1", "org"), Status.CONTRACT_SIGNED)
+        val updated = StatusUpdated(Reference("1", "org.example"), Status.CONTRACT_SIGNED)
         val originalEvent: CloudEvent<StatusUpdated> = openBrokerEvent(event = updated, source = "org.something")
         val serialized: String = jsonString(originalEvent)
         val deserializedEvent: CloudEvent<out OpenBrokerEvent> = parseOpenBrokerEvent(serialized)
