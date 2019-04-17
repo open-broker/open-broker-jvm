@@ -1,4 +1,4 @@
-package org.openbroker.no.privateunsecuredloan.events
+package org.openbroker.no.mortgage.events
 
 import org.openbroker.common.model.Reference
 import org.openbroker.no.privateunsecuredloan.model.LoanInsuranceOffer
@@ -11,4 +11,4 @@ data class Offering @JvmOverloads constructor(
     override val brokerReference: Reference,
     val offer: Offer,
     val loanInsuranceOffer: LoanInsuranceOffer? = null
-): PrivateUnsecuredLoanEvent
+): MortgageEvent

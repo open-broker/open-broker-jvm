@@ -2,7 +2,6 @@ package org.openbroker.no.mortgage.events
 
 import org.openbroker.common.model.Reference
 import org.openbroker.common.requireMin
-import org.openbroker.se.mortgage.events.MortgageEvent
 
 data class OfferAccepted @JvmOverloads constructor(
     override val brokerReference: Reference,
