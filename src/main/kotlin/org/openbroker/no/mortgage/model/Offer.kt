@@ -11,7 +11,7 @@ data class Offer(
     val arrangementFee: Int,
     val termFee: Int,
     val invoiceFee: Int,
-    val termMonths: Int,
+    val termYears: Int,
     val amortizationType: AmortizationType
 ) {
     init {
@@ -30,6 +30,6 @@ data class Offer(
         arrangementFee.requireMin(0, "arrangementFee")
         termFee.requireMin(0, "termFee")
         invoiceFee.requireMin(0, "invoiceFee")
-        termMonths.requireMin(1, "termMonths")
+        termYears.requireMin(1, "termYears")
     }
 }

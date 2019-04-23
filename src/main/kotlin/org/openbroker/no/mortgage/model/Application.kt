@@ -43,14 +43,14 @@ data class Application @JvmOverloads constructor(
     val refinanceAmount: Int = 0,
 
     /**
-     * The number 1-month terms that the applicant desires to pay off the loan over
+     * The number of year terms that the applicant desires to pay off the loan over
      */
-    val termMonths: Int
+    val termYears: Int
     ) {
     init {
         loanAmount.requireMin(1, "loanAmount")
         refinanceAmount.requireMin(0, "refinanceAmount")
-        termMonths.requireMin(1, "termMonths")
+        termYears.requireMin(1, "termYears")
         require(refinanceAmount <= loanAmount) {
             "refinanceAmount ($refinanceAmount) may not be greater than loanAmount ($loanAmount)."
         }
