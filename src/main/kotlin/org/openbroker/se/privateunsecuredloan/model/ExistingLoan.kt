@@ -7,7 +7,8 @@ data class ExistingLoan(
     val monthlyPayment: Int,
     val shouldRefinance: Boolean,
     val existingLoanType: ExistingLoanType,
-    val responsibility: Responsibility
+    val responsibility: Responsibility,
+    val lenderName: String? = null
 ) {
     init {
     	loanAmount.requireMin(1, "loanAmount")
