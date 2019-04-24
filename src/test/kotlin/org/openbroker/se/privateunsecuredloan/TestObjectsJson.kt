@@ -112,7 +112,7 @@ object TestObjectsJson {
 					"shouldRefinance": true,
 					"existingLoanType": "CAR_LOAN",
 					"responsibility": "SHARED",
-                    "lenderName": "banksy"
+					"lenderName": "banksy"
 				},
 				{
 					"loanAmount": 15000,
@@ -172,7 +172,7 @@ object TestObjectsJson {
 					"shouldRefinance": false,
 					"existingLoanType": "STUDENT_LOAN",
 					"responsibility": "MAIN_APPLICANT",
-                    "lenderName": "a lender"
+					"lenderName": "a lender"
 				}
 			],
 			"extensions": {
