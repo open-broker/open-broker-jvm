@@ -10,7 +10,7 @@ import org.openbroker.common.OpenBrokerEvent
 import org.openbroker.common.meta.EventType
 import org.openbroker.common.meta.eventType
 
-private val mapper: ObjectMapper = ObjectMapper()
+private val mapper: ObjectMapper = jacksonObjectMapper()
     .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
 
 private inline fun <reified T: OpenBrokerEvent> parse(json: String): T =
