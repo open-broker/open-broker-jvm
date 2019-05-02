@@ -15,7 +15,7 @@ import org.openbroker.parseJsonFromFile
 
 class EventTypeFactoryTest {
     private val applicationCreated: CloudEvent<ApplicationCreated> = parseJsonFromFile("no/mortgage/MortgageApplicationCreated")
-    private val offering: CloudEvent<Offering> = parseJsonFromFile("no/mortgage/MortgageApplicationOffering")
+    private val offering: CloudEvent<Offering> = parseJsonFromFile("no/mortgage/MortgageOffering")
     private val applicationRejection: CloudEvent<ApplicationRejection> = parseJsonFromFile("no/mortgage/MortgageApplicationRejection")
     private val disbursed: CloudEvent<Disbursed> = parseJsonFromFile("no/mortgage/MortgageDisbursed")
     private val message: CloudEvent<Message> = parseJsonFromFile("no/mortgage/MortgageMessage")
