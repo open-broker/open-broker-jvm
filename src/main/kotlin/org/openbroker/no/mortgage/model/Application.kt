@@ -45,8 +45,13 @@ data class Application @JvmOverloads constructor(
     /**
      * The number of year terms that the applicant desires to pay off the loan over
      */
-    val termYears: Int
-    ) {
+    val termYears: Int,
+    /**
+     * An optional human-readable comment about the application, presenting
+     * extra information about the application, such as cause to today's situation.
+     */
+    val comment: String? = null
+) {
     init {
         loanAmount.requireMin(1, "loanAmount")
         refinanceAmount.requireMin(0, "refinanceAmount")
