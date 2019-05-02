@@ -10,6 +10,7 @@ data class RefinancingProperty(
     val squareMeters: Int,
     val existingMortgage: Int,
     val monthlyCost: Int,
+    val condominiumCompoundDebt: Int? = null,
     val defaulted: Boolean
 ) {
     init {
@@ -17,6 +18,7 @@ data class RefinancingProperty(
         squareMeters.requireMin(0, "squareMeters")
         existingMortgage.requireMin(0, "existingMortgage")
         monthlyCost.requireMin(0, "monthlyCost")
+        condominiumCompoundDebt.requireMin(0, "condominiumCompoundDebt")
         require(interestRate.matches(interestRateRegex)) {
             "Value interestRate has invalid format: '$interestRate'"
         }

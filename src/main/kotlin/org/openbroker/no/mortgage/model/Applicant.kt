@@ -24,16 +24,14 @@ data class Applicant @JvmOverloads constructor(
     val childSupportPaidMonthly: Int? = null,
     val paymentRemark: Boolean,
     val housingType: HousingType,
-    val housingSinceYear: Int,
-    val housingSinceMonth: Int,
     val housingCostPerMonth: Int,
     val monthlyGrossIncome: Int,
     val monthlyNetIncome: Int,
     val maritalStatus: MaritalStatus,
     val norwegianCitizen: Boolean,
-    val education: Education,
+    val education: Education? = null,
     val tentativeAddress: Address? = null
-    ) {
+) {
 
     init {
         val ssnRegex = Regex("^[0-9]{11}$")
@@ -55,8 +53,6 @@ data class Applicant @JvmOverloads constructor(
         }
         require(employmentStatusSinceYear in 1900..3000)
         require(employmentStatusSinceMonth in 1..12)
-        require(housingSinceYear in 1900..3000)
-        require(housingSinceMonth in 1..12)
         require(dependentChildren in 0..15)
         childSupportReceivedMonthly.requireMin(0, "childSupportReceivedMonthly")
         rentReceivedMonthly.requireMin(0, "rentReceivedMonthly")
@@ -65,6 +61,9 @@ data class Applicant @JvmOverloads constructor(
         housingCostPerMonth.requireMin(0, "housingCostPerMonth")
         monthlyNetIncome.requireMin(0, "monthlyNetIncome")
         monthlyGrossIncome.requireMin(0, "monthlyGrossIncome")
+        require(monthlyNetIncome <= monthlyGrossIncome) {
+            "Value for monthlyNetIncome cannot be greater than value for monthlyGrossIncome"
+        }
     }
 
 }
