@@ -31,7 +31,7 @@ data class Applicant @JvmOverloads constructor(
     val norwegianCitizen: Boolean,
     val education: Education? = null,
     val tentativeAddress: Address? = null
-    ) {
+) {
 
     init {
         val ssnRegex = Regex("^[0-9]{11}$")
@@ -61,6 +61,9 @@ data class Applicant @JvmOverloads constructor(
         housingCostPerMonth.requireMin(0, "housingCostPerMonth")
         monthlyNetIncome.requireMin(0, "monthlyNetIncome")
         monthlyGrossIncome.requireMin(0, "monthlyGrossIncome")
+        require(monthlyNetIncome <= monthlyGrossIncome) {
+            "Value for monthlyNetIncome cannot be greater than value for monthlyGrossIncome"
+        }
     }
 
 }
