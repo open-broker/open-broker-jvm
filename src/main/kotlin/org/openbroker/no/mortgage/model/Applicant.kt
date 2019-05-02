@@ -29,7 +29,7 @@ data class Applicant @JvmOverloads constructor(
     val monthlyNetIncome: Int,
     val maritalStatus: MaritalStatus,
     val norwegianCitizen: Boolean,
-    val education: Education,
+    val education: Education? = null,
     val tentativeAddress: Address? = null
     ) {
 
