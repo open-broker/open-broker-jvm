@@ -14,37 +14,38 @@ private val mapper: ObjectMapper = ObjectMapper()
     .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
 
 private inline fun <reified T: OpenBrokerEvent> parse(json: String): T =
-    jacksonObjectMapper().readValue(json)
+    mapper.readValue(json)
 
 private fun <T: OpenBrokerEvent> parse(json: String, clazz: Class<T>): OpenBrokerEvent =
-    jacksonObjectMapper().readValue(json, clazz)
+    mapper.readValue(json, clazz)
 
 fun parseOpenBrokerEvent(payload: String): CloudEvent<OpenBrokerEvent> {
-    val cloudEvent: CloudEvent<JsonNode> = jacksonObjectMapper().readValue(payload)
+    val cloudEvent: CloudEvent<JsonNode> = mapper.readValue(payload)
     return cloudEvent.toOpenBrokerEvent()
 }
 
 fun CloudEvent<JsonNode>.toOpenBrokerEvent(): CloudEvent<OpenBrokerEvent> {
-    val data: String = jacksonObjectMapper().writeValueAsString(this.data)
+    val data: String = mapper.writeValueAsString(this.data)
     val eventType: EventType<OpenBrokerEvent> = eventType(this.eventType)
     val event: OpenBrokerEvent = parse(data, eventType.clazz)
     return this.withData(event)
 }
 
 fun cloudEventType(payload: String): String {
-    val node: JsonNode = jacksonObjectMapper().readValue(payload)
+    val node: JsonNode = mapper.readValue(payload)
     return node["eventType"]?.textValue() ?: throw IllegalArgumentException("EventType was null")
 }
 
 fun restoreOpenBrokerEvent(event: CloudEvent<*>): CloudEvent<OpenBrokerEvent>? {
     if(event.data == null)
         return null
-    val data: String = jacksonObjectMapper().writeValueAsString(event.data)
+    val data: String = mapper.writeValueAsString(event.data)
     val type: EventType<OpenBrokerEvent> = eventType(event.eventType)
     val openBrokerEvent: OpenBrokerEvent = parse(data, type.clazz)
     return event.withData(openBrokerEvent)
 }
 
+@Suppress("UNCHECKED_CAST")
 fun <T: OpenBrokerEvent> CloudEvent<*>.withData(data: T): CloudEvent<OpenBrokerEvent> {
     if(this.data == data)
         return this as CloudEvent<OpenBrokerEvent>
