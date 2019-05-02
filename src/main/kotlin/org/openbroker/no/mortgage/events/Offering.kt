@@ -1,14 +1,12 @@
 package org.openbroker.no.mortgage.events
 
 import org.openbroker.common.model.Reference
-import org.openbroker.no.privateunsecuredloan.model.LoanInsuranceOffer
-import org.openbroker.no.privateunsecuredloan.model.Offer
+import org.openbroker.no.mortgage.model.Offer
 
 /**
  * An offer for a loan
  */
-data class Offering @JvmOverloads constructor(
+data class Offering constructor(
     override val brokerReference: Reference,
-    val offer: Offer,
-    val loanInsuranceOffer: LoanInsuranceOffer? = null
+    val offer: Offer
 ): MortgageEvent
