@@ -1,12 +1,17 @@
 package org.openbroker.common.serialize
 
+import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.JsonNode
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.openbroker.cloudevents.CloudEvent
 import org.openbroker.common.OpenBrokerEvent
 import org.openbroker.common.meta.EventType
 import org.openbroker.common.meta.eventType
+
+private val mapper: ObjectMapper = ObjectMapper()
+    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
 
 private inline fun <reified T: OpenBrokerEvent> parse(json: String): T =
     jacksonObjectMapper().readValue(json)

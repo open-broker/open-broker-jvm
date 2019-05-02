@@ -2,14 +2,16 @@ package org.openbroker.no.serialize
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import org.openbroker.no.privateunsecuredloan.TestObjectsJson
 import org.openbroker.cloudevents.CloudEvent
 import org.openbroker.cloudevents.cloudEvent
 import org.openbroker.common.OpenBrokerEvent
 import org.openbroker.common.serialize.restoreOpenBrokerEvent
+import org.openbroker.no.privateunsecuredloan.TestObjectsJson
 import org.openbroker.no.privateunsecuredloan.events.ApplicationCreated
 
 class OpenBrokerEvent {

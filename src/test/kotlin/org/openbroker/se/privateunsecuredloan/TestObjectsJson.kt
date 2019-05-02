@@ -372,4 +372,29 @@ object TestObjectsJson {
             }
         }
 		""".trimIndent()
+
+    internal val disbursedWithAdditionalValue: String =
+        """
+        {
+            "cloudEventsVersion" : "0.1",
+            "eventType" : "org.open-broker.v0.se.PrivateUnsecuredLoanDisbursed",
+            "eventTypeVersion" : "v0",
+            "source" : "/mycontext",
+            "eventID" : "C234-1234-1234",
+            "eventTime" : "2018-04-05T17:31:00Z",
+            "extensions" : {
+              "comExampleExtension" : "value"
+            },
+            "contentType" : "application/json",
+            "data": {
+                "brokerReference": {
+                    "id": "9",
+                    "issuer": "io.klira"
+                },
+                "amountBrokered": 10000,
+                "amountDisbursed": 25000,
+                "extraKeyNotInSpecification": "someValue"
+            }
+        }
+        """.trimIndent()
 }
