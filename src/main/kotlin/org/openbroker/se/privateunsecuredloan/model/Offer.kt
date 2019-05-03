@@ -1,5 +1,6 @@
 package org.openbroker.se.privateunsecuredloan.model
 
+import org.openbroker.common.model.AmortizationType
 import org.openbroker.common.requireMin
 
 data class Offer(

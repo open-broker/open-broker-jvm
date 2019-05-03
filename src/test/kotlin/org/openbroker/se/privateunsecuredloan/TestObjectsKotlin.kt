@@ -1,6 +1,7 @@
 package org.openbroker.se.privateunsecuredloan
 
 import org.openbroker.cloudevents.CloudEvent
+import org.openbroker.common.model.AmortizationType
 import org.openbroker.common.model.DataProtectionContext
 import org.openbroker.common.model.Reference
 import org.openbroker.common.openBrokerEvent
@@ -13,7 +14,6 @@ import org.openbroker.se.privateunsecuredloan.events.OfferRejected
 import org.openbroker.se.privateunsecuredloan.events.Offering
 import org.openbroker.se.privateunsecuredloan.events.Rejection
 import org.openbroker.se.privateunsecuredloan.events.StatusUpdated
-import org.openbroker.se.privateunsecuredloan.model.AmortizationType
 import org.openbroker.se.privateunsecuredloan.model.Applicant
 import org.openbroker.se.privateunsecuredloan.model.Application
 import org.openbroker.se.privateunsecuredloan.model.DelayReason

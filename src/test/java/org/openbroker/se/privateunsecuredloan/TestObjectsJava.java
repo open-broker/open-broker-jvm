@@ -2,6 +2,7 @@ package org.openbroker.se.privateunsecuredloan;
 
 import org.openbroker.cloudevents.CloudEvent;
 import org.openbroker.common.OpenBrokerEventKt;
+import org.openbroker.common.model.AmortizationType;
 import org.openbroker.common.model.DataProtectionContext;
 import org.openbroker.common.model.Reference;
 import org.openbroker.se.model.Address;

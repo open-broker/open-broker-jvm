@@ -1,4 +1,4 @@
-package org.openbroker.se.privateunsecuredloan.model
+package org.openbroker.common.model
 
 /**
  * Decides in which manner the loan is amortized

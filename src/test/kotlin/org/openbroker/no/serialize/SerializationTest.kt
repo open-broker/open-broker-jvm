@@ -6,6 +6,7 @@ import org.openbroker.cloudevents.CloudEvent
 import org.openbroker.cloudevents.cloudEvent
 import org.openbroker.cloudevents.jsonString
 import org.openbroker.common.OpenBrokerEvent
+import org.openbroker.common.model.AmortizationType
 import org.openbroker.common.model.DataProtectionContext
 import org.openbroker.common.model.Reference
 import org.openbroker.common.openBrokerEvent

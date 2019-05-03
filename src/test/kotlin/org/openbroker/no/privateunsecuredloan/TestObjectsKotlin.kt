@@ -1,6 +1,7 @@
 package org.openbroker.no.privateunsecuredloan
 
 import org.openbroker.cloudevents.CloudEvent
+import org.openbroker.common.model.AmortizationType
 import org.openbroker.common.model.DataProtectionContext
 import org.openbroker.common.model.Reference
 import org.openbroker.common.openBrokerEvent
