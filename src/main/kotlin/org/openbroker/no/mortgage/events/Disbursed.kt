@@ -4,7 +4,7 @@ import org.openbroker.common.model.Reference
 import org.openbroker.common.requireMin
 
 /**
- * An event indicating that a private unsecured loan has been disbursed
+ * An event indicating that a mortgage has been disbursed
  */
 data class Disbursed(
     override val brokerReference: Reference,

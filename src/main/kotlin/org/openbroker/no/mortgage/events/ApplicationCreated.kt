@@ -8,7 +8,7 @@ import org.openbroker.no.mortgage.model.Application
 
 /**
  * An event indicating the creation of an application
- * for a private unsecured loan
+ * for a mortgage
  */
 data class ApplicationCreated(
     val application: Application,
