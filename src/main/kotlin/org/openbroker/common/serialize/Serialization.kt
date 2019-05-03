@@ -8,10 +8,10 @@ import org.openbroker.common.OpenBrokerEvent
 import org.openbroker.common.meta.EventType
 import org.openbroker.common.meta.eventType
 
-private inline fun <reified T: OpenBrokerEvent> parse(json: String): T =
+inline fun <reified T: OpenBrokerEvent> parseJsonCloudEvent(json: String): CloudEvent<T> =
     jacksonObjectMapper().readValue(json)
 
-private fun <T: OpenBrokerEvent> parse(json: String, clazz: Class<T>): OpenBrokerEvent =
+fun <T: OpenBrokerEvent> parseJson(json: String, clazz: Class<T>): OpenBrokerEvent =
     jacksonObjectMapper().readValue(json, clazz)
 
 fun parseOpenBrokerEvent(payload: String): CloudEvent<OpenBrokerEvent> {
@@ -22,7 +22,7 @@ fun parseOpenBrokerEvent(payload: String): CloudEvent<OpenBrokerEvent> {
 fun CloudEvent<JsonNode>.toOpenBrokerEvent(): CloudEvent<OpenBrokerEvent> {
     val data: String = jacksonObjectMapper().writeValueAsString(this.data)
     val eventType: EventType<OpenBrokerEvent> = eventType(this.eventType)
-    val event: OpenBrokerEvent = parse(data, eventType.clazz)
+    val event: OpenBrokerEvent = parseJson(data, eventType.clazz)
     return this.withData(event)
 }
 
@@ -36,10 +36,11 @@ fun restoreOpenBrokerEvent(event: CloudEvent<*>): CloudEvent<OpenBrokerEvent>? {
         return null
     val data: String = jacksonObjectMapper().writeValueAsString(event.data)
     val type: EventType<OpenBrokerEvent> = eventType(event.eventType)
-    val openBrokerEvent: OpenBrokerEvent = parse(data, type.clazz)
+    val openBrokerEvent: OpenBrokerEvent = parseJson(data, type.clazz)
     return event.withData(openBrokerEvent)
 }
 
+@Suppress("UNCHECKED_CAST")
 fun <T: OpenBrokerEvent> CloudEvent<*>.withData(data: T): CloudEvent<OpenBrokerEvent> {
     if(this.data == data)
         return this as CloudEvent<OpenBrokerEvent>
