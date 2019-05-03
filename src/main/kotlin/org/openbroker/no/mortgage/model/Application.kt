@@ -38,7 +38,7 @@ data class Application @JvmOverloads constructor(
     val loanPurpose: LoanPurpose = LoanPurpose.OTHER,
 
     /**
-     * The amount being refinanced, must be less than the loanAmount
+     * The amount being refinanced, must be less than or equal to the loanAmount
      */
     val refinanceAmount: Int = 0,
 
