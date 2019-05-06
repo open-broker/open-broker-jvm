@@ -1,6 +1,8 @@
 package org.openbroker.common.serialize
 
+import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.JsonNode
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.openbroker.cloudevents.CloudEvent
@@ -8,33 +10,37 @@ import org.openbroker.common.OpenBrokerEvent
 import org.openbroker.common.meta.EventType
 import org.openbroker.common.meta.eventType
 
+@PublishedApi
+internal val mapper: ObjectMapper = jacksonObjectMapper()
+    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+
 inline fun <reified T: OpenBrokerEvent> parseJsonCloudEvent(json: String): CloudEvent<T> =
-    jacksonObjectMapper().readValue(json)
+    mapper.readValue(json)
 
 fun <T: OpenBrokerEvent> parseJson(json: String, clazz: Class<T>): OpenBrokerEvent =
-    jacksonObjectMapper().readValue(json, clazz)
+    mapper.readValue(json, clazz)
 
 fun parseOpenBrokerEvent(payload: String): CloudEvent<OpenBrokerEvent> {
-    val cloudEvent: CloudEvent<JsonNode> = jacksonObjectMapper().readValue(payload)
+    val cloudEvent: CloudEvent<JsonNode> = mapper.readValue(payload)
     return cloudEvent.toOpenBrokerEvent()
 }
 
 fun CloudEvent<JsonNode>.toOpenBrokerEvent(): CloudEvent<OpenBrokerEvent> {
-    val data: String = jacksonObjectMapper().writeValueAsString(this.data)
+    val data: String = mapper.writeValueAsString(this.data)
     val eventType: EventType<OpenBrokerEvent> = eventType(this.eventType)
     val event: OpenBrokerEvent = parseJson(data, eventType.clazz)
     return this.withData(event)
 }
 
 fun cloudEventType(payload: String): String {
-    val node: JsonNode = jacksonObjectMapper().readValue(payload)
+    val node: JsonNode = mapper.readValue(payload)
     return node["eventType"]?.textValue() ?: throw IllegalArgumentException("EventType was null")
 }
 
 fun restoreOpenBrokerEvent(event: CloudEvent<*>): CloudEvent<OpenBrokerEvent>? {
     if(event.data == null)
         return null
-    val data: String = jacksonObjectMapper().writeValueAsString(event.data)
+    val data: String = mapper.writeValueAsString(event.data)
     val type: EventType<OpenBrokerEvent> = eventType(event.eventType)
     val openBrokerEvent: OpenBrokerEvent = parseJson(data, type.clazz)
     return event.withData(openBrokerEvent)
