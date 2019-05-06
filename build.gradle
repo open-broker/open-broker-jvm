@@ -1,11 +1,7 @@
 plugins {
-    id "org.jetbrains.kotlin.jvm" version "1.3.0"
+    id "org.jetbrains.kotlin.jvm" version "1.3.30"
+    id "maven-publish"
 }
-
-apply plugin: 'kotlin'
-apply plugin: 'java'
-apply plugin: 'maven'
-apply plugin: 'idea'
 
 group = 'org.openbroker'
 version = '1.0-SNAPSHOT'
@@ -13,59 +9,100 @@ description = 'Library for Open Broker'
 
 defaultTasks 'test'
 
-project.ext {
-    kotlin_version = '1.3.10'
-    kotlin_api_version = '1.3'
-    jvm_version = '1.8'
+ext {
+    kotlinLanguageVersion = '1.3'
+
+    defaultEncoding = 'UTF-8'
+
+    ver = [
+        'kotlin'     : '1.3.30',
+        'springBoot' : '2.1.4.RELEASE',
+        'cloudEvents': '76dfa0814f',
+    ]
+
+    servicePackage = 'org.openbroker'
+    servicePackageSlashes = servicePackage.replace('.', '/')
 }
 
-apply from: "jar.gradle"
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
     jcenter()
     mavenCentral()
-    maven { url "https://dl.bintray.com/kotlin/kotlinx" }
     maven { url "https://jitpack.io" }
 }
 
 dependencies {
-    // Kotlin
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
-    // Cloud Events
-    compile 'com.github.open-broker:cloud-events-jvm:76dfa0814f'
-    compile 'com.github.open-broker:cloud-events-jvm:76dfa0814f:sources'
+    implementation(
+        platform("org.springframework.boot:spring-boot-dependencies:$ver.springBoot"),
+        platform("org.jetbrains.kotlin:kotlin-bom:$ver.kotlin"),
+        "org.jetbrains.kotlin:kotlin-stdlib-jdk8",
+        "com.github.open-broker:cloud-events-jvm:$ver.cloudEvents",
+        "com.fasterxml.jackson.core:jackson-core",
+        "com.fasterxml.jackson.module:jackson-module-kotlin",
+        "com.fasterxml.jackson.datatype:jackson-datatype-jsr310",
+    )
 
-    // Jackson
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version:'2.9.8'
-    implementation group: 'com.fasterxml.jackson.module', name: 'jackson-module-kotlin', version:'2.9.8'
-    implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version:'2.9.8'
+    testImplementation(
+        "org.junit.jupiter:junit-jupiter-api",
+    )
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.3.1")
-    testRuntime("org.junit.jupiter:junit-jupiter-engine:5.3.1")
+    testRuntime(
+        "org.junit.jupiter:junit-jupiter-engine",
+    )
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
     kotlinOptions {
-        languageVersion = kotlin_api_version
-        apiVersion = kotlin_api_version
-        jvmTarget = jvm_version
-        javaParameters = true   // Useful for reflection.
+        javaParameters = true
+        jvmTarget = JavaVersion.VERSION_1_8
+        freeCompilerArgs += ['-Xjsr305=strict', '-progressive']
+        languageVersion = kotlinLanguageVersion
+        apiVersion = kotlinLanguageVersion
     }
 }
 
-compileJava {
-    sourceCompatibility = jvm_version
-    targetCompatibility = jvm_version
-    options.incremental = true
-    options.encoding = 'UTF-8'
+tasks.withType(JavaCompile).all {
+    options.encoding = defaultEncoding
+    options.compilerArgs = ['-parameters', '-Xlint:unchecked']
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    archiveClassifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+        }
+    }
 }
 
 test {
-    useJUnitPlatform()
-}
 
-task wrapper(type: Wrapper) {
-    description = 'Generates gradlew[.bat] scripts for faster execution'
-    gradleVersion = '4.10.2'
+    useJUnitPlatform()
+
+    reports.junitXml.enabled false
+    reports.html.enabled false
+
+    failFast = System.getProperty('failFast') != null
+    include servicePackageSlashes + '/**/*Test.*'
+
+    testLogging {
+        events 'skipped', 'failed'
+        exceptionFormat = 'full'
+
+        debug {
+            events "started", "passed", "skipped", "failed"
+        }
+
+        info {
+            events "passed", "skipped", "failed"
+        }
+    }
 }

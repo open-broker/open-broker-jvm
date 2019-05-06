@@ -3,18 +3,17 @@ jobs:
   build:
     working_directory: ~/workdir
     docker:
-      - image: gradle:4.8-jdk8
+      - image: gradle:5.4
     steps:
       - checkout
       - restore_cache:
           key: circleci-{{ checksum "build.gradle" }}
-      - run: gradle dependencies
+      - run: ./gradlew dependencies
       - save_cache:
           paths:
             - ~/.gradle
           key: circleci-{{ checksum "build.gradle" }}
-      - run: gradle build
-      - run: gradle test
+      - run: ./gradlew build
 
 workflows:
   version: 2
