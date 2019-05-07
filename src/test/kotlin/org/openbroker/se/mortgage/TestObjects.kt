@@ -23,6 +23,7 @@ import org.openbroker.se.mortgage.model.OwnedProperty
 import org.openbroker.se.mortgage.model.PropertyAddress
 import org.openbroker.se.mortgage.model.PropertyType
 import org.openbroker.se.mortgage.model.RefinancingProperty
+import org.openbroker.se.mortgage.model.Responsibility
 
 object TestObjects {
 
@@ -73,8 +74,8 @@ object TestObjects {
                         welfareReceived = 700
                     ),
                     existingLoans = listOf(
-                        ExistingLoan(43_000, 980, ExistingLoanType.CREDIT_CARD),
-                        ExistingLoan(89_000, 221, ExistingLoanType.OTHER)
+                        ExistingLoan(43_000, 980, ExistingLoanType.CREDIT_CARD, Responsibility.MAIN_APPLICANT),
+                        ExistingLoan(89_000, 221, ExistingLoanType.OTHER, Responsibility.MAIN_APPLICANT)
                     ),
                     coApplicant = null,
                     adultsInHousehold = 2,
