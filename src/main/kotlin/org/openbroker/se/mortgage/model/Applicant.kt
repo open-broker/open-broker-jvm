@@ -19,7 +19,8 @@ data class Applicant @JvmOverloads constructor(
     val dependentChildren: Int,
     val housingType: HousingType,
     val monthlyRent: Int,
-    val monthlyIncome: Int,
+    val monthlyGrossIncome: Int,
+    val monthlyNetIncome: Int,
     val maritalStatus: MaritalStatus,
     val childSupportPaid: Int = 0,
     val childSupportReceived: Int = 0,
@@ -66,7 +67,11 @@ data class Applicant @JvmOverloads constructor(
         require(employmentStatusSinceMonth in 1..12)
         require(dependentChildren in 0..15)
         monthlyRent.requireMin(0, "monthlyRent")
-        monthlyIncome.requireMin(0, "monthlyIncome")
+        monthlyNetIncome.requireMin(0, "monthlyIncome")
+        monthlyGrossIncome.requireMin(0, "monthlyIncome")
+        require(monthlyNetIncome <= monthlyGrossIncome) {
+            "Monthly income after tax cannot be greater than monthly income before tax"
+        }
 
         sequenceOf(
             childSupportPaid,
