@@ -59,10 +59,5 @@ data class Application @JvmOverloads constructor(
         require(refinanceAmount <= loanAmount) {
             "refinanceAmount ($refinanceAmount) may not be greater than loanAmount ($loanAmount)."
         }
-        extensions?.keys?.forEach { key ->
-            require(key.matches(issuerRegex)) {
-                "Key for extension is not a valid format: '$key'"
-            }
-        }
     }
 }
