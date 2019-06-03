@@ -14,6 +14,10 @@ enum class ExistingLoanType {
      */
     CREDIT_CARD,
     /**
+     * A home mortgage
+     */
+    MORTGAGE,
+    /**
      * A student loan
      */
     STUDENT_LOAN,
