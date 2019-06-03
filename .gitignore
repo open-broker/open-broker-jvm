@@ -28,3 +28,5 @@ build
 # Environment variables for Docker
 .env
 .attach_pid*
+
+src/main/resources/logback.xml
