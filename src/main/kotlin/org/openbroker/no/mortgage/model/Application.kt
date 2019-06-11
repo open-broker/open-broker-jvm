@@ -28,7 +28,8 @@ data class Application @JvmOverloads constructor(
     val extensions: Map<String, Any>? = emptyMap(),
 
     /**
-     * The amount that the customer wishes to borrow
+     * The amount that the customer wishes to borrow, including
+     * refinancing
      */
     val loanAmount: Int,
 
@@ -36,11 +37,6 @@ data class Application @JvmOverloads constructor(
      * Purpose of the loan
      */
     val loanPurpose: LoanPurpose = LoanPurpose.OTHER,
-
-    /**
-     * The amount being refinanced, must be less than or equal to the loanAmount
-     */
-    val refinanceAmount: Int = 0,
 
     /**
      * The number of year terms that the applicant desires to pay off the loan over
@@ -54,8 +50,8 @@ data class Application @JvmOverloads constructor(
 ) {
     init {
         loanAmount.requireMin(1, "loanAmount")
-        refinanceAmount.requireMin(0, "refinanceAmount")
         termYears.requireMin(1, "termYears")
+        val refinanceAmount: Int = refinanceAmount()
         require(refinanceAmount <= loanAmount) {
             "refinanceAmount ($refinanceAmount) may not be greater than loanAmount ($loanAmount)."
         }
@@ -65,4 +61,9 @@ data class Application @JvmOverloads constructor(
             }
         }
     }
+
+    /**
+     * The amount the customer wishes to refinance of existing loans
+     */
+    fun refinanceAmount(): Int = existingLoans.sumBy { it.refinanceAmount }
 }

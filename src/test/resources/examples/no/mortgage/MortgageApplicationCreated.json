@@ -101,12 +101,20 @@
                     "responsibility": "CO_APPLICANT",
                     "lender": "ABC Bank",
                     "defaulted": false
+                },
+                {
+                    "loanAmount": 2500000,
+                    "monthlyPayment": 4500,
+                    "refinanceAmount": 250000,
+                    "existingLoanType": "MORTGAGE",
+                    "responsibility": "SHARED",
+                    "lender": "Santander",
+                    "defaulted": false
                 }
             ],
             "loanAmount": 2500000,
             "loanPurpose": "REFINANCE_CONSUMER_LOANS",
             "termYears": 30,
-            "refinanceAmount": 2500000,
             "refinancingProperty": {
                 "interestRate": "0.067",
                 "assessedValue": "3300000",
