@@ -21,7 +21,6 @@ data class Applicant @JvmOverloads constructor(
     val childSupportReceivedMonthly: Int? = null,
     val rentReceivedMonthly: Int? = null,
     val otherIncomeReceivedMonthly: Int? = null,
-    val childSupportPaidMonthly: Int? = null,
     val paymentRemark: Boolean,
     val housingType: HousingType,
     val housingCostPerMonth: Int,
