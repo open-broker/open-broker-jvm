@@ -56,7 +56,6 @@ data class Applicant @JvmOverloads constructor(
         childSupportReceivedMonthly.requireMin(0, "childSupportReceivedMonthly")
         rentReceivedMonthly.requireMin(0, "rentReceivedMonthly")
         otherIncomeReceivedMonthly.requireMin(0, "otherIncomeReceivedMonthly")
-        childSupportPaidMonthly.requireMin(0, "childSupportPaidMonthly")
         housingCostPerMonth.requireMin(0, "housingCostPerMonth")
         monthlyNetIncome.requireMin(0, "monthlyNetIncome")
         monthlyGrossIncome.requireMin(0, "monthlyGrossIncome")
