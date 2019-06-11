@@ -47,7 +47,6 @@
             ],
             "refinanceAmount": 2500000,
             "refinancingProperty": {
-                "interestRate": "0.067",
                 "assessedValue": "3300000",
                 "propertyAddress": {
                     "streetAddress": "Nobels gate 16",
@@ -56,9 +55,7 @@
                 },
                 "propertyType": "APARTMENT_SELF_OWNED",
                 "squareMeters": 196,
-                "existingMortgage": 2500000,
-                "monthlyCost": 6700,
-                "defaulted": false
+                "monthlyCost": 6700
             }
         }
     }

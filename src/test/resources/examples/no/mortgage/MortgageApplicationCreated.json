@@ -112,7 +112,7 @@
                     "defaulted": false
                 }
             ],
-            "loanAmount": 2500000,
+            "loanAmount": 2800000,
             "loanPurpose": "REFINANCE_CONSUMER_LOANS",
             "termYears": 30,
             "refinancingProperty": {
@@ -125,10 +125,8 @@
                 },
                 "propertyType": "APARTMENT_SELF_OWNED",
                 "squareMeters": 196,
-                "existingMortgage": 2500000,
                 "monthlyCost": 6700,
-                "condominiumCompoundDebt": null,
-                "defaulted": false
+                "condominiumCompoundDebt": null
             },
             "comment": "Co applicant will retire within six months"
         }
