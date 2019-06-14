@@ -5,7 +5,7 @@ import org.openbroker.common.requireMin
 data class ExistingLoan(
     val loanAmount: Int,
     val monthlyPayment: Int,
-    val refinanceAmount: Int? = null,
+    val refinanceAmount: Int = 0,
     val existingLoanType: ExistingLoanType,
     val responsibility: Responsibility,
     val lender: String,

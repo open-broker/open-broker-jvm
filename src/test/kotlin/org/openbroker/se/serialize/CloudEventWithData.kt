@@ -10,6 +10,7 @@ import org.openbroker.cloudevents.cloudEvent
 import org.openbroker.common.OpenBrokerEvent
 import org.openbroker.common.serialize.withData
 import org.openbroker.se.privateunsecuredloan.events.ApplicationCreated
+import org.openbroker.se.privateunsecuredloan.events.Disbursed
 
 class CloudEventWithData {
     @Test
@@ -27,5 +28,12 @@ class CloudEventWithData {
         val deserialized: CloudEvent<*> = jacksonObjectMapper().readValue(serialized)
         val eventRestoredType: CloudEvent<OpenBrokerEvent> = deserialized.withData(event.data!!)
         assertEquals(eventRestoredType.data, event.data)
+    }
+
+    @Test
+    fun testCloudEventWithExtraValue() {
+        // Verify that this does not throw an exception
+        val event: CloudEvent<Disbursed> = cloudEvent(TestObjectsJson.disbursedWithAdditionalValue)
+        assertEquals(10000, event.data!!.amountBrokered)
     }
 }
