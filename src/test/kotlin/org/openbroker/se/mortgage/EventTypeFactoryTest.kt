@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.openbroker.se.mortgage.events.MortgageEvent
 
-class EventTypeFactory {
+class EventTypeFactoryTest {
 
     @Test
     fun testCorrectSortingByComparator() {

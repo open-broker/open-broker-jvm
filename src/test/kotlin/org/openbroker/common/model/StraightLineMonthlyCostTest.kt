@@ -7,7 +7,7 @@ import java.math.BigDecimal
 
 private const val ACCEPTABLE_ERROR: Double = 0.6
 
-class StraightLineMonthlyCost {
+class StraightLineMonthlyCostTest {
 
     @Test
     fun testComputeMonthlyCostForSmallLoanNoTermFee() {

@@ -8,10 +8,10 @@ import org.openbroker.no.privateunsecuredloan.events.OfferAccepted;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class OpenBrokerCreateTest {
+class OpenBrokerCreateTest {
 
     @Test
-    public void testCreateOpenBrokerEvent() {
+    void testCreateOpenBrokerEvent() {
         CloudEvent<OfferAccepted> accept = OpenBrokerEventKt.create(
             new OfferAccepted(new Reference("1", "io.klira"), "12345678901"),
             OfferAccepted.class,

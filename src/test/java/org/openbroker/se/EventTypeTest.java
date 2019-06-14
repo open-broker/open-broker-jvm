@@ -5,10 +5,10 @@ import org.openbroker.se.privateunsecuredloan.PrivateUnsecuredLoanSweden;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class EventTypeTest {
+class EventTypeTest {
 
     @Test
-    public void switchOnEventTypeTest() {
+    void switchOnEventTypeTest() {
         String eventTypeName = "org.open-broker.v0.se.PrivateUnsecuredLoanApplicationCreated";
         PrivateUnsecuredLoanSweden event = (PrivateUnsecuredLoanSweden) PrivateUnsecuredLoanSweden.Companion.invoke(eventTypeName);
         switch (event) {

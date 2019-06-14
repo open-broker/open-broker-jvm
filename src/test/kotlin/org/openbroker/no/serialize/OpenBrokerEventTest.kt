@@ -14,7 +14,7 @@ import org.openbroker.common.serialize.restoreOpenBrokerEvent
 import org.openbroker.no.privateunsecuredloan.TestObjectsJson
 import org.openbroker.no.privateunsecuredloan.events.ApplicationCreated
 
-class OpenBrokerEvent {
+class OpenBrokerEventTest {
 
     @Test
     fun testCloudEventWithSameData() {
