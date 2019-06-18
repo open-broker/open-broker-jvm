@@ -65,7 +65,7 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
     kotlinOptions {
         javaParameters = true
         jvmTarget = jdkVersion
-        freeCompilerArgs += ['-Xjsr305=strict', '-progressive']
+        freeCompilerArgs += ['-progressive']
         languageVersion = kotlinLanguageVersion
         apiVersion = kotlinLanguageVersion
     }
