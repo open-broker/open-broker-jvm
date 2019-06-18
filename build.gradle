@@ -94,10 +94,8 @@ test {
 
     useJUnitPlatform()
 
-    reports.junitXml.enabled false
     reports.html.enabled false
 
-    failFast = System.getProperty('failFast') != null
     include servicePackage.replace('.', '/') + '/**/*Test.*'
 
     testLogging {

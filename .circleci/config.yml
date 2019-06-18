@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/workdir
     docker:
-      - image: gradle:5.4
+      - image: gradle:5.4.1
     steps:
       - checkout
       - restore_cache:
