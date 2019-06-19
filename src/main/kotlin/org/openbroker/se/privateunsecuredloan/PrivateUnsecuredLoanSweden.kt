@@ -5,21 +5,14 @@ import org.openbroker.common.meta.EventTypeFactory
 import org.openbroker.common.meta.EventTypeQualifier
 import org.openbroker.common.meta.QualifiedName
 import org.openbroker.se.mortgage.MortgageSweden
-import org.openbroker.se.privateunsecuredloan.events.ApplicationCreated
-import org.openbroker.se.privateunsecuredloan.events.DelayedProcessing
-import org.openbroker.se.privateunsecuredloan.events.Disbursed
-import org.openbroker.se.privateunsecuredloan.events.OfferAccepted
-import org.openbroker.se.privateunsecuredloan.events.OfferRejected
-import org.openbroker.se.privateunsecuredloan.events.Offering
-import org.openbroker.se.privateunsecuredloan.events.PrivateUnsecuredLoanEvent
-import org.openbroker.se.privateunsecuredloan.events.Rejection
-import org.openbroker.se.privateunsecuredloan.events.StatusUpdated
+import org.openbroker.se.privateunsecuredloan.events.*
 
 enum class PrivateUnsecuredLoanSweden(
     override val clazz: Class<out PrivateUnsecuredLoanEvent>
 ): EventType<PrivateUnsecuredLoanEvent> {
     APPLICATION_CREATED(ApplicationCreated::class.java),
     DELAYED_PROCESSING(DelayedProcessing::class.java),
+    MESSAGE(Message::class.java),
     OFFERING(Offering::class.java),
     REJECTION(Rejection::class.java),
     OFFER_ACCEPTED(OfferAccepted::class.java),
