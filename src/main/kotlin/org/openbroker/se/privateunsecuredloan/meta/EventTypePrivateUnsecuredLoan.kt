@@ -1,5 +1,6 @@
 package org.openbroker.se.privateunsecuredloan.meta
 
+import org.openbroker.se.privateunsecuredloan.events.Message
 import org.openbroker.se.privateunsecuredloan.events.DelayedProcessing
 import org.openbroker.se.privateunsecuredloan.events.Disbursed
 import org.openbroker.se.privateunsecuredloan.events.OfferAccepted
@@ -15,6 +16,7 @@ enum class EventTypePrivateUnsecuredLoan(val clazz: Class<out PrivateUnsecuredLo
     DELAYED_PROCESSING(DelayedProcessing::class.java),
     OFFERING(Offering::class.java),
     REJECTION(Rejection::class.java),
+    MESSAGE(Message::class.java),
     OFFER_ACCEPTED(OfferAccepted::class.java),
     OFFER_REJECTED(OfferRejected::class.java),
     STATUS_UPDATED(StatusUpdated::class.java),
