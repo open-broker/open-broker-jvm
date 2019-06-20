@@ -14,6 +14,10 @@ enum class LoanPurpose {
      */
     HEALTHCARE_EXPENSES,
     /**
+     * To finance an investment
+     */
+    INVESTMENT,
+    /**
      * To finance education of some kind
      */
     EDUCATION,
