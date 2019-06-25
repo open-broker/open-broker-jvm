@@ -8,5 +8,6 @@ import org.openbroker.common.model.Reference
  */
 data class Offering constructor(
     override val brokerReference: Reference,
+    val offerId: Reference? = null,
     val offer: Offer
 ): MortgageEvent
