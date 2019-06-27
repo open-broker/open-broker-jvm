@@ -21,6 +21,20 @@ data class EventTypeQualifier(
 
     fun <T: OpenBrokerEvent> withClass(clazz: Class<T>): QualifiedName =
         QualifiedName.fromClass(this, clazz)
+
+    companion object {
+        fun fromEvent(eventType: String): EventTypeQualifier {
+            require(eventType.startsWith(NAME_SPACE)) { "Illegal event type: $eventType" }
+            val parts: List<String> = eventType.removePrefix("$NAME_SPACE.").split(".")
+            require(parts.size >= 3)
+            val domain = Domain.fromEventType(eventType)
+            return EventTypeQualifier(
+                version = parts[0],
+                region = parts[1],
+                domain = domain.name
+            )
+        }
+    }
 }
 
 data class QualifiedName internal constructor(
