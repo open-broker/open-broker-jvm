@@ -14,6 +14,7 @@ class AnnuityTotalCostForLoanTest {
         val totalCost: BigDecimal = Annuity.totalCost(
             loanAmount = 10_000,
             nominalAnnualInterestRate = 0.05,
+            administrationFee = 0,
             termFee = 0,
             termMonths = 24
         )
@@ -26,6 +27,7 @@ class AnnuityTotalCostForLoanTest {
         val totalCost: BigDecimal = Annuity.totalCost(
             loanAmount = 200_000,
             nominalAnnualInterestRate = 0.067,
+            administrationFee = 0,
             termFee = 0,
             termMonths = 96
         )
@@ -39,6 +41,7 @@ class AnnuityTotalCostForLoanTest {
         val totalCost: BigDecimal = Annuity.totalCost(
             loanAmount = 10_000,
             nominalAnnualInterestRate = 0.05,
+            administrationFee = 0,
             termFee = 20,
             termMonths = 24
         )
@@ -51,6 +54,7 @@ class AnnuityTotalCostForLoanTest {
         val totalCost: BigDecimal = Annuity.totalCost(
             loanAmount = 200_000,
             nominalAnnualInterestRate = 0.067,
+            administrationFee = 0,
             termFee = 60,
             termMonths = 96
         )

@@ -7,13 +7,17 @@ interface LoanType {
      * Compute "effective interest rate"
      * @param loanAmount the amount loaned
      * @param nominalAnnualInterestRate the nominal interest rate on annual basis
-     * @param termFee any fee that is paid each month, not including amortization
-     * and interest rate payments
+     * @param administrationFee one time fee for setting up the loan
+     * @param termFee recurring fee that is paid each month, **excluding**
+     *  - amortization
+     *  - interest rate payments
+     *  - billing fee (if it can be avoided by choosing another payment option)
      * @param termMonths for how many months the loan is payed off over
      */
     fun effectiveInterestRate(
         loanAmount: Int,
         nominalAnnualInterestRate: Double,
+        administrationFee: Int,
         termFee: Int,
         termMonths: Int
     ): BigDecimal
@@ -22,6 +26,7 @@ interface LoanType {
      * Compute the total cost of a annuity loan, given the
      * @param loanAmount the amount loaned
      * @param nominalAnnualInterestRate the nominal interest rate on annual basis
+     * @param administrationFee one time fee for setting up the loan
      * @param termFee any fee that is paid each month, not including amortization
      * and interest rate payments
      * @param termMonths for how many months the loan is payed off over
@@ -31,6 +36,7 @@ interface LoanType {
     fun totalCost(
         loanAmount: Int,
         nominalAnnualInterestRate: Double,
+        administrationFee: Int,
         termFee: Int,
         termMonths: Int
     ): BigDecimal

@@ -8,22 +8,25 @@ object Annuity: LoanType {
     override fun totalCost(
         loanAmount: Int,
         nominalAnnualInterestRate: Double,
+        administrationFee: Int,
         termFee: Int,
         termMonths: Int
     ): BigDecimal {
         val monthlyCost: BigDecimal = monthlyCost(loanAmount, nominalAnnualInterestRate, termMonths)
         val monthlyTermCost = BigDecimal(termFee)
-        return (monthlyCost + monthlyTermCost).multiply(BigDecimal(termMonths), MathContext.DECIMAL128)
+        val adminFee = BigDecimal(administrationFee)
+        return (monthlyCost + monthlyTermCost).multiply(BigDecimal(termMonths), MathContext.DECIMAL128).plus(adminFee)
     }
 
     override fun effectiveInterestRate(
         loanAmount: Int,
         nominalAnnualInterestRate: Double,
+        administrationFee: Int,
         termFee: Int,
         termMonths: Int
     ): BigDecimal {
         val totalCost: BigDecimal =
-            totalCost(loanAmount, nominalAnnualInterestRate, termFee, termMonths)
+            totalCost(loanAmount, nominalAnnualInterestRate, administrationFee, termFee, termMonths)
         val monthlyPayment: Double = totalCost.divide(BigDecimal(termMonths), MathContext.DECIMAL128).toDouble()
         return effectiveInterestRate(loanAmount, monthlyPayment, termMonths)
     }
