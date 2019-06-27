@@ -16,7 +16,7 @@ object Annuity: LoanType {
         return (monthlyCost + monthlyTermCost).multiply(BigDecimal(termMonths), MathContext.DECIMAL128)
     }
 
-    override fun apr(
+    override fun effectiveInterestRate(
         loanAmount: Int,
         nominalAnnualInterestRate: Double,
         termFee: Int,

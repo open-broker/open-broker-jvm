@@ -4,7 +4,7 @@ import java.math.BigDecimal
 import java.math.MathContext
 
 object StraightLine: LoanType {
-    override fun apr(loanAmount: Int, nominalAnnualInterestRate: Double, termFee: Int, termMonths: Int): BigDecimal {
+    override fun effectiveInterestRate(loanAmount: Int, nominalAnnualInterestRate: Double, termFee: Int, termMonths: Int): BigDecimal {
         // Save this for another day
         // https://www.fi.se/contentassets/46eeed14d88842c29d6104b9492c6742/fffs9733.pdf
         TODO("not implemented")

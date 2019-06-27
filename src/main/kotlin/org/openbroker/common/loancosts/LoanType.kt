@@ -4,15 +4,14 @@ import java.math.BigDecimal
 
 interface LoanType {
     /**
-     * Compute APR (annual percentage rate), sometimes referred to as
-     * "effective interest rate"
+     * Compute "effective interest rate"
      * @param loanAmount the amount loaned
      * @param nominalAnnualInterestRate the nominal interest rate on annual basis
      * @param termFee any fee that is paid each month, not including amortization
      * and interest rate payments
      * @param termMonths for how many months the loan is payed off over
      */
-    fun apr(
+    fun effectiveInterestRate(
         loanAmount: Int,
         nominalAnnualInterestRate: Double,
         termFee: Int,
