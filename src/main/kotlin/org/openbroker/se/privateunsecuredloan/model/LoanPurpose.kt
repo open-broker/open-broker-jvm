@@ -26,6 +26,10 @@ enum class LoanPurpose {
      */
     HOME_REMODELLING,
     /**
+     * To finance an investment
+     */
+    INVESTMENT,
+    /**
      * Refinancing existing debt
      */
     REFINANCE,
