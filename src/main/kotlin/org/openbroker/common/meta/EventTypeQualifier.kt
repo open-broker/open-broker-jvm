@@ -21,6 +21,20 @@ data class EventTypeQualifier(
 
     fun <T: OpenBrokerEvent> withClass(clazz: Class<T>): QualifiedName =
         QualifiedName.fromClass(this, clazz)
+
+    companion object {
+        fun fromEvent(eventType: String): EventTypeQualifier {
+            require(eventType.startsWith(NAME_SPACE)) { "Illegal event type: $eventType" }
+            val parts: List<String> = eventType.removePrefix("$NAME_SPACE.").split(".")
+            require(parts.size >= 3)
+            val domain = Domain.fromEventType(eventType)
+            return EventTypeQualifier(
+                version = parts[0],
+                region = parts[1],
+                domain = domain.name
+            )
+        }
+    }
 }
 
 data class QualifiedName internal constructor(
@@ -33,8 +47,6 @@ data class QualifiedName internal constructor(
     override fun toString(): String = fullName
 
     companion object {
-        private val knownDomains = listOf("PrivateUnsecuredLoan", "Mortgage")
-
         fun <T: OpenBrokerEvent> fromEvent(
             qualifier: EventTypeQualifier,
             event: T
@@ -56,8 +68,7 @@ data class QualifiedName internal constructor(
             val parts: List<String> = string.split(Regex("\\."))
             require(parts.size == 5){ "Invalid format: $string" }
             val event: String = parts[4]
-            val domain: String = knownDomains.firstOrNull { event.startsWith(it) } ?:
-                throw IllegalArgumentException("Unable to extract domain from: $event")
+            val domain: String = Domain.fromEventType(event).name
             val qualifier = EventTypeQualifier(version = parts[2], region = parts[3], domain = domain)
             val eventType: String = event.removePrefix(domain)
             return QualifiedName(qualifier, eventType)
