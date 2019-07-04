@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 class TestObjectsJava {
     private static Reference reference = new Reference("S1", "io.klira");
+    private static Reference offerId =  new Reference("1", "com.creditor");
     private static String source = "klira.io";
 
     static CloudEvent<ApplicationCreated> applicationCreated = OpenBrokerEventKt.create(
@@ -75,6 +76,7 @@ class TestObjectsJava {
     static CloudEvent<Offering> offering = OpenBrokerEventKt.create(
         new Offering(
             reference,
+            offerId,
             new Offer(
             "14.5",
             "12.1",
@@ -98,7 +100,8 @@ class TestObjectsJava {
 
     static CloudEvent<OfferRejected> offerRejected = OpenBrokerEventKt.create(
         new OfferRejected(
-            reference
+            reference,
+            offerId
         ),
         OfferRejected.class,
         source
@@ -106,7 +109,8 @@ class TestObjectsJava {
 
     static CloudEvent<OfferAccepted> offerAccepted = OpenBrokerEventKt.create(
         new OfferAccepted(
-            reference
+            reference,
+            offerId
         ),
         OfferAccepted.class,
         source
@@ -124,6 +128,7 @@ class TestObjectsJava {
     static CloudEvent<Disbursed> disbursed = OpenBrokerEventKt.create(
         new Disbursed(
             reference,
+            offerId,
             240_000,
             240_000
         ),

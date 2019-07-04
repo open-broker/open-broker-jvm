@@ -17,7 +17,13 @@ data class Disbursed(
      *  The date for which the loan was disbursed, formatted
      *  as a ISO-8601 date, in the extended format YYYY-MM-DD
      */
-    val date: String
+    val date: String,
+
+    /**
+     * An id for the offer that has been disbursed,
+     * if the offer has an identifier
+     */
+    val offerId: Reference? = null
 ): MortgageEvent
 {
     init {

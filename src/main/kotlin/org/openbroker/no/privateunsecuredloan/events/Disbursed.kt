@@ -8,6 +8,7 @@ import org.openbroker.common.requireMin
  */
 data class Disbursed(
     override val brokerReference: Reference,
+    val offerId: Reference? = null,
 
     /**
      * The total amount disbursed to the customer of the loan being brokered

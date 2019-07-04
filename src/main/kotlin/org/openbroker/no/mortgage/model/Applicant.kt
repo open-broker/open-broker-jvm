@@ -63,5 +63,4 @@ data class Applicant @JvmOverloads constructor(
             "Value for monthlyNetIncome cannot be greater than value for monthlyGrossIncome"
         }
     }
-
 }

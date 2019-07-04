@@ -13,7 +13,11 @@ public class OpenBrokerCreateTest {
     @Test
     public void testCreateOpenBrokerEvent() {
         CloudEvent<OfferAccepted> accept = OpenBrokerEventKt.create(
-            new OfferAccepted(new Reference("1", "io.klira"), "12345678901"),
+            new OfferAccepted(
+                new Reference("1", "io.klira"),
+                new Reference("123", "com.creditor"),
+                "12345678901"
+            ),
             OfferAccepted.class,
             "source"
         );

@@ -14,7 +14,11 @@ public class OpenBrokerCreateTest {
     @Test
     public void testCreateOpenBrokerEvent() {
         CloudEvent<OfferAccepted> accept = OpenBrokerEventKt.create(
-            new OfferAccepted(new Reference("1", "io.klira"), new BankAccount("3300", "1234567890")),
+            new OfferAccepted(
+                new Reference("1", "io.klira"),
+                new Reference("2", "com.creditor"),
+                new BankAccount("3300", "1234567890")
+            ),
             OfferAccepted.class,
             "source"
         );
