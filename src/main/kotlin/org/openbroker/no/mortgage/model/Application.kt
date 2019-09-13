@@ -1,7 +1,8 @@
 package org.openbroker.no.mortgage.model
 
-import org.openbroker.common.model.issuerRegex
 import org.openbroker.common.requireMin
+
+internal val extensionKeyRegex = Regex("^[a-zA-Z0-9]+[a-zA-Z0-9._-]+\$")
 
 data class Application @JvmOverloads constructor(
     /**
@@ -56,7 +57,7 @@ data class Application @JvmOverloads constructor(
             "refinanceAmount ($refinanceAmount) may not be greater than loanAmount ($loanAmount)."
         }
         extensions?.keys?.forEach { key ->
-            require(key.matches(issuerRegex)) {
+            require(key.matches(extensionKeyRegex)) {
                 "Key for extension is not a valid format: '$key'"
             }
         }
