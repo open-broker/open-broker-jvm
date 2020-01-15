@@ -13,12 +13,13 @@ import org.openbroker.common.meta.eventType
 @PublishedApi
 internal val mapper: ObjectMapper = jacksonObjectMapper()
     .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+    .configure(DeserializationFeature.FAIL_ON_MISSING_CREATOR_PROPERTIES, true)
 
 inline fun <reified T: OpenBrokerEvent> parseJsonCloudEvent(json: String): CloudEvent<T> =
     mapper.readValue(json)
 
-fun <T: OpenBrokerEvent> parseJson(json: String, clazz: Class<T>): OpenBrokerEvent =
-    mapper.readValue(json, clazz)
+fun <T> parseJson(json: String, clazz: Class<T>): T = mapper.readValue(json, clazz)
+inline fun <reified T> parseJson(json: String): T = parseJson(json, T::class.java)
 
 fun parseOpenBrokerEvent(payload: String): CloudEvent<OpenBrokerEvent> {
     val cloudEvent: CloudEvent<JsonNode> = mapper.readValue(payload)
