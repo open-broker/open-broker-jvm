@@ -1,6 +1,6 @@
 # open-broker-jvm
 
-A library containing Kotlin classes for working with [Open Broker](https://github.com/open-broker/specification/) events, as well as fuctionality to seralize and deserialize these events.
+A library containing Kotlin classes for working with [Open Broker](https://github.com/open-broker/specification/) events, as well as functionality to serialize and deserialize these events.
 
 Releases will be tagged with incrementing _build number_.
 
