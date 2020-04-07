@@ -42,6 +42,10 @@ enum class EmploymentStatus {
      */
     STUDENT,
     /**
+     * Employed, but temporarily not working
+     */
+    TEMPORARILY_DISCHARGED,
+    /**
      * Employment pertaining to a limited time period
      */
     TEMPORARY,
