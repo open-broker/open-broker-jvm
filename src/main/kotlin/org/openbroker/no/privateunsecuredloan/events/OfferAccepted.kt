@@ -7,7 +7,9 @@ data class OfferAccepted @JvmOverloads constructor(
     override val brokerReference: Reference,
     val offerId: Reference? = null,
     val bankAccount: String? = null,
-    val requestedCredit: Int? = null
+    val requestedCredit: Int? = null,
+    val emailAddress: String? = null,
+    val emailAddressCoapplicant: String? = null
 ): PrivateUnsecuredLoanEvent
 {
     init {
