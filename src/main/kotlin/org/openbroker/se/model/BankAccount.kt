@@ -10,7 +10,6 @@ private val accountNumberRegex = Regex("^[0-9]{1,11}$")
  * account number
  */
 data class BankAccount(
-    val bankName: String? = null,
     /**
      * The clearing number, also known as the sort code identifies, the
      * bank along with the branch
@@ -20,7 +19,8 @@ data class BankAccount(
      * The account number within the bank identified by the
      * clearingNo. Specified using digits only.
      */
-    val accountNo: String
+    val accountNo: String,
+    val bankName: String? = null
 ) {
     init {
         require(clearingNo.matches(clearingNumberRegex)) {

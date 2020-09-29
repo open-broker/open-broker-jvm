@@ -17,7 +17,7 @@ public class OpenBrokerCreateTest {
             new OfferAccepted(
                 new Reference("1", "io.klira"),
                 new Reference("2", "com.creditor"),
-                new BankAccount("3300", "1234567890")
+                new BankAccount("3300", "1234567890", "Nordea")
             ),
             OfferAccepted.class,
             "source"
