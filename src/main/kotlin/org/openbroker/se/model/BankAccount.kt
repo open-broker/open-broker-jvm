@@ -19,7 +19,8 @@ data class BankAccount(
      * The account number within the bank identified by the
      * clearingNo. Specified using digits only.
      */
-    val accountNo: String
+    val accountNo: String,
+    val bankName: String? = null
 ) {
     init {
         require(clearingNo.matches(clearingNumberRegex)) {
