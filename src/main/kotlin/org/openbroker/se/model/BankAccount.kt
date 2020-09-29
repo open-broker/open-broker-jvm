@@ -10,6 +10,7 @@ private val accountNumberRegex = Regex("^[0-9]{1,11}$")
  * account number
  */
 data class BankAccount(
+    val bankName: String? = null,
     /**
      * The clearing number, also known as the sort code identifies, the
      * bank along with the branch

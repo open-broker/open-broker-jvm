@@ -8,7 +8,6 @@ data class OfferAccepted @JvmOverloads constructor(
     override val brokerReference: Reference,
     val offerId: Reference? = null,
     val bankAccount: BankAccount? = null,
-    val bankName: String? = null,
     val requestedCredit: Int? = null,
     val emailAddress: String? = null,
     val emailAddressCoapplicant: String? = null
