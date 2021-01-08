@@ -37,6 +37,8 @@ class SerializationTest {
             employmentStatus = EmploymentStatus.FULL_TIME,
             employmentStatusSinceYear = 2017,
             employmentStatusSinceMonth = 2,
+            employmentStatusUntilYear = null,
+            employmentStatusUntilMonth = null,
             dependentChildren = 0,
             housingType = HousingType.RENTED,
             employerName = "Zensum AB",
