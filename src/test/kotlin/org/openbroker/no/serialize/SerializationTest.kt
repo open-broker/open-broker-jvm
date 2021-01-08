@@ -33,6 +33,8 @@ class SerializationTest {
             employmentStatus = EmploymentStatus.PUBLIC_SECTOR,
             employmentStatusSinceYear = 2010,
             employmentStatusSinceMonth = 12,
+            employmentStatusUntilYear = null,
+            employmentStatusUntilMonth = null,
             employerName = "Company Inc",
             employerPhone = null,
             dependentChildren = 0,

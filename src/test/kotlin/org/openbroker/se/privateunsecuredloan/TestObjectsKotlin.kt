@@ -50,6 +50,8 @@ object TestObjectsKotlin {
                         dependentChildren = 14,
                         employmentStatusSinceMonth = 11,
                         employmentStatusSinceYear = 2012,
+                        employmentStatusUntilMonth = null,
+                        employmentStatusUntilYear = null,
                         employmentStatus = EmploymentStatus.FULL_TIME,
                         childSupportPaidMonthly = 2312,
                         childSupportReceivedMonthly = 23222
@@ -165,6 +167,8 @@ object TestObjectsKotlin {
                         dependentChildren = 3,
                         employmentStatusSinceMonth = 11,
                         employmentStatusSinceYear = 2012,
+                        employmentStatusUntilMonth = null,
+                        employmentStatusUntilYear = null,
                         employmentStatus = EmploymentStatus.FULL_TIME,
                         childSupportPaidMonthly = 2312,
                         childSupportReceivedMonthly = 0

@@ -32,7 +32,7 @@ data class Applicant @JvmOverloads constructor(
 
     init {
         val ssnRegex = Regex("^[0-9]{12}$")
-    	require(ssn.matches(ssnRegex)) { "Invalid SSN" }
+        require(ssn.matches(ssnRegex)) { "Invalid SSN" }
 
         val phoneRegex = Regex("^\\+[1-9][0-9]{1,14}\$")
         phone?.let {
@@ -51,8 +51,12 @@ data class Applicant @JvmOverloads constructor(
 
         require(employmentStatusSinceYear in 1900..3000)
         require(employmentStatusSinceMonth in 1..12)
-        require(employmentStatusUntilYear in 1900..3000)
-        require(employmentStatusUntilMonth in 1..12)
+        employmentStatusUntilYear?.let {
+            require(it in 1900..3000)
+        }
+        employmentStatusUntilMonth?.let {
+            require(it in 1..12)
+        }
         require(dependentChildren in 0..15)
         housingCostPerMonth.requireMin(0, "housingCostPerMonth")
         monthlyIncome.requireMin(0, "monthlyIncome")

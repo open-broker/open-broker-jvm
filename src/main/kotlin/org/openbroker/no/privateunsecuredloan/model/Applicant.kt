@@ -40,7 +40,7 @@ data class Applicant @JvmOverloads constructor(
     val taxResidentOf: List<String>,
     val education: Education,
     val tentativeAddress: Address? = null
-    ) {
+) {
     init {
         val ssnRegex = Regex("^[0-9]{11}$")
         require(ssn.matches(ssnRegex)) { "Invalid SSN: '${obfuscateDigits(ssn)}'" }
@@ -61,8 +61,12 @@ data class Applicant @JvmOverloads constructor(
         }
         require(employmentStatusSinceYear in 1900..3000)
         require(employmentStatusSinceMonth in 1..12)
-        require(employmentStatusUntilYear in 1900..3000)
-        require(employmentStatusUntilMonth in 1..12)
+        employmentStatusUntilYear?.let {
+            require(it in 1900..3000)
+        }
+        employmentStatusUntilMonth?.let {
+            require(it in 1..12)
+        }
         require(housingSinceYear in 1900..3000)
         require(housingSinceMonth in 1..12)
         require(dependentChildren in 0..15)

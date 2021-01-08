@@ -30,6 +30,8 @@ class TestObjectsJava {
                 EmploymentStatus.EARLY_RETIRED,
                 2010,
                 12,
+                null,
+                null,
                 0,
                 HousingType.LIVE_IN,
                 10000,
