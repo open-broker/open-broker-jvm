@@ -15,6 +15,8 @@ data class Applicant @JvmOverloads constructor(
     val employmentStatus: EmploymentStatus,
     val employmentStatusSinceYear: Int,
     val employmentStatusSinceMonth: Int,
+    val employmentStatusUntilYear: Int? = null,
+    val employmentStatusUntilMonth: Int? = null,
     val employerName: String? = null,
     val employerPhone: String? = null,
     val dependentChildren: Int,
@@ -59,6 +61,8 @@ data class Applicant @JvmOverloads constructor(
         }
         require(employmentStatusSinceYear in 1900..3000)
         require(employmentStatusSinceMonth in 1..12)
+        require(employmentStatusUntilYear in 1900..3000)
+        require(employmentStatusUntilMonth in 1..12)
         require(housingSinceYear in 1900..3000)
         require(housingSinceMonth in 1..12)
         require(dependentChildren in 0..15)

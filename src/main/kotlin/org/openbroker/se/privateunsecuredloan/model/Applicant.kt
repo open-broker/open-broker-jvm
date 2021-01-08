@@ -11,6 +11,8 @@ data class Applicant @JvmOverloads constructor(
     val employmentStatus: EmploymentStatus,
     val employmentStatusSinceYear: Int,
     val employmentStatusSinceMonth: Int,
+    val employmentStatusUntilYear: Int? = null,
+    val employmentStatusUntilMonth: Int? = null,
     val dependentChildren: Int,
     val housingType: HousingType,
     val housingCostPerMonth: Int,
@@ -49,6 +51,8 @@ data class Applicant @JvmOverloads constructor(
 
         require(employmentStatusSinceYear in 1900..3000)
         require(employmentStatusSinceMonth in 1..12)
+        require(employmentStatusUntilYear in 1900..3000)
+        require(employmentStatusUntilMonth in 1..12)
         require(dependentChildren in 0..15)
         housingCostPerMonth.requireMin(0, "housingCostPerMonth")
         monthlyIncome.requireMin(0, "monthlyIncome")
