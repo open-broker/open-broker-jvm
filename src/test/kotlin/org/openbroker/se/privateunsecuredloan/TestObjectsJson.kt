@@ -114,6 +114,7 @@ object TestObjectsJson {
 					"loanAmount": 4000,
 					"monthlyPayment": 22,
 					"shouldRefinance": true,
+					"refinanceAmount": 4000,
 					"existingLoanType": "CAR_LOAN",
 					"responsibility": "SHARED"
 				},
@@ -121,6 +122,7 @@ object TestObjectsJson {
 					"loanAmount": 15000,
 					"monthlyPayment": 56,
 					"shouldRefinance": false,
+					"refinanceAmount": 0,
 					"existingLoanType": "STUDENT_LOAN",
 					"responsibility": "MAIN_APPLICANT"
 				}
@@ -166,6 +168,7 @@ object TestObjectsJson {
 					"loanAmount": 4000,
 					"monthlyPayment": 22,
 					"shouldRefinance": true,
+					"refinanceAmount": 4000,
 					"existingLoanType": "CAR_LOAN",
 					"responsibility": "SHARED"
 				},
@@ -173,6 +176,7 @@ object TestObjectsJson {
 					"loanAmount": 15000,
 					"monthlyPayment": 56,
 					"shouldRefinance": false,
+					"refinanceAmount": 0,
 					"existingLoanType": "STUDENT_LOAN",
 					"responsibility": "MAIN_APPLICANT"
 				}
@@ -258,6 +262,7 @@ object TestObjectsJson {
 					"loanAmount": 4000,
 					"monthlyPayment": 22,
 					"shouldRefinance": true,
+					"refinanceAmount": 4000,
 					"existingLoanType": "CAR_LOAN",
 					"responsibility": "SHARED"
 				},
@@ -265,6 +270,7 @@ object TestObjectsJson {
 					"loanAmount": 15000,
 					"monthlyPayment": 56,
 					"shouldRefinance": false,
+					"refinanceAmount": 0,
 					"existingLoanType": "STUDENT_LOAN",
 					"responsibility": "MAIN_APPLICANT"
 				}

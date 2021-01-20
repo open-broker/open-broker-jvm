@@ -62,8 +62,8 @@ class SerializationTest {
         val app = Application(
             applicant = applicant,
             existingLoans = listOf(
-                ExistingLoan(4000, 22, true, ExistingLoanType.CAR_LOAN, Responsibility.SHARED),
-                ExistingLoan(15_000, 56, false, ExistingLoanType.STUDENT_LOAN, Responsibility.MAIN_APPLICANT)
+                ExistingLoan(4000, 22, true, 4000, ExistingLoanType.CAR_LOAN, Responsibility.SHARED),
+                ExistingLoan(15_000, 56, false, 0, ExistingLoanType.STUDENT_LOAN, Responsibility.MAIN_APPLICANT)
             ),
             loanAmount = 20_000,
             termMonths = 24,
