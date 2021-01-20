@@ -6,6 +6,7 @@ data class ExistingLoan(
     val loanAmount: Int,
     val monthlyPayment: Int,
     val shouldRefinance: Boolean,
+    val refinanceAmount: Int? = null,
     val existingLoanType: ExistingLoanType,
     val responsibility: Responsibility
 ) {
