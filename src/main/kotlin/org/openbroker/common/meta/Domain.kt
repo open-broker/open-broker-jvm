@@ -2,7 +2,8 @@ package org.openbroker.common.meta
 
 enum class Domain {
     PrivateUnsecuredLoan,
-    Mortgage;
+    Mortgage,
+    Fault;
 
     companion object {
         fun fromEventType(eventType: String): Domain {
