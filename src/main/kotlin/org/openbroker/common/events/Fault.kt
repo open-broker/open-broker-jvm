@@ -17,6 +17,6 @@ enum class Fault(
         override fun values(): Array<out EventType<ErrorEvent>> =
             Fault.values()
         override val qualifier: EventTypeQualifier =
-            EventTypeQualifier("v0", "common", "Fault") //todo check domain
+            EventTypeQualifier("v0", "common", "Fault")
     }
 }
