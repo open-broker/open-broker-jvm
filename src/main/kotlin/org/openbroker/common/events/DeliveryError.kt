@@ -7,9 +7,9 @@ import org.openbroker.common.model.Reference
  */
 
 data class DeliveryError constructor(
-    override val brokerReference: Reference, //todo could be null
     val eventType: String? = null,
     val eventID: String? = null,
     val message: String? = null,
-    val shouldRetry: Boolean? = null
+    val shouldRetry: Boolean? = null,
+    override val brokerReference: Reference = Reference("","stub.stub")
 ) : ErrorEvent

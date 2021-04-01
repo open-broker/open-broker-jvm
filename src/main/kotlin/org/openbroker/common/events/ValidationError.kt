@@ -7,10 +7,10 @@ import org.openbroker.common.model.Reference
  */
 
 data class ValidationError constructor(
-    override val brokerReference: Reference, //todo could be null
     val eventType: String? = null,
     val eventID: String? = null,
     val originalMessage: String? = null,
     val message: String? = null,
-    val origin: String? = null
+    val origin: String? = null,
+    override val brokerReference: Reference = Reference("","stub.stub")
 ) : ErrorEvent
