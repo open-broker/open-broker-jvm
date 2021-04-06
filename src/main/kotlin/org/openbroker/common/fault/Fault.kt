@@ -1,5 +1,8 @@
-package org.openbroker.common.events
+package org.openbroker.common.fault
 
+import org.openbroker.common.fault.events.DeliveryError
+import org.openbroker.common.fault.events.ErrorEvent
+import org.openbroker.common.fault.events.ValidationError
 import org.openbroker.common.meta.EventType
 import org.openbroker.common.meta.EventTypeFactory
 import org.openbroker.common.meta.EventTypeQualifier

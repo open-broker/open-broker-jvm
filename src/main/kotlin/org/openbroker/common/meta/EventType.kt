@@ -1,7 +1,7 @@
 package org.openbroker.common.meta
 
 import org.openbroker.common.OpenBrokerEvent
-import org.openbroker.common.events.Fault
+import org.openbroker.common.fault.Fault
 import org.openbroker.no.mortgage.MortgageNorway
 import org.openbroker.no.privateunsecuredloan.PrivateUnsecuredLoanNorway
 import org.openbroker.se.mortgage.MortgageSweden

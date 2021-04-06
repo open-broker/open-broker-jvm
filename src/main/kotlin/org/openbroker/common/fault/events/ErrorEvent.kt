@@ -1,4 +1,4 @@
-package org.openbroker.common.events
+package org.openbroker.common.fault.events
 
 import org.openbroker.common.OpenBrokerEvent
 
