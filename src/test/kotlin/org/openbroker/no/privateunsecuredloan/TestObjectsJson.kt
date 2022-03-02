@@ -5,6 +5,7 @@ object TestObjectsJson {
         """
         {
             "ssn": "31128012345",
+            "customerId": "abc145",
             "phone": "+4740123456",
             "secondaryPhone": [],
             "emailAddress": "example@example.com",
@@ -55,6 +56,7 @@ object TestObjectsJson {
         """
         {
             "ssn": "31127012345",
+            "customerId": "abc146",
             "phone": "+4740123456",
             "secondaryPhone": [],
             "emailAddress": "example@example.com",

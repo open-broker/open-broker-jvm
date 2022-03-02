@@ -5,6 +5,7 @@ object TestObjectsJson {
         """
         {
             "ssn": "198712167249",
+            "customerId": "abc145",
             "phone": "+46705431052",
             "secondaryPhone": [],
             "emailAddress": "anton@zensum.se",
@@ -50,6 +51,7 @@ object TestObjectsJson {
         """
         {
             "ssn": "198012167241",
+            "customerId": "abc145",
             "phone": "+46705431052",
             "secondaryPhone": [],
             "emailAddress": "simon@zensum.se",
@@ -217,6 +219,7 @@ object TestObjectsJson {
 		"application": {
 			"applicant": {
                 "ssn": "198712167249",
+                "customerId": "abc145",
                 "phone": "+46705431052",
                 "secondaryPhone": [],
                 "emailAddress": "anton@zensum.se",

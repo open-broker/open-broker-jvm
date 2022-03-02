@@ -32,6 +32,7 @@ object TestObjectsKotlin {
                 Application(
                     applicant = Applicant(
                         ssn = "198206172215",
+                        customerId = "abc145",
                         phone = null,
                         secondaryPhone = emptyList(),
                         emailAddress = "anton@zensum.se",
@@ -149,6 +150,7 @@ object TestObjectsKotlin {
                 Application(
                     applicant = Applicant(
                         ssn = "198711016819",
+                        customerId = "abc145",
                         phone = "+46735711157",
                         secondaryPhone = emptyList(),
                         emailAddress = "anton@zensum.se",
