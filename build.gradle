@@ -23,7 +23,6 @@ apply from: "jar.gradle"
 
 repositories {
     mavenCentral()
-    maven { url "https://dl.bintray.com/kotlin/kotlinx" }
     maven { url "https://jitpack.io" }
 }
 
