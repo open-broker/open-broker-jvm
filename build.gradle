@@ -22,9 +22,7 @@ project.ext {
 apply from: "jar.gradle"
 
 repositories {
-    jcenter()
     mavenCentral()
-    maven { url "https://dl.bintray.com/kotlin/kotlinx" }
     maven { url "https://jitpack.io" }
 }
 
@@ -65,7 +63,7 @@ test {
     useJUnitPlatform()
 }
 
-task wrapper(type: Wrapper) {
+wrapper{
     description = 'Generates gradlew[.bat] scripts for faster execution'
-    gradleVersion = '4.10.2'
+    gradleVersion = '6.8'
 }

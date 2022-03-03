@@ -9,6 +9,7 @@ import org.openbroker.no.model.MaritalStatus
 
 data class Applicant @JvmOverloads constructor(
     val ssn: String,
+    val customerId: String,
     val phone: String? = null,
     val secondaryPhone: List<String> = emptyList(),
     val emailAddress: String? = null,
@@ -87,6 +88,7 @@ data class Applicant @JvmOverloads constructor(
         require(citizenships.isNotEmpty())
         require(countriesOfResidence.isNotEmpty())
         require(taxResidentOf.isNotEmpty())
+        require(customerId.isNotEmpty())
     }
 
 }

@@ -28,6 +28,7 @@ class SerializationTest {
     fun testSerializeOpenBrokerApplicationCreated() {
         val applicant = Applicant(
             ssn = "31128012345",
+            customerId = "abc145",
             phone = null,
             secondaryPhone = emptyList(),
             employmentStatus = EmploymentStatus.PUBLIC_SECTOR,

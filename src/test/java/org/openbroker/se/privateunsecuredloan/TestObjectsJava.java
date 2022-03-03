@@ -24,6 +24,7 @@ class TestObjectsJava {
             new Application(
                 new Applicant(
                     "198012311234",
+                    "abc145",
                 null,
                 new ArrayList<>(),
                 null,
