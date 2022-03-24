@@ -9,6 +9,7 @@ data class OfferAccepted @JvmOverloads constructor(
     val offerId: Reference? = null,
     val bankAccount: String? = null,
     val requestedCredit: Int? = null,
+    val termMonths: Int? = null,
     val ssn: String? = null,
     val ssnCoapplicant: String? = null,
     val emailAddress: String? = null,
@@ -16,6 +17,7 @@ data class OfferAccepted @JvmOverloads constructor(
 ) : PrivateUnsecuredLoanEvent {
     init {
         requestedCredit.requireMin(1, "requestedCredit")
+        termMonths.requireMin(1, "termMonths")
 
         val ssnRegex = Regex("^[0-9]{11}$")
         ssn?.let {
