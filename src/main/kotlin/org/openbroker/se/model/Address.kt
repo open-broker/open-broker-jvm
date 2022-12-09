@@ -9,14 +9,12 @@ data class Address(
     val careOf: String? = null
 ) {
     init {
-        require(firstName.isNotBlank())
-        require(lastName.isNotBlank())
-        require(address.isNotBlank())
-        require(city.isNotBlank())
-        require(postalCode.matches(postalCodeRegex)) {
-            "Invalid postal code: '$postalCode'"
-        }
-        careOf?.let { require(it.isNotBlank()) }
+        require(firstName.isNotBlank()) { "firstName cannot be blank" }
+        require(lastName.isNotBlank()) { "lastName cannot be blank" }
+        require(address.isNotBlank()) { "address cannot be blank" }
+        require(city.isNotBlank()) { "city cannot be blank" }
+        require(postalCode.matches(postalCodeRegex)) { "postalCode does not match a regex for postal code" }
+        careOf?.let { require(it.isNotBlank()) { "careOf cannot be blank" } }
     }
 
     companion object {

@@ -1,6 +1,7 @@
 package org.openbroker.no.privateunsecuredloan.model
 
 import org.openbroker.common.obfuscateDigits
+import org.openbroker.common.requireInRange
 import org.openbroker.common.requireMin
 import org.openbroker.no.model.Address
 import org.openbroker.no.model.EmploymentStatus
@@ -60,18 +61,18 @@ data class Applicant @JvmOverloads constructor(
                 "Invalid employer phone number: '$it'"
             }
         }
-        require(employmentStatusSinceYear in 1900..3000)
-        require(employmentStatusSinceMonth in 1..12)
+        employmentStatusSinceYear.requireInRange(1900, 3000, "employmentStatusSinceYear")
+        employmentStatusSinceMonth.requireInRange(1, 12, "employmentStatusSinceMonth")
         employmentStatusUntilYear?.let {
-            require(it in 1900..3000)
+            it.requireInRange(1900, 3000, "employmentStatusUntilYear")
         }
         employmentStatusUntilMonth?.let {
-            require(it in 1..12)
+            it.requireInRange(1, 12, "employmentStatusUntilMonth")
         }
-        require(housingSinceYear in 1900..3000)
-        require(housingSinceMonth in 1..12)
-        require(dependentChildren in 0..15)
-        require(livedInCountrySinceYear in 1900..3000)
+        housingSinceYear.requireInRange(1900, 3000, "housingSinceYear")
+        housingSinceMonth.requireInRange(1, 12, "housingSinceMonth")
+        dependentChildren.requireInRange(0, 15, "dependentChildren")
+        livedInCountrySinceYear.requireInRange(1900, 3000, "livedInCountrySinceYear")
         childSupportReceivedMonthly.requireMin(0, "childSupportReceivedMonthly")
         rentReceivedMonthly.requireMin(0, "rentReceivedMonthly")
         otherIncomeReceivedMonthly.requireMin(0, "otherIncomeReceivedMonthly")
@@ -85,10 +86,10 @@ data class Applicant @JvmOverloads constructor(
                 "Invalid bank account: '${obfuscateDigits(bankAccount)}'"
             }
         }
-        require(citizenships.isNotEmpty())
-        require(countriesOfResidence.isNotEmpty())
-        require(taxResidentOf.isNotEmpty())
-        require(customerId.isNotEmpty())
+        require(citizenships.isNotEmpty()) { "citizenships cannot be empty" }
+        require(countriesOfResidence.isNotEmpty()) { "countriesOfResidence cannot be empty" }
+        require(taxResidentOf.isNotEmpty()) { "taxResidentOf cannot be empty" }
+        require(customerId.isNotEmpty()) { "customerId cannot be empty" }
     }
 
 }

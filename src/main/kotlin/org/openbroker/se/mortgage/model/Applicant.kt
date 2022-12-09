@@ -1,5 +1,6 @@
 package org.openbroker.se.mortgage.model
 
+import org.openbroker.common.requireInRange
 import org.openbroker.se.model.EmploymentStatus
 import org.openbroker.se.model.HousingType
 import org.openbroker.se.model.MaritalStatus
@@ -63,9 +64,9 @@ data class Applicant @JvmOverloads constructor(
             }
         }
 
-        require(employmentStatusSinceYear in 1900..3000)
-        require(employmentStatusSinceMonth in 1..12)
-        require(dependentChildren in 0..15)
+        employmentStatusSinceYear.requireInRange(1900, 3000, "employmentStatusSinceYear")
+        employmentStatusSinceMonth.requireInRange(1, 12, "employmentStatusSinceMonth")
+        dependentChildren.requireInRange(0, 15, "dependentChildren")
         monthlyRent.requireMin(0, "monthlyRent")
         monthlyNetIncome.requireMin(0, "monthlyIncome")
         monthlyGrossIncome.requireMin(0, "monthlyIncome")
@@ -73,21 +74,19 @@ data class Applicant @JvmOverloads constructor(
             "Monthly income after tax cannot be greater than monthly income before tax"
         }
 
-        sequenceOf(
-            childSupportPaid,
-            childSupportReceived,
-            childBenefitReceived,
-            studentBenefitReceived,
-            housingBenefitReceived,
-            welfareReceived,
-            pensionReceived,
-            dividendReceived,
-            otherReceived,
-            savingsCash,
-            savingsMutualFunds,
-            savingsStocks,
-            savingsOther
-        ).forEach { it.requireMin(0) }
+        childSupportPaid.requireMin(0, "childSupportPaid")
+        childSupportReceived.requireMin(0, "childSupportReceived")
+        childBenefitReceived.requireMin(0, "childBenefitReceived")
+        studentBenefitReceived.requireMin(0, "studentBenefitReceived")
+        housingBenefitReceived.requireMin(0, "housingBenefitReceived")
+        welfareReceived.requireMin(0, "welfareReceived")
+        pensionReceived.requireMin(0, "pensionReceived")
+        dividendReceived.requireMin(0, "dividendReceived")
+        otherReceived.requireMin(0, "otherReceived")
+        savingsCash.requireMin(0, "savingsCash")
+        savingsMutualFunds.requireMin(0, "savingsMutualFunds")
+        savingsStocks.requireMin(0, "savingsStocks")
+        savingsOther.requireMin(0, "savingsOther")
     }
 
     companion object {

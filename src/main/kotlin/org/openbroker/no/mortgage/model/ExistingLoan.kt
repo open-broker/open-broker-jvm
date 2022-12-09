@@ -14,6 +14,6 @@ data class ExistingLoan(
     init {
         loanAmount.requireMin(1, "loanAmount")
         monthlyPayment.requireMin(1, "monthlyPayment")
-        require(lender.isNotEmpty())
+        require(lender.isNotEmpty()) { "lender cannot be empty" }
     }
 }

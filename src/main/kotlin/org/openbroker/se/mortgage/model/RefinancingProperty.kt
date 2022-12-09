@@ -1,5 +1,6 @@
 package org.openbroker.se.mortgage.model
 
+import org.openbroker.common.requireInRange
 import org.openbroker.common.requireMin
 
 data class RefinancingProperty(
@@ -24,9 +25,7 @@ data class RefinancingProperty(
         require(interestRate.matches(interestRateRegex)) {
             "Value interestRate has invalid format: '$interestRate'"
         }
-        require(ownershipShare in 1..100) {
-            "Value for ownershipShare must be 1 <= 100, was $ownershipShare"
-        }
+        ownershipShare.requireInRange(1, 100, "ownershipShare")
     }
 
     companion object {

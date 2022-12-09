@@ -6,9 +6,9 @@ data class PropertyAddress(
     val postalCode: String
 ) {
     init {
-        require(streetAddress.isNotBlank())
-        require(city.isNotBlank())
-        require(postalCode.matches(postalCodeRegex))
+        require(streetAddress.isNotBlank()) { "streetAddress cannot be blank" }
+        require(city.isNotBlank()) { "city cannot be blank" }
+        require(postalCode.matches(postalCodeRegex)) { "postalCode does not match a regex for postal code" }
     }
 
     companion object {
