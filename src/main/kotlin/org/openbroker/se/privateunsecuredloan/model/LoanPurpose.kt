@@ -22,6 +22,30 @@ enum class LoanPurpose {
      */
     HOME_DOWNPAYMENT,
     /**
+     * To finance getting a driver's licence
+     */
+    DRIVERS_LICENSE,
+    /**
+     * To refinance or pay off overdue loans
+     */
+    DEBT_COLLECTION,
+    /**
+     * To finance moving to a different location, like different town
+     */
+    RELOCATION,
+    /**
+     * General consumption
+     */
+    CONSUMPTION,
+    /**
+     * To finance a new interior, like new kitchen, furniture
+     */
+    INTERIOR,
+    /**
+     * To finance a wedding
+     */
+    WEDDING,
+    /**
      * Home remodelling or renovation
      */
     HOME_REMODELLING,
