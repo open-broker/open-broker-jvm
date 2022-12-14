@@ -1,6 +1,7 @@
 package org.openbroker.common.meta
 
 import org.openbroker.common.OpenBrokerEvent
+import org.openbroker.common.requireMatchRegex
 
 const val NAME_SPACE: String = "org.open-broker"
 
@@ -14,7 +15,7 @@ data class EventTypeQualifier(
     val domain: String
 ) {
     init {
-        require(version.matches(Regex("^v\\d+$"))) { "Version '$version' does not match a regex for version" }
+        version.requireMatchRegex(Regex("^v\\d+$"), "version")
     }
 
     override fun toString(): String = "$NAME_SPACE.$version.$region.$domain"

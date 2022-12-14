@@ -1,14 +1,17 @@
 package org.openbroker.no.mortgage.model
 
+import org.openbroker.common.requireMatchRegex
+import org.openbroker.common.requireNotBlank
+
 data class PropertyAddress(
     val streetAddress: String,
     val city: String,
     val postalCode: String
 ) {
     init {
-        require(streetAddress.isNotBlank()) { "streetAddress cannot be blank" }
-        require(city.isNotBlank()) { "city cannot be blank" }
-        require(postalCode.matches(postalCodeRegex)) { "postalCode does not match a regex for postal code" }
+        streetAddress.requireNotBlank("streetAddress")
+        city.requireNotBlank("city")
+        postalCode.requireMatchRegex(postalCodeRegex, "postalCode")
     }
 
     companion object {

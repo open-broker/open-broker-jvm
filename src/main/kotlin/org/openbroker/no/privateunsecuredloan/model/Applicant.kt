@@ -1,7 +1,8 @@
 package org.openbroker.no.privateunsecuredloan.model
 
-import org.openbroker.common.obfuscateDigits
+import org.openbroker.common.*
 import org.openbroker.common.requireInRange
+import org.openbroker.common.requireMatchRegex
 import org.openbroker.common.requireMin
 import org.openbroker.no.model.Address
 import org.openbroker.no.model.EmploymentStatus
@@ -45,30 +46,17 @@ data class Applicant @JvmOverloads constructor(
 ) {
     init {
         val ssnRegex = Regex("^[0-9]{11}$")
-        require(ssn.matches(ssnRegex)) { "Invalid SSN: '${obfuscateDigits(ssn)}'" }
+        ssn.requireMatchRegex(ssnRegex, "ssn")
 
         val phoneRegex = Regex("^\\+[1-9][0-9]{1,14}\$")
-        phone?.let {
-            require(it.matches(phoneRegex)) {
-                "Invalid primary phone number: '$it'"
-            }
-        }
-        require(secondaryPhone.all { it.matches(phoneRegex) }) {
-            "Invalid secondary phone number in $secondaryPhone"
-        }
-        employerPhone?.let {
-            require(it.matches(phoneRegex)) {
-                "Invalid employer phone number: '$it'"
-            }
-        }
+        phone?.requireMatchRegex(phoneRegex, "phone")
+        secondaryPhone.requireAllMatchRegex(phoneRegex, "secondaryPhone")
+
+        employerPhone?.requireMatchRegex(phoneRegex, "employerPhone")
         employmentStatusSinceYear.requireInRange(1900, 3000, "employmentStatusSinceYear")
         employmentStatusSinceMonth.requireInRange(1, 12, "employmentStatusSinceMonth")
-        employmentStatusUntilYear?.let {
-            it.requireInRange(1900, 3000, "employmentStatusUntilYear")
-        }
-        employmentStatusUntilMonth?.let {
-            it.requireInRange(1, 12, "employmentStatusUntilMonth")
-        }
+        employmentStatusUntilYear?.requireInRange(1900, 3000, "employmentStatusUntilYear")
+        employmentStatusUntilMonth?.requireInRange(1, 12, "employmentStatusUntilMonth")
         housingSinceYear.requireInRange(1900, 3000, "housingSinceYear")
         housingSinceMonth.requireInRange(1, 12, "housingSinceMonth")
         dependentChildren.requireInRange(0, 15, "dependentChildren")
@@ -80,16 +68,13 @@ data class Applicant @JvmOverloads constructor(
         housingCostPerMonth.requireMin(0, "housingCostPerMonth")
         netMonthlyIncome.requireMin(0, "netMonthlyIncome")
         grossYearlyIncome.requireMin(0, "grossYearlyIncome")
+
         val bankAccountRegex = Regex("^\\d{11}$")
-        bankAccount?.let {
-            require(it.matches(bankAccountRegex)) {
-                "Invalid bank account: '${obfuscateDigits(bankAccount)}'"
-            }
-        }
-        require(citizenships.isNotEmpty()) { "citizenships cannot be empty" }
-        require(countriesOfResidence.isNotEmpty()) { "countriesOfResidence cannot be empty" }
-        require(taxResidentOf.isNotEmpty()) { "taxResidentOf cannot be empty" }
-        require(customerId.isNotEmpty()) { "customerId cannot be empty" }
+        bankAccount?.requireMatchRegex(bankAccountRegex, "bankAccount")
+        citizenships.requireNotEmpty("citizenships")
+        countriesOfResidence.requireNotEmpty("countriesOfResidence")
+        taxResidentOf.requireNotEmpty("taxResidentOf")
+        customerId.requireNotEmpty("customerId")
     }
 
 }

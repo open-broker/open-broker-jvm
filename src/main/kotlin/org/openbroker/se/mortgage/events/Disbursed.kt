@@ -1,6 +1,7 @@
 package org.openbroker.se.mortgage.events
 
 import org.openbroker.common.model.Reference
+import org.openbroker.common.requireMatchRegex
 import org.openbroker.common.requireMin
 
 /**
@@ -28,8 +29,6 @@ data class Disbursed(
 {
     init {
         amountDisbursed.requireMin(1, "amountDisbursed")
-        require(date.matches(Regex("\\d{4}-\\d{2}-\\d{2}"))) {
-            "Invalid date argument: '$date'"
-        }
+        date.requireMatchRegex(Regex("\\d{4}-\\d{2}-\\d{2}"), "date")
     }
 }

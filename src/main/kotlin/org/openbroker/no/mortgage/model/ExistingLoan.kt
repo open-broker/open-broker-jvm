@@ -1,6 +1,7 @@
 package org.openbroker.no.mortgage.model
 
 import org.openbroker.common.requireMin
+import org.openbroker.common.requireNotEmpty
 
 data class ExistingLoan(
     val loanAmount: Int,
@@ -14,6 +15,6 @@ data class ExistingLoan(
     init {
         loanAmount.requireMin(1, "loanAmount")
         monthlyPayment.requireMin(1, "monthlyPayment")
-        require(lender.isNotEmpty()) { "lender cannot be empty" }
+        lender.requireNotEmpty("lender")
     }
 }

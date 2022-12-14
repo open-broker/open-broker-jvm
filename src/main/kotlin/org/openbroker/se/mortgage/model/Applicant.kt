@@ -1,10 +1,13 @@
 package org.openbroker.se.mortgage.model
 
+import org.openbroker.common.*
+import org.openbroker.common.requireAllMatchRegex
 import org.openbroker.common.requireInRange
+import org.openbroker.common.requireMatchRegex
+import org.openbroker.common.requireMin
 import org.openbroker.se.model.EmploymentStatus
 import org.openbroker.se.model.HousingType
 import org.openbroker.se.model.MaritalStatus
-import org.openbroker.common.requireMin
 import org.openbroker.se.model.Address
 
 data class Applicant @JvmOverloads constructor(
@@ -42,27 +45,11 @@ data class Applicant @JvmOverloads constructor(
 ) {
 
     init {
-        require(ssn.matches(ssnRegex)) { "Invalid SSN" }
-
-        phone?.let {
-            require(it.matches(phoneRegex)) {
-                "Invalid primary phone number: '$it'"
-            }
-        }
-        require(secondaryPhone.all { it.matches(phoneRegex) }) {
-            "Invalid secondary phone number in $secondaryPhone"
-        }
-        employerPhone?.let {
-            require(it.matches(phoneRegex)) {
-                "Invalid employer phone number: '$it'"
-            }
-        }
-
-        emailAddress?.let {
-            require(it.matches(emailRegex)) {
-                "Invalid email: '$emailAddress'"
-            }
-        }
+        ssn.requireMatchRegex(ssnRegex, "ssn")
+        phone?.requireMatchRegex(phoneRegex, "phone")
+        secondaryPhone.requireAllMatchRegex(phoneRegex, "secondaryPhone")
+        employerPhone?.requireMatchRegex(phoneRegex, "employerPhone")
+        emailAddress?.requireMatchRegex(emailRegex, "emailAddress")
 
         employmentStatusSinceYear.requireInRange(1900, 3000, "employmentStatusSinceYear")
         employmentStatusSinceMonth.requireInRange(1, 12, "employmentStatusSinceMonth")
@@ -70,10 +57,7 @@ data class Applicant @JvmOverloads constructor(
         monthlyRent.requireMin(0, "monthlyRent")
         monthlyNetIncome.requireMin(0, "monthlyIncome")
         monthlyGrossIncome.requireMin(0, "monthlyIncome")
-        require(monthlyNetIncome <= monthlyGrossIncome) {
-            "Monthly income after tax cannot be greater than monthly income before tax"
-        }
-
+        monthlyNetIncome.requireLessThanOrEqual(monthlyGrossIncome, "monthlyGrossIncome", "monthlyNetIncome")
         childSupportPaid.requireMin(0, "childSupportPaid")
         childSupportReceived.requireMin(0, "childSupportReceived")
         childBenefitReceived.requireMin(0, "childBenefitReceived")
