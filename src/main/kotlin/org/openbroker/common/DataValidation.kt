@@ -17,7 +17,7 @@ internal fun Int?.requireInRange(min: Int, max: Int, propertyName: String) {
 
 internal fun Int.requireLessThanOrEqual(compareTo: Int, compareToPropertyName: String, propertyName: String) {
     require(this <= compareTo) {
-        "Value for $propertyName cannot be greater than value for $compareToPropertyName"
+        "Value for $propertyName: $this cannot be greater than value for $compareToPropertyName: $compareTo"
     }
 }
 
@@ -35,13 +35,21 @@ internal fun String.requireNotEmpty(propertyName: String) {
 
 internal fun String.requireMatchRegex(regex: Regex, propertyName: String) {
     require(this.matches(regex)) {
-        "$propertyName is in wrong format (does not match a regex)"
+        "Invalid $propertyName: $this, does not match regex"
     }
 }
 
 internal fun List<String>.requireAllMatchRegex(regex: Regex, propertyName: String) {
-    require(this.all { it.matches(regex) }) {
-        "$propertyName contains element that is in wrong format (does not match a regex)"
+    var allValid = true
+    val notValidElements: MutableList<String> = mutableListOf()
+    this.forEach {
+        if (!it.matches(regex)) {
+            allValid = false
+            notValidElements.add(it)
+        }
+    }
+    require(allValid) {
+        "Invalid element in $propertyName: ${notValidElements.joinToString { it }}, does not match regex"
     }
 }
 
