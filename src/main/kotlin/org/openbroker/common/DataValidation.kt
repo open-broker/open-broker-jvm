@@ -5,37 +5,37 @@ internal fun Int?.requireMin(min: Int, propertyName: String? = null) {
         return
     require(this >= min) {
         val descriptor: String = propertyName?.let { " '$it'" } ?: ""
-        "Value$descriptor must be at least $min, but was $this"
+        composeMessage("Value$descriptor must be at least $min. $propertyName: $this.")
     }
 }
 
-internal fun Int?.requireInRange(min: Int, max: Int, propertyName: String) {
+internal fun Int.requireInRange(min: Int, max: Int, propertyName: String) {
     require(this in min .. max) {
-        "Invalid $propertyName: $this, should be in range $min-$max"
+        composeMessage("Invalid $propertyName, should be in range $min-$max. $propertyName: $this.")
     }
 }
 
 internal fun Int.requireLessThanOrEqual(compareTo: Int, compareToPropertyName: String, propertyName: String) {
     require(this <= compareTo) {
-        "Value for $propertyName: $this cannot be greater than value for $compareToPropertyName: $compareTo"
+        composeMessage("Value for $propertyName cannot be greater than value for $compareToPropertyName. $propertyName: $this, $compareToPropertyName: $compareTo.")
     }
 }
 
 internal fun String.requireNotBlank(propertyName: String) {
     require(this.isNotBlank()) {
-        "$propertyName cannot be blank"
+        composeMessage("$propertyName cannot be blank.")
     }
 }
 
 internal fun String.requireNotEmpty(propertyName: String) {
     require(this.isNotEmpty()) {
-        "$propertyName cannot be empty"
+        composeMessage("$propertyName cannot be empty.")
     }
 }
 
 internal fun String.requireMatchRegex(regex: Regex, propertyName: String) {
     require(this.matches(regex)) {
-        "Invalid $propertyName: $this, does not match regex"
+        composeMessage("Invalid $propertyName value, does not match regex. $propertyName: $this.")
     }
 }
 
@@ -49,12 +49,16 @@ internal fun List<String>.requireAllMatchRegex(regex: Regex, propertyName: Strin
         }
     }
     require(allValid) {
-        "Invalid element in $propertyName: ${notValidElements.joinToString { it }}, does not match regex"
+        composeMessage("Invalid element in $propertyName, does not match regex. ${notValidElements.joinToString { "$propertyName: $it" }}.")
     }
 }
 
 internal fun <T> List<T>.requireNotEmpty(propertyName: String) {
     require(this.isNotEmpty()) {
-        "$propertyName cannot be empty"
+        composeMessage("$propertyName cannot be empty.")
     }
+}
+
+private fun composeMessage(message: String): String {
+    return "{\"message\": \"$message\"}"
 }
