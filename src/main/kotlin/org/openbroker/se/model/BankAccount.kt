@@ -1,6 +1,6 @@
 package org.openbroker.se.model
 
-import org.openbroker.common.obfuscateDigits
+import org.openbroker.common.requireMatchRegex
 
 private val clearingNumberRegex = Regex("^[1-9][0-9]{3,4}$")
 private val accountNumberRegex = Regex("^[0-9]{1,11}$")
@@ -23,11 +23,7 @@ data class BankAccount(
     val bankName: String? = null
 ) {
     init {
-        require(clearingNo.matches(clearingNumberRegex)) {
-            "Invalid clearing number with format '${obfuscateDigits(clearingNo)}'"
-        }
-        require(accountNo.matches(accountNumberRegex)) {
-            "Invalid account number with format '${obfuscateDigits(accountNo)}'"
-        }
+        clearingNo.requireMatchRegex(clearingNumberRegex, "clearingNo")
+        accountNo.requireMatchRegex(accountNumberRegex, "accountNo")
     }
 }

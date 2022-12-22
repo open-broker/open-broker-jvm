@@ -1,6 +1,7 @@
 package org.openbroker.no.privateunsecuredloan.events
 
 import org.openbroker.common.model.Reference
+import org.openbroker.common.requireLessThanOrEqual
 import org.openbroker.common.requireMin
 
 /**
@@ -25,9 +26,6 @@ data class Disbursed(
     init {
         amountDisbursed.requireMin(1, "amountDisbursed")
         amountBrokered.requireMin(0, "amountBrokered")
-
-        require(amountBrokered <= amountDisbursed) {
-            "amountBrokered ($amountBrokered) must be equal to or less than amountDisbursed ($amountDisbursed)"
-        }
+        amountBrokered.requireLessThanOrEqual(amountDisbursed, "amountDisbursed", "amountBrokered")
     }
 }

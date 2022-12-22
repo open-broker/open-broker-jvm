@@ -1,9 +1,13 @@
 package org.openbroker.se.mortgage.model
 
+import org.openbroker.common.*
+import org.openbroker.common.requireAllMatchRegex
+import org.openbroker.common.requireInRange
+import org.openbroker.common.requireMatchRegex
+import org.openbroker.common.requireMin
 import org.openbroker.se.model.EmploymentStatus
 import org.openbroker.se.model.HousingType
 import org.openbroker.se.model.MaritalStatus
-import org.openbroker.common.requireMin
 import org.openbroker.se.model.Address
 
 data class Applicant @JvmOverloads constructor(
@@ -41,53 +45,32 @@ data class Applicant @JvmOverloads constructor(
 ) {
 
     init {
-        require(ssn.matches(ssnRegex)) { "Invalid SSN" }
+        ssn.requireMatchRegex(ssnRegex, "ssn")
+        phone?.requireMatchRegex(phoneRegex, "phone")
+        secondaryPhone.requireAllMatchRegex(phoneRegex, "secondaryPhone")
+        employerPhone?.requireMatchRegex(phoneRegex, "employerPhone")
+        emailAddress?.requireMatchRegex(emailRegex, "emailAddress")
 
-        phone?.let {
-            require(it.matches(phoneRegex)) {
-                "Invalid primary phone number: '$it'"
-            }
-        }
-        require(secondaryPhone.all { it.matches(phoneRegex) }) {
-            "Invalid secondary phone number in $secondaryPhone"
-        }
-        employerPhone?.let {
-            require(it.matches(phoneRegex)) {
-                "Invalid employer phone number: '$it'"
-            }
-        }
-
-        emailAddress?.let {
-            require(it.matches(emailRegex)) {
-                "Invalid email: '$emailAddress'"
-            }
-        }
-
-        require(employmentStatusSinceYear in 1900..3000)
-        require(employmentStatusSinceMonth in 1..12)
-        require(dependentChildren in 0..15)
+        employmentStatusSinceYear.requireInRange(1900, 3000, "employmentStatusSinceYear")
+        employmentStatusSinceMonth.requireInRange(1, 12, "employmentStatusSinceMonth")
+        dependentChildren.requireInRange(0, 15, "dependentChildren")
         monthlyRent.requireMin(0, "monthlyRent")
         monthlyNetIncome.requireMin(0, "monthlyIncome")
         monthlyGrossIncome.requireMin(0, "monthlyIncome")
-        require(monthlyNetIncome <= monthlyGrossIncome) {
-            "Monthly income after tax cannot be greater than monthly income before tax"
-        }
-
-        sequenceOf(
-            childSupportPaid,
-            childSupportReceived,
-            childBenefitReceived,
-            studentBenefitReceived,
-            housingBenefitReceived,
-            welfareReceived,
-            pensionReceived,
-            dividendReceived,
-            otherReceived,
-            savingsCash,
-            savingsMutualFunds,
-            savingsStocks,
-            savingsOther
-        ).forEach { it.requireMin(0) }
+        monthlyNetIncome.requireLessThanOrEqual(monthlyGrossIncome, "monthlyGrossIncome", "monthlyNetIncome")
+        childSupportPaid.requireMin(0, "childSupportPaid")
+        childSupportReceived.requireMin(0, "childSupportReceived")
+        childBenefitReceived.requireMin(0, "childBenefitReceived")
+        studentBenefitReceived.requireMin(0, "studentBenefitReceived")
+        housingBenefitReceived.requireMin(0, "housingBenefitReceived")
+        welfareReceived.requireMin(0, "welfareReceived")
+        pensionReceived.requireMin(0, "pensionReceived")
+        dividendReceived.requireMin(0, "dividendReceived")
+        otherReceived.requireMin(0, "otherReceived")
+        savingsCash.requireMin(0, "savingsCash")
+        savingsMutualFunds.requireMin(0, "savingsMutualFunds")
+        savingsStocks.requireMin(0, "savingsStocks")
+        savingsOther.requireMin(0, "savingsOther")
     }
 
     companion object {

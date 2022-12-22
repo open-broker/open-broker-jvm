@@ -1,5 +1,6 @@
 package org.openbroker.se.mortgage.model
 
+import org.openbroker.common.requireMatchRegex
 import org.openbroker.common.requireMin
 
 data class Offer(
@@ -14,25 +15,12 @@ data class Offer(
     val comment: String? = null
 ) {
     init {
-        effectiveInterestRate?.let { rate ->
-            require(rate.matches(interestRateRegex)) {
-                "Bad format of effective interest rate: '$rate'"
-            }
-        }
-
-        require(nominalInterestRate.matches(interestRateRegex)) {
-            "Bad format of nominal interest rate: '$nominalInterestRate'"
-        }
-
+        effectiveInterestRate?.requireMatchRegex(interestRateRegex, "effectiveInterestRate")
+        nominalInterestRate.requireMatchRegex(interestRateRegex, "nominalInterestRate")
         arrangementFee.requireMin(0, "arrangementFee")
         termFee.requireMin(0, "termFee")
         invoiceFee.requireMin(0, "invoiceFee")
-
-        expires?.let {
-            require(it.matches(iso8601dateRegex)) {
-                "Invalid expires argument: '$it'"
-            }
-        }
+        expires?.requireMatchRegex(iso8601dateRegex, "expires")
     }
 
     companion object {

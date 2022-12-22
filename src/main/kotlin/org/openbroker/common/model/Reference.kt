@@ -1,5 +1,7 @@
 package org.openbroker.common.model
 
+import org.openbroker.common.requireMatchRegex
+import org.openbroker.common.requireNotBlank
 import java.nio.charset.Charset
 
 internal val issuerRegex = Regex("^[a-zA-Z0-9]+\\.(([a-zA-Z0-9_-])|([a-zA-Z0-9_-]\\.[a-zA-Z0-9_-]))+\$")
@@ -22,11 +24,8 @@ data class Reference(
     val issuer: String
 ) {
     init {
-        require(issuer.matches(issuerRegex)) {
-            "Issuer '$issuer' does not match regex for issuer"
-        }
-
-        require(id.isNotBlank()) { "id in reference must not be blank" }
+        issuer.requireMatchRegex(issuerRegex, "issuer")
+        id.requireNotBlank("id")
     }
 
     /**

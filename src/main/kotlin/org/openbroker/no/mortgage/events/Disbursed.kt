@@ -1,6 +1,8 @@
 package org.openbroker.no.mortgage.events
 
 import org.openbroker.common.model.Reference
+import org.openbroker.common.requireLessThanOrEqual
+import org.openbroker.common.requireMatchRegex
 import org.openbroker.common.requireMin
 
 /**
@@ -30,13 +32,7 @@ data class Disbursed(
     init {
         amountDisbursed.requireMin(1, "amountDisbursed")
         amountBrokered.requireMin(0, "amountBrokered")
-
-        require(amountBrokered <= amountDisbursed) {
-            "amountBrokered ($amountBrokered) must be equal to or less than amountDisbursed ($amountDisbursed)"
-        }
-
-        require(date.matches(Regex("\\d{4}-\\d{2}-\\d{2}"))) {
-            "Invalid date argument: '$date'"
-        }
+        amountBrokered.requireLessThanOrEqual(amountDisbursed, "amountDisbursed", "amountBrokered")
+        date.requireMatchRegex(Regex("\\d{4}-\\d{2}-\\d{2}"), "date")
     }
 }

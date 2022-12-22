@@ -1,5 +1,9 @@
 package org.openbroker.se.privateunsecuredloan.model
 
+import org.openbroker.common.*
+import org.openbroker.common.requireAllMatchRegex
+import org.openbroker.common.requireInRange
+import org.openbroker.common.requireMatchRegex
 import org.openbroker.common.requireMin
 import org.openbroker.se.model.*
 
@@ -33,40 +37,25 @@ data class Applicant @JvmOverloads constructor(
 
     init {
         val ssnRegex = Regex("^[0-9]{12}$")
-        require(ssn.matches(ssnRegex)) { "Invalid SSN" }
+        ssn.requireMatchRegex(ssnRegex, "ssn")
 
         val phoneRegex = Regex("^\\+[1-9][0-9]{1,14}\$")
-        phone?.let {
-            require(it.matches(phoneRegex)) {
-                "Invalid primary phone number: '$it'"
-            }
-        }
-        require(secondaryPhone.all { it.matches(phoneRegex) }) {
-            "Invalid secondary phone number in $secondaryPhone"
-        }
-        employerPhone?.let {
-            require(it.matches(phoneRegex)) {
-                "Invalid employer phone number: '$it'"
-            }
-        }
+        phone?.requireMatchRegex(phoneRegex, "phone")
+        secondaryPhone.requireAllMatchRegex(phoneRegex, "secondaryPhone")
+        employerPhone?.requireMatchRegex(phoneRegex, "employerPhone")
 
-        require(employmentStatusSinceYear in 1900..3000)
-        require(employmentStatusSinceMonth in 1..12)
-        employmentStatusUntilYear?.let {
-            require(it in 1900..3000)
-        }
-        employmentStatusUntilMonth?.let {
-            require(it in 1..12)
-        }
-        require(dependentChildren in 0..15)
+        employmentStatusSinceYear.requireInRange(1900, 3000, "employmentStatusSinceYear")
+        employmentStatusSinceMonth.requireInRange(1, 12, "employmentStatusSinceMonth")
+        employmentStatusUntilYear?.requireInRange(1900, 3000, "employmentStatusUntilYear")
+        employmentStatusUntilMonth?.requireInRange(1, 12, "employmentStatusUntilMonth")
+        dependentChildren.requireInRange(0, 15, "dependentChildren")
         housingCostPerMonth.requireMin(0, "housingCostPerMonth")
         monthlyIncome.requireMin(0, "monthlyIncome")
         childSupportReceivedMonthly.requireMin(0, "childSupportReceivedMonthly")
         childSupportPaidMonthly.requireMin(0, "childSupportPaidMonthly")
-
-        require(citizenships.isNotEmpty())
-        require(countriesOfResidence.isNotEmpty())
-        require(taxResidentOf.isNotEmpty())
-        require(customerId.isNotEmpty())
+        citizenships.requireNotEmpty("citizenships")
+        countriesOfResidence.requireNotEmpty("countriesOfResidence")
+        taxResidentOf.requireNotEmpty("taxResidentOf")
+        customerId.requireNotEmpty("customerId")
     }
 }

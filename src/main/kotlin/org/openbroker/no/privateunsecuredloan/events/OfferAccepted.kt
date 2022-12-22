@@ -2,6 +2,7 @@ package org.openbroker.no.privateunsecuredloan.events
 
 import org.openbroker.common.model.Reference
 import org.openbroker.common.obfuscateDigits
+import org.openbroker.common.requireMatchRegex
 import org.openbroker.common.requireMin
 
 data class OfferAccepted @JvmOverloads constructor(
@@ -20,16 +21,8 @@ data class OfferAccepted @JvmOverloads constructor(
         termMonths.requireMin(1, "termMonths")
 
         val ssnRegex = Regex("^[0-9]{11}$")
-        ssn?.let {
-            require(it.matches(ssnRegex)) {
-                "Invalid applicant's SSN: '${obfuscateDigits(it)}'"
-            }
-        }
-        ssnCoapplicant?.let {
-            require(it.matches(ssnRegex)) {
-                "Invalid co-applicant's SSN: '${obfuscateDigits(it)}'"
-            }
-        }
+        ssn?.requireMatchRegex(ssnRegex, "ssn")
+        ssnCoapplicant?.requireMatchRegex(ssnRegex, "ssnCoapplicant")
 
     }
 }

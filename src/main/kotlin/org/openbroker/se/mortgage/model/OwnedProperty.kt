@@ -1,5 +1,6 @@
 package org.openbroker.se.mortgage.model
 
+import org.openbroker.common.requireInRange
 import org.openbroker.common.requireMin
 
 data class OwnedProperty(
@@ -11,8 +12,6 @@ data class OwnedProperty(
     init {
         existingMortgage.requireMin(0, "existingMortgage")
         monthlyCost.requireMin(0, "monthlyCost")
-        require(ownershipShare in 1..100) {
-            "Value for ownershipShare must be 1 <= 100, was $ownershipShare"
-        }
+        ownershipShare.requireInRange(1, 100, "ownershipShare")
     }
 }

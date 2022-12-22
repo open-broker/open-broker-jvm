@@ -1,5 +1,8 @@
 package org.openbroker.no.model
 
+import org.openbroker.common.requireMatchRegex
+import org.openbroker.common.requireNotBlank
+
 data class Address(
     val firstName: String,
     val lastName: String,
@@ -9,14 +12,12 @@ data class Address(
     val careOf: String? = null
 ) {
     init {
-        require(firstName.isNotBlank())
-        require(lastName.isNotBlank())
-        require(address.isNotBlank())
-        require(city.isNotBlank())
-        require(postalCode.matches(postalCodeRegex)) {
-            "Invalid postal code: '$postalCode'"
-        }
-        careOf?.let { require(it.isNotBlank()) }
+        firstName.requireNotBlank("firstName")
+        lastName.requireNotBlank("lastName")
+        address.requireNotBlank("address")
+        city.requireNotBlank("city")
+        postalCode.requireMatchRegex(postalCodeRegex, "postalCode")
+        careOf?.requireNotBlank("careOf")
     }
 
     companion object {

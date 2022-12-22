@@ -1,6 +1,7 @@
 package org.openbroker.common.meta
 
 import org.openbroker.common.OpenBrokerEvent
+import org.openbroker.common.requireMatchRegex
 
 const val NAME_SPACE: String = "org.open-broker"
 
@@ -14,7 +15,7 @@ data class EventTypeQualifier(
     val domain: String
 ) {
     init {
-        require(version.matches(Regex("^v\\d+$")))
+        version.requireMatchRegex(Regex("^v\\d+$"), "version")
     }
 
     override fun toString(): String = "$NAME_SPACE.$version.$region.$domain"
@@ -26,7 +27,7 @@ data class EventTypeQualifier(
         fun fromEvent(eventType: String): EventTypeQualifier {
             require(eventType.startsWith(NAME_SPACE)) { "Illegal event type: $eventType" }
             val parts: List<String> = eventType.removePrefix("$NAME_SPACE.").split(".")
-            require(parts.size >= 3)
+            require(parts.size >= 3) { "Invalid eventType format: $eventType" }
             val domain = Domain.fromEventType(eventType)
             return EventTypeQualifier(
                 version = parts[0],
@@ -64,7 +65,7 @@ data class QualifiedName internal constructor(
         fun fromString(
             string: String
         ): QualifiedName {
-            require(string.startsWith(NAME_SPACE))
+            require(string.startsWith(NAME_SPACE)) { "Name should start with: $NAME_SPACE" }
             val parts: List<String> = string.split(Regex("\\."))
             require(parts.size == 5){ "Invalid format: $string" }
             val event: String = parts[4]

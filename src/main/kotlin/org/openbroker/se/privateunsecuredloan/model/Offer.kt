@@ -1,6 +1,9 @@
 package org.openbroker.se.privateunsecuredloan.model
 
 import org.openbroker.common.model.AmortizationType
+import org.openbroker.common.requireInRange
+import org.openbroker.common.requireLessThanOrEqual
+import org.openbroker.common.requireMatchRegex
 import org.openbroker.common.requireMin
 
 data class Offer(
@@ -26,24 +29,14 @@ data class Offer(
 ) {
     init {
         val interestRateRegex = Regex("^[0-9]+(.[0-9]+)?$")
-
-        require(effectiveInterestRate.matches(interestRateRegex)) {
-            "Bad format of effective interest rate: '$effectiveInterestRate'"
-        }
-
-        require(nominalInterestRate.matches(interestRateRegex)) {
-            "Bad format of nominal interest rate: '$nominalInterestRate'"
-        }
+        effectiveInterestRate.requireMatchRegex(interestRateRegex, "effectiveInterestRate")
+        nominalInterestRate.requireMatchRegex(interestRateRegex, "nominalInterestRate")
 
         minOfferedCredit.requireMin(1, "minOfferedCredit")
         offeredCredit.requireMin(1, "offeredCredit")
         maxOfferedCredit.requireMin(1, "maxOfferedCredit")
-
-        require(minOfferedCredit <= maxOfferedCredit) { "minOfferedCredit cannot be greater than maxOfferedCredit" }
-        require(offeredCredit in minOfferedCredit..maxOfferedCredit) {
-            "offeredCredit must be within the range of minOfferedCredit and maxOfferedCredit"
-        }
-
+        minOfferedCredit.requireLessThanOrEqual(maxOfferedCredit, "maxOfferedCredit", "minOfferedCredit")
+        offeredCredit.requireInRange(minOfferedCredit, maxOfferedCredit, "offeredCredit")
         mustRefinance.requireMin(0, "mustRefinance")
         arrangementFee.requireMin(0, "arrangementFee")
         termFee.requireMin(0, "termFee")

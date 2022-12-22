@@ -1,6 +1,8 @@
 package org.openbroker.no.mortgage.model
 
 import org.openbroker.common.model.issuerRegex
+import org.openbroker.common.requireLessThanOrEqual
+import org.openbroker.common.requireMatchRegex
 import org.openbroker.common.requireMin
 
 data class Application @JvmOverloads constructor(
@@ -52,13 +54,9 @@ data class Application @JvmOverloads constructor(
         loanAmount.requireMin(1, "loanAmount")
         termYears.requireMin(1, "termYears")
         val refinanceAmount: Int = refinanceAmount()
-        require(refinanceAmount <= loanAmount) {
-            "refinanceAmount ($refinanceAmount) may not be greater than loanAmount ($loanAmount)."
-        }
+        refinanceAmount.requireLessThanOrEqual(loanAmount, "loanAmount", "refinanceAmount")
         extensions?.keys?.forEach { key ->
-            require(key.matches(issuerRegex)) {
-                "Key for extension is not a valid format: '$key'"
-            }
+            key.requireMatchRegex(issuerRegex, "Key for extension")
         }
     }
 

@@ -1,5 +1,8 @@
 package org.openbroker.se.mortgage.model
 
+import org.openbroker.common.requireMatchRegex
+import org.openbroker.common.requireNotBlank
+
 data class PropertyAddress(
     val streetAddress: String,
     val city: String,
@@ -7,10 +10,10 @@ data class PropertyAddress(
     val apartmentCode: String
 ) {
     init {
-    	require(streetAddress.isNotBlank())
-        require(city.isNotBlank())
-        require(postalCode.matches(postalCodeRegex))
-        require(apartmentCode.matches(apartmentCodeRegex))
+        streetAddress.requireNotBlank("streetAddress")
+        city.requireNotBlank("city")
+        postalCode.requireMatchRegex(postalCodeRegex, "postalCode")
+        apartmentCode.requireMatchRegex(apartmentCodeRegex, "apartmentCode")
     }
 
     companion object {
