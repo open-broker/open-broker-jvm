@@ -10,9 +10,33 @@ enum class LoanPurpose {
      */
     HOME_REMODELLING,
     /**
+     * To finance a downpayment for a loan
+     */
+    HOME_DOWNPAYMENT,
+    /**
      * To finance health-care cost
      */
     HEALTHCARE_EXPENSES,
+    /**
+     * To finance costs relating to a divorce
+     */
+    DIVORCE_PROCEEDINGS,
+    /**
+     * To finance getting a driver's licence
+     */
+    DRIVERS_LICENSE,
+    /**
+     * To refinance or pay off overdue loans
+     */
+    DEBT_COLLECTION,
+    /**
+     * General consumption
+     */
+    CONSUMPTION,
+    /**
+     * To finance moving to a different location, like different town
+     */
+    RELOCATION,
     /**
      * To finance an investment
      */
@@ -21,6 +45,14 @@ enum class LoanPurpose {
      * To finance education of some kind
      */
     EDUCATION,
+    /**
+     * To finance a new interior, like new kitchen, furniture
+     */
+    INTERIOR,
+    /**
+     * To finance a wedding
+     */
+    WEDDING,
     /**
      * To finance a vacation or other travel expenses
      */
