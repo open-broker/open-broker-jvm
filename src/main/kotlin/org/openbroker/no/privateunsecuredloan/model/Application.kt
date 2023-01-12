@@ -51,8 +51,5 @@ data class Application @JvmOverloads constructor(
         refinanceAmount.requireMin(0, "refinanceAmount")
         termMonths.requireMin(1, "termMonths")
         refinanceAmount.requireLessThanOrEqual(loanAmount, "loanAmount", "refinanceAmount")
-        extensions?.keys?.forEach { key ->
-            key.requireMatchRegex(issuerRegex, "Key for extension")
-        }
     }
 }
