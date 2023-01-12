@@ -55,9 +55,6 @@ data class Application @JvmOverloads constructor(
         termYears.requireMin(1, "termYears")
         val refinanceAmount: Int = refinanceAmount()
         refinanceAmount.requireLessThanOrEqual(loanAmount, "loanAmount", "refinanceAmount")
-        extensions?.keys?.forEach { key ->
-            key.requireMatchRegex(issuerRegex, "Key for extension")
-        }
     }
 
     /**
