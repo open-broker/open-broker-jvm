@@ -1,8 +1,6 @@
 package org.openbroker.no.mortgage.model
 
-import org.openbroker.common.model.issuerRegex
 import org.openbroker.common.requireLessThanOrEqual
-import org.openbroker.common.requireMatchRegex
 import org.openbroker.common.requireMin
 
 data class Application @JvmOverloads constructor(
