@@ -1,8 +1,6 @@
 package org.openbroker.se.privateunsecuredloan.model
 
-import org.openbroker.common.model.issuerRegex
 import org.openbroker.common.requireLessThanOrEqual
-import org.openbroker.common.requireMatchRegex
 import org.openbroker.common.requireMin
 
 data class Application @JvmOverloads constructor(
@@ -51,8 +49,5 @@ data class Application @JvmOverloads constructor(
         refinanceAmount.requireMin(0, "refinanceAmount")
         termMonths.requireMin(1, "termMonths")
         refinanceAmount.requireLessThanOrEqual(loanAmount, "loanAmount", "refinanceAmount")
-        extensions?.keys?.forEach { key ->
-            key.requireMatchRegex(issuerRegex, "Key for extension")
-        }
     }
 }

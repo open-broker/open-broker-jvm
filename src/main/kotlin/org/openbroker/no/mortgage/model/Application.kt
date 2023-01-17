@@ -1,8 +1,6 @@
 package org.openbroker.no.mortgage.model
 
-import org.openbroker.common.model.issuerRegex
 import org.openbroker.common.requireLessThanOrEqual
-import org.openbroker.common.requireMatchRegex
 import org.openbroker.common.requireMin
 
 data class Application @JvmOverloads constructor(
@@ -55,9 +53,6 @@ data class Application @JvmOverloads constructor(
         termYears.requireMin(1, "termYears")
         val refinanceAmount: Int = refinanceAmount()
         refinanceAmount.requireLessThanOrEqual(loanAmount, "loanAmount", "refinanceAmount")
-        extensions?.keys?.forEach { key ->
-            key.requireMatchRegex(issuerRegex, "Key for extension")
-        }
     }
 
     /**
