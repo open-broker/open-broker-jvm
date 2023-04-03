@@ -29,8 +29,8 @@ data class Applicant @JvmOverloads constructor(
     val childSupportPaidMonthly: Int? = null,
     val paymentRemark: Boolean,
     val housingType: HousingType,
-    val housingSinceYear: Int,
-    val housingSinceMonth: Int,
+    val housingSinceYear: Int? = null,
+    val housingSinceMonth: Int? = null,
     val housingCostPerMonth: Int,
     val netMonthlyIncome: Int,
     val grossYearlyIncome: Int,
@@ -38,10 +38,10 @@ data class Applicant @JvmOverloads constructor(
     val maritalStatus: MaritalStatus,
     val bankAccount: String? = null,
     val citizenships: List<String>,
-    val livedInCountrySinceYear: Int,
+    val livedInCountrySinceYear: Int? = null,
     val countriesOfResidence: List<String>,
     val taxResidentOf: List<String>,
-    val education: Education,
+    val education: Education? = null,
     val tentativeAddress: Address? = null
 ) {
     init {
@@ -57,10 +57,10 @@ data class Applicant @JvmOverloads constructor(
         employmentStatusSinceMonth.requireInRange(1, 12, "employmentStatusSinceMonth")
         employmentStatusUntilYear?.requireInRange(1900, 3000, "employmentStatusUntilYear")
         employmentStatusUntilMonth?.requireInRange(1, 12, "employmentStatusUntilMonth")
-        housingSinceYear.requireInRange(1900, 3000, "housingSinceYear")
-        housingSinceMonth.requireInRange(1, 12, "housingSinceMonth")
+        housingSinceYear?.requireInRange(1900, 3000, "housingSinceYear")
+        housingSinceMonth?.requireInRange(1, 12, "housingSinceMonth")
         dependentChildren.requireInRange(0, 15, "dependentChildren")
-        livedInCountrySinceYear.requireInRange(1900, 3000, "livedInCountrySinceYear")
+        livedInCountrySinceYear?.requireInRange(1900, 3000, "livedInCountrySinceYear")
         childSupportReceivedMonthly.requireMin(0, "childSupportReceivedMonthly")
         rentReceivedMonthly.requireMin(0, "rentReceivedMonthly")
         otherIncomeReceivedMonthly.requireMin(0, "otherIncomeReceivedMonthly")
