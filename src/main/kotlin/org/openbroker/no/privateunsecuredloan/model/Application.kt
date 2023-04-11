@@ -42,12 +42,12 @@ data class Application @JvmOverloads constructor(
     /**
      * The number 1-month terms that the applicant desires to pay off the loan over
      */
-    val termMonths: Int
+    val termMonths: Int? = null
     ) {
     init {
         loanAmount.requireMin(1, "loanAmount")
         refinanceAmount.requireMin(0, "refinanceAmount")
-        termMonths.requireMin(1, "termMonths")
+        termMonths?.requireMin(1, "termMonths")
         refinanceAmount.requireLessThanOrEqual(loanAmount, "loanAmount", "refinanceAmount")
     }
 }
