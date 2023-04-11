@@ -25,9 +25,9 @@ data class Offer(
         effectiveInterestRate.requireMatchRegex(interestRateRegex, "effectiveInterestRate")
         nominalInterestRate.requireMatchRegex(interestRateRegex, "nominalInterestRate")
 
-        minOfferedCredit.requireMin(1, "minOfferedCredit")
+        minOfferedCredit?.requireMin(1, "minOfferedCredit")
         offeredCredit.requireMin(1, "offeredCredit")
-        maxOfferedCredit.requireMin(1, "maxOfferedCredit")
+        maxOfferedCredit?.requireMin(1, "maxOfferedCredit")
         if (minOfferedCredit != null && maxOfferedCredit != null) {
             minOfferedCredit.requireLessThanOrEqual(maxOfferedCredit, "maxOfferedCredit", "minOfferedCredit")
             offeredCredit.requireInRange(minOfferedCredit, maxOfferedCredit, "offeredCredit")
