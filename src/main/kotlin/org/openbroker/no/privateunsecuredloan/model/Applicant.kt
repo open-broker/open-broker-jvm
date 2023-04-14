@@ -39,8 +39,8 @@ data class Applicant @JvmOverloads constructor(
     val bankAccount: String? = null,
     val citizenships: List<String>,
     val livedInCountrySinceYear: Int? = null,
-    val countriesOfResidence: List<String>,
-    val taxResidentOf: List<String>,
+    val countriesOfResidence: List<String> = emptyList(),
+    val taxResidentOf: List<String> = emptyList(),
     val education: Education? = null,
     val tentativeAddress: Address? = null
 ) {
@@ -72,8 +72,9 @@ data class Applicant @JvmOverloads constructor(
         val bankAccountRegex = Regex("^\\d{11}$")
         bankAccount?.requireMatchRegex(bankAccountRegex, "bankAccount")
         citizenships.requireNotEmpty("citizenships")
-        countriesOfResidence.requireNotEmpty("countriesOfResidence")
-        taxResidentOf.requireNotEmpty("taxResidentOf")
+        val countryCodeRegex = Regex("^[A-Z]{2}$|OTHER")
+        countriesOfResidence.requireAllMatchRegex(countryCodeRegex, "countriesOfResidence")
+        taxResidentOf.requireAllMatchRegex(countryCodeRegex, "taxResidentOf")
         customerId.requireNotEmpty("customerId")
     }
 
