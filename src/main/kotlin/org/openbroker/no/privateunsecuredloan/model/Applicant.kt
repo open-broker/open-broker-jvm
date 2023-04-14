@@ -73,6 +73,7 @@ data class Applicant @JvmOverloads constructor(
         bankAccount?.requireMatchRegex(bankAccountRegex, "bankAccount")
         citizenships.requireNotEmpty("citizenships")
         val countryCodeRegex = Regex("^[A-Z]{2}$|OTHER")
+        citizenships.requireAllMatchRegex(countryCodeRegex, "citizenships")
         countriesOfResidence.requireAllMatchRegex(countryCodeRegex, "countriesOfResidence")
         taxResidentOf.requireAllMatchRegex(countryCodeRegex, "taxResidentOf")
         customerId.requireNotEmpty("customerId")
