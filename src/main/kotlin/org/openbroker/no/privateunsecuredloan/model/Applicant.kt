@@ -32,15 +32,15 @@ data class Applicant @JvmOverloads constructor(
     val housingSinceYear: Int? = null,
     val housingSinceMonth: Int? = null,
     val housingCostPerMonth: Int,
-    val netMonthlyIncome: Int,
-    val grossYearlyIncome: Int? = null,
+    val netMonthlyIncome: Int? = null,
+    val grossYearlyIncome: Int,
     val partnerGrossYearlyIncome: Int? = null,
     val maritalStatus: MaritalStatus,
     val bankAccount: String? = null,
     val citizenships: List<String>,
     val livedInCountrySinceYear: Int? = null,
-    val countriesOfResidence: List<String>,
-    val taxResidentOf: List<String>,
+    val countriesOfResidence: List<String> = emptyList(),
+    val taxResidentOf: List<String> = emptyList(),
     val education: Education? = null,
     val tentativeAddress: Address? = null
 ) {
@@ -66,14 +66,16 @@ data class Applicant @JvmOverloads constructor(
         otherIncomeReceivedMonthly.requireMin(0, "otherIncomeReceivedMonthly")
         childSupportPaidMonthly.requireMin(0, "childSupportPaidMonthly")
         housingCostPerMonth.requireMin(0, "housingCostPerMonth")
-        netMonthlyIncome.requireMin(0, "netMonthlyIncome")
+        netMonthlyIncome?.requireMin(0, "netMonthlyIncome")
         grossYearlyIncome.requireMin(0, "grossYearlyIncome")
 
         val bankAccountRegex = Regex("^\\d{11}$")
         bankAccount?.requireMatchRegex(bankAccountRegex, "bankAccount")
         citizenships.requireNotEmpty("citizenships")
-        countriesOfResidence.requireNotEmpty("countriesOfResidence")
-        taxResidentOf.requireNotEmpty("taxResidentOf")
+        val countryCodeRegex = Regex("^[A-Z]{2}$|OTHER")
+        citizenships.requireAllMatchRegex(countryCodeRegex, "citizenships")
+        countriesOfResidence.requireAllMatchRegex(countryCodeRegex, "countriesOfResidence")
+        taxResidentOf.requireAllMatchRegex(countryCodeRegex, "taxResidentOf")
         customerId.requireNotEmpty("customerId")
     }
 
