@@ -7,7 +7,7 @@ import org.openbroker.common.requireMatchRegex
 import org.openbroker.common.requireMin
 
 data class Offer(
-    val effectiveInterestRate: String,
+    val effectiveInterestRate: String? = null,
     val nominalInterestRate: String? = null,
     val minOfferedCredit: Int? = null,
     val offeredCredit: Int,
@@ -22,7 +22,7 @@ data class Offer(
 ) {
     init {
         val interestRateRegex = Regex("^[0-9]+(.[0-9]+)?$")
-        effectiveInterestRate.requireMatchRegex(interestRateRegex, "effectiveInterestRate")
+        effectiveInterestRate?.requireMatchRegex(interestRateRegex, "effectiveInterestRate")
         nominalInterestRate?.requireMatchRegex(interestRateRegex, "nominalInterestRate")
         minOfferedCredit?.requireMin(1, "minOfferedCredit")
         offeredCredit.requireMin(1, "offeredCredit")
