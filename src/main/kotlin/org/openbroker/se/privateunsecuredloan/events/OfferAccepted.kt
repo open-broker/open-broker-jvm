@@ -15,7 +15,8 @@ data class OfferAccepted @JvmOverloads constructor(
     val ssn: String? = null,
     val ssnCoapplicant: String? = null,
     val emailAddress: String? = null,
-    val emailAddressCoapplicant: String? = null
+    val emailAddressCoapplicant: String? = null,
+    val extensions: Map<String, Any>? = emptyMap()
 ) : PrivateUnsecuredLoanEvent {
     init {
         requestedCredit.requireMin(1, "requestedCredit")
