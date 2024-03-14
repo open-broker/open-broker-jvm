@@ -9,7 +9,7 @@ apply plugin: 'maven'
 apply plugin: 'idea'
 
 group = 'org.openbroker'
-version = '1.0.2'
+version = '1.0.3'
 description = 'Library for Open Broker'
 
 defaultTasks 'test'
@@ -26,10 +26,6 @@ repositories {
     mavenCentral()
     maven {
         url = uri("https://maven.pkg.github.com/open-broker/cloud-events-jvm")
-        credentials {
-            username = System.getenv("GITHUB_PACKAGES_USERNAME")
-            password = System.getenv("GITHUB_PACKAGES_PASSWORD")
-        }
     }
 }
 
