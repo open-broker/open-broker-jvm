@@ -9,7 +9,7 @@ apply plugin: 'maven'
 apply plugin: 'idea'
 
 group = 'org.openbroker'
-version = '1.0.3'
+version = '1.0.4'
 description = 'Library for Open Broker'
 
 defaultTasks 'test'

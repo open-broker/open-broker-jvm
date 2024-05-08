@@ -28,7 +28,7 @@ data class Offer(
     val comment: String? = null
 ) {
     init {
-        val interestRateRegex = Regex("^[0-9]+(.[0-9]+)?$")
+        val interestRateRegex = Regex("^0\\.([1-9]\\d?|\\d[1-9])(\\d+)?\$")
         effectiveInterestRate.requireMatchRegex(interestRateRegex, "effectiveInterestRate")
         nominalInterestRate.requireMatchRegex(interestRateRegex, "nominalInterestRate")
 
