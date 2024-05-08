@@ -21,7 +21,7 @@ data class Offer(
     val amortizationType: AmortizationType? = null
 ) {
     init {
-        val interestRateRegex = Regex("^0\\.\\d[1-9](\\d+)?$")
+        val interestRateRegex = Regex("^0\\.([1-9]\\d?|\\d[1-9])(\\d+)?\$")
         effectiveInterestRate?.requireMatchRegex(interestRateRegex, "effectiveInterestRate")
         nominalInterestRate?.requireMatchRegex(interestRateRegex, "nominalInterestRate")
         minOfferedCredit?.requireMin(1, "minOfferedCredit")
