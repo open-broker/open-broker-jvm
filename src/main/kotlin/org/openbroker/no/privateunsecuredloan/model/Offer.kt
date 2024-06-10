@@ -12,13 +12,16 @@ data class Offer(
     val minOfferedCredit: Int? = null,
     val offeredCredit: Int,
     val maxOfferedCredit: Int? = null,
+    val minimumMonthlyCost: Int? = null,
     val monthlyCost: Int? = null,
     val mustRefinance: Int? = null,
+    val totalRepaymentAmount: Int? = null,
     val arrangementFee: Int,
     val termFee: Int,
     val invoiceFee: Int,
     val termMonths: Int? = null,
-    val amortizationType: AmortizationType? = null
+    val amortizationType: AmortizationType? = null,
+    val customerUrl: String? = null
 ) {
     init {
         val interestRateRegex = Regex("^0\\.([1-9]\\d?|\\d[1-9])(\\d+)?\$")
@@ -27,11 +30,13 @@ data class Offer(
         minOfferedCredit?.requireMin(1, "minOfferedCredit")
         offeredCredit.requireMin(1, "offeredCredit")
         maxOfferedCredit?.requireMin(1, "maxOfferedCredit")
+        minimumMonthlyCost?.requireMin(1, "minimumMonthlyCost")
         if (minOfferedCredit != null && maxOfferedCredit != null) {
             minOfferedCredit.requireLessThanOrEqual(maxOfferedCredit, "maxOfferedCredit", "minOfferedCredit")
             offeredCredit.requireInRange(minOfferedCredit, maxOfferedCredit, "offeredCredit")
         }
         mustRefinance?.requireMin(0, "mustRefinance")
+        totalRepaymentAmount?.requireMin(1, "totalRepaymentAmount")
         arrangementFee.requireMin(0, "arrangementFee")
         termFee.requireMin(0, "termFee")
         invoiceFee.requireMin(0, "invoiceFee")

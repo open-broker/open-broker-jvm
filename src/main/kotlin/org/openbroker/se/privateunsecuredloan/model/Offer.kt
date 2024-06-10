@@ -12,13 +12,16 @@ data class Offer(
     val minOfferedCredit: Int,
     val offeredCredit: Int,
     val maxOfferedCredit: Int,
+    val minimumMonthlyCost: Int? = null,
     val monthlyCost: Int? = null,
     val mustRefinance: Int,
+    val totalRepaymentAmount: Int? = null,
     val arrangementFee: Int,
     val termFee: Int,
     val invoiceFee: Int,
     val termMonths: Int,
     val amortizationType: AmortizationType,
+    val customerUrl: String? = null,
     /**
      * An optional human-readable comment about the offer, presenting
      * extra information about the offer, such as if it is only valid
@@ -35,9 +38,11 @@ data class Offer(
         minOfferedCredit.requireMin(1, "minOfferedCredit")
         offeredCredit.requireMin(1, "offeredCredit")
         maxOfferedCredit.requireMin(1, "maxOfferedCredit")
+        minimumMonthlyCost?.requireMin(1, "minimumMonthlyCost")
         minOfferedCredit.requireLessThanOrEqual(maxOfferedCredit, "maxOfferedCredit", "minOfferedCredit")
         offeredCredit.requireInRange(minOfferedCredit, maxOfferedCredit, "offeredCredit")
         mustRefinance.requireMin(0, "mustRefinance")
+        totalRepaymentAmount?.requireMin(1, "totalRepaymentAmount")
         arrangementFee.requireMin(0, "arrangementFee")
         termFee.requireMin(0, "termFee")
         invoiceFee.requireMin(0, "invoiceFee")
