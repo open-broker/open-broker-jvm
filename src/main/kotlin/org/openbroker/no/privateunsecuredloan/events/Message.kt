@@ -1,5 +1,6 @@
 package org.openbroker.no.privateunsecuredloan.events
 
+import org.openbroker.common.model.Origin
 import org.openbroker.common.model.Reference
 
 /**
@@ -9,5 +10,6 @@ import org.openbroker.common.model.Reference
 data class Message constructor(
     override val brokerReference: Reference,
     val message: String,
-    val requiresAction: Boolean
+    val requiresAction: Boolean,
+    val origin: Origin
 ) : PrivateUnsecuredLoanEvent
