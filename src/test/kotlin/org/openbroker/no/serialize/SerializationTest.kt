@@ -8,6 +8,7 @@ import org.openbroker.cloudevents.jsonString
 import org.openbroker.common.OpenBrokerEvent
 import org.openbroker.common.model.AmortizationType
 import org.openbroker.common.model.DataProtectionContext
+import org.openbroker.common.model.Origin
 import org.openbroker.common.model.Reference
 import org.openbroker.common.openBrokerEvent
 import org.openbroker.common.serialize.parseOpenBrokerEvent
@@ -69,8 +70,22 @@ class SerializationTest {
         val app = Application(
             applicant = applicant,
             existingLoans = listOf(
-                ExistingLoan(4000, 22, 2000, ExistingLoanType.CAR_LOAN, Responsibility.SHARED, "Example Bank"),
-                ExistingLoan(15_000, 56, 0, ExistingLoanType.STUDENT_LOAN, Responsibility.MAIN_APPLICANT, "Other")
+                ExistingLoan(
+                    loanAmount = 4000,
+                    monthlyPayment = 22,
+                    refinanceAmount = 2000,
+                    existingLoanType = ExistingLoanType.CAR_LOAN,
+                    responsibility = Responsibility.SHARED,
+                    lender = "Example Bank"
+                ),
+                ExistingLoan(
+                    loanAmount = 15_000,
+                    monthlyPayment = 56,
+                    refinanceAmount = 0,
+                    existingLoanType = ExistingLoanType.STUDENT_LOAN,
+                    responsibility = Responsibility.MAIN_APPLICANT,
+                    lender = "Other"
+                )
             ),
             loanAmount = 20_000,
             termMonths = 24,
@@ -125,7 +140,7 @@ class SerializationTest {
 
     @Test
     fun testSerializeAndDeserializeOpenBrokerEvent() {
-        val message = Message(Reference("1", "org.example"), message = "Hello World", requiresAction = false)
+        val message = Message(Reference("1", "org.example"), message = "Hello World", requiresAction = false, origin = Origin.BANK)
         val originalEvent: CloudEvent<Message> = openBrokerEvent(event = message, source = "org.something")
         val serializedEvent: String = jsonString(originalEvent)
         val deserializedEvent: CloudEvent<Message> = cloudEvent(serializedEvent)

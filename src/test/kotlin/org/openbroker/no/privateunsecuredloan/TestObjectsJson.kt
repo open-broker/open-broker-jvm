@@ -347,7 +347,8 @@ object TestObjectsJson {
                     "termFee": 12,
                     "invoiceFee": 19,
                     "termMonths": 36,
-                    "amortizationType": "ANNUITY"
+                    "amortizationType": "ANNUITY",
+                    "creditorProduct": "UNSECURED_LOAN"
                 },
                 "loanInsuranceOffer": null
             }
