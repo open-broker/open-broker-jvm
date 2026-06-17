@@ -88,8 +88,8 @@ object TestObjectsKotlin {
             Offering(
                 brokerReference = reference,
                 offer = Offer(
-                    effectiveInterestRate = "14.5",
-                    nominalInterestRate = "12.1",
+                    effectiveInterestRate = "0.145",
+                    nominalInterestRate = "0.121",
                     termMonths = 56,
                     termFee = 20,
                     amortizationType = AmortizationType.ANNUITY,

@@ -3,6 +3,7 @@ package org.openbroker.no.privateunsecuredloan
 import org.openbroker.cloudevents.CloudEvent
 import org.openbroker.common.model.AmortizationType
 import org.openbroker.common.model.DataProtectionContext
+import org.openbroker.common.model.Origin
 import org.openbroker.common.model.Reference
 import org.openbroker.common.openBrokerEvent
 import org.openbroker.no.model.Address
@@ -74,7 +75,8 @@ object TestObjectsKotlin {
             event = Message(
                 message = "Hello World",
                 requiresAction = false,
-                brokerReference = reference
+                brokerReference = reference,
+                origin = Origin.BANK
             ),
             source = "https://bank.no"
         )
@@ -89,8 +91,8 @@ object TestObjectsKotlin {
         val offering: CloudEvent<Offering> = openBrokerEvent(
             event = Offering(
                 offer = Offer(
-                    effectiveInterestRate = "14.5",
-                    nominalInterestRate = "12.1",
+                    effectiveInterestRate = "0.145",
+                    nominalInterestRate = "0.121",
                     termMonths = 56,
                     termFee = 20,
                     amortizationType = AmortizationType.ANNUITY,
@@ -100,7 +102,8 @@ object TestObjectsKotlin {
                     arrangementFee = 150,
                     minOfferedCredit = 150_000,
                     maxOfferedCredit = 160_000,
-                    offeredCredit = 150_000
+                    offeredCredit = 150_000,
+                    creditorProduct = CreditorProduct.UNSECURED_LOAN
                 ),
                 brokerReference = reference
             ),
@@ -198,7 +201,8 @@ object TestObjectsKotlin {
             event = Message(
                 message = "Manual processing",
                 requiresAction = false,
-                brokerReference = reference
+                brokerReference = reference,
+                origin = Origin.BANK
             ),
             source = "https://bank.no"
         )
@@ -206,8 +210,8 @@ object TestObjectsKotlin {
         val offering: CloudEvent<Offering> = openBrokerEvent(
             event = Offering(
                 offer = Offer(
-                    effectiveInterestRate = "14.5",
-                    nominalInterestRate = "12.1",
+                    effectiveInterestRate = "0.145",
+                    nominalInterestRate = "0.121",
                     termMonths = 56,
                     termFee = 20,
                     amortizationType = AmortizationType.ANNUITY,
@@ -217,7 +221,8 @@ object TestObjectsKotlin {
                     arrangementFee = 150,
                     minOfferedCredit = 150_000,
                     maxOfferedCredit = 160_000,
-                    offeredCredit = 150_000
+                    offeredCredit = 150_000,
+                    creditorProduct = CreditorProduct.CREDIT_CARD
                 ),
                 brokerReference = reference
             ),
@@ -235,7 +240,8 @@ object TestObjectsKotlin {
             event = Message(
                 message = "Contract sent to customer",
                 requiresAction = false,
-                brokerReference = reference
+                brokerReference = reference,
+                origin = Origin.BANK
             ),
             source = "https://bank.no"
         )
@@ -251,7 +257,8 @@ object TestObjectsKotlin {
             event = Message(
                 message = "Need further documentation",
                 requiresAction = true,
-                brokerReference = reference
+                brokerReference = reference,
+                origin = Origin.BANK
             ),
             source = "https://bank.no"
         )

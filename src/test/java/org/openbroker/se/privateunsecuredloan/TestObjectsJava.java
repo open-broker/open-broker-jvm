@@ -81,19 +81,22 @@ class TestObjectsJava {
             reference,
             offerId,
             new Offer(
-            "14.5",
-            "12.1",
+            "0.145",
+            "0.121",
             150_000,
             150_000,
             160_000,
+            null,
             2312,
             2000,
+            null,
             150,
             20,
             10,
             56,
             AmortizationType.ANNUITY,
-            "Hello World!"
+            "Hello World!",
+            null
             ),
             null
         ),
