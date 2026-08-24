@@ -20,5 +20,11 @@ enum class CreditorProduct {
     /**
      * A revolving line of credit the customer can draw from up to a credit limit
      */
-    CREDIT_LINE
+    CREDIT_LINE,
+
+    /**
+     * A loan used to buy real estate, where the property acts as security
+     * (collateral) for the lender
+     */
+    MORTGAGE_LOAN
 }
