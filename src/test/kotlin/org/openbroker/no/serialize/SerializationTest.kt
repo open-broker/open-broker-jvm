@@ -185,17 +185,17 @@ class SerializationTest {
     }
 
     @Test
-    fun testDeserializeOfferRejectedWithoutBankReason() {
+    fun testDeserializeOfferRejectedWithoutReasonDetails() {
         val event: CloudEvent<OfferRejected> = cloudEvent(TestObjectsJson.rejectOffer)
         assertEquals(OfferRejectedReason.NEW_APPLICATION_SUBMITTED, event.data!!.reason)
-        assertNull(event.data!!.bankReason)
+        assertNull(event.data!!.reasonDetails)
     }
 
     @Test
-    fun testDeserializeOfferRejectedWithBankReason() {
-        val event: CloudEvent<OfferRejected> = cloudEvent(TestObjectsJson.rejectOfferWithBankReason)
+    fun testDeserializeOfferRejectedWithReasonDetails() {
+        val event: CloudEvent<OfferRejected> = cloudEvent(TestObjectsJson.rejectOfferWithReasonDetails)
         assertEquals(OfferRejectedReason.CANCELLED_BY_BANK, event.data!!.reason)
-        assertEquals("Occupation", event.data!!.bankReason)
+        assertEquals("Occupation", event.data!!.reasonDetails)
     }
 
     @Test
@@ -216,16 +216,16 @@ class SerializationTest {
     }
 
     @Test
-    fun testSerializeAndDeserializeOfferRejectedWithBankReason() {
+    fun testSerializeAndDeserializeOfferRejectedWithReasonDetails() {
         val offerRejected = OfferRejected(
             brokerReference = Reference("1", "org.example"),
             reason = OfferRejectedReason.CANCELLED_BY_BANK,
-            bankReason = "Occupation"
+            reasonDetails = "Occupation"
         )
         val originalEvent: CloudEvent<OfferRejected> = openBrokerEvent(event = offerRejected, source = "org.something")
         val serializedEvent: String = jsonString(originalEvent)
         assertTrue(serializedEvent.contains("\"reason\":\"CANCELLED_BY_BANK\""))
-        assertTrue(serializedEvent.contains("\"bankReason\":\"Occupation\""))
+        assertTrue(serializedEvent.contains("\"reasonDetails\":\"Occupation\""))
         val deserializedEvent: CloudEvent<OfferRejected> = cloudEvent(serializedEvent)
         assertEquals(originalEvent, deserializedEvent)
     }

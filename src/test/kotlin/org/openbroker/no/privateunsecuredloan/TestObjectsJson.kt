@@ -381,7 +381,7 @@ object TestObjectsJson {
 		""".trimIndent()
 
     @JvmField
-    internal val rejectOfferWithBankReason =
+    internal val rejectOfferWithReasonDetails =
         """
         {
             "cloudEventsVersion" : "0.1",
@@ -397,7 +397,7 @@ object TestObjectsJson {
                     "issuer": "io.klira"
                 },
                 "reason": "CANCELLED_BY_BANK",
-                "bankReason": "Occupation"
+                "reasonDetails": "Occupation"
             }
         }
         """.trimIndent()

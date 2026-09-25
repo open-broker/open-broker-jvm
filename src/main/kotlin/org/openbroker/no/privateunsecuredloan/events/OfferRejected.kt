@@ -16,5 +16,5 @@ data class OfferRejected(
      * standardised. Usually set for [OfferRejectedReason.CANCELLED_BY_BANK]
      * and null for [OfferRejectedReason.NEW_APPLICATION_SUBMITTED].
      */
-    val bankReason: String? = null
+    val reasonDetails: String? = null
 ): PrivateUnsecuredLoanEvent
