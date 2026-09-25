@@ -378,4 +378,25 @@ object TestObjectsJson {
             }
         }
 		""".trimIndent()
+
+    @JvmField
+    internal val rejectOfferWithReason =
+        """
+        {
+            "cloudEventsVersion" : "0.1",
+            "eventType" : "org.open-broker.v0.no.PrivateUnsecuredLoanOfferRejected",
+            "eventTypeVersion" : "v0",
+            "source" : "/mycontext",
+            "eventID" : "C234-1234-1235",
+            "eventTime" : "2018-04-05T17:31:00Z",
+            "contentType" : "application/json",
+            "data": {
+                "brokerReference": {
+                    "id": "12345",
+                    "issuer": "io.klira"
+                },
+                "reason": "NEW_APPLICATION_SUBMITTED"
+            }
+        }
+        """.trimIndent()
 }

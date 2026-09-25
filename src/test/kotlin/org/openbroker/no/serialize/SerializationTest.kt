@@ -20,6 +20,7 @@ import org.openbroker.no.privateunsecuredloan.TestObjectsJson
 import org.openbroker.no.privateunsecuredloan.events.ApplicationCreated
 import org.openbroker.no.privateunsecuredloan.events.ContractSigned
 import org.openbroker.no.privateunsecuredloan.events.Message
+import org.openbroker.no.privateunsecuredloan.events.OfferRejected
 import org.openbroker.no.privateunsecuredloan.events.Offering
 import org.openbroker.no.privateunsecuredloan.model.*
 
@@ -155,5 +156,28 @@ class SerializationTest {
         val deserializedEvent: CloudEvent<out OpenBrokerEvent> = parseOpenBrokerEvent(serializedEvent)
         val castedEvent: CloudEvent<ContractSigned> = deserializedEvent as CloudEvent<ContractSigned>
         assertEquals(originalEvent, castedEvent)
+    }
+
+    @Test
+    fun testDeserializeOfferRejectedWithoutReason() {
+        val event: CloudEvent<OfferRejected> = cloudEvent(TestObjectsJson.rejectOffer)
+        assertNotNull(event.data)
+        assertNull(event.data!!.reason)
+    }
+
+    @Test
+    fun testDeserializeOfferRejectedWithReason() {
+        val event: CloudEvent<OfferRejected> = cloudEvent(TestObjectsJson.rejectOfferWithReason)
+        assertEquals(OfferRejectedReason.NEW_APPLICATION_SUBMITTED, event.data!!.reason)
+    }
+
+    @Test
+    fun testSerializeAndDeserializeOfferRejectedWithReason() {
+        val offerRejected = OfferRejected(Reference("1", "org.example"), reason = OfferRejectedReason.CANCELLED_BY_BANK)
+        val originalEvent: CloudEvent<OfferRejected> = openBrokerEvent(event = offerRejected, source = "org.something")
+        val serializedEvent: String = jsonString(originalEvent)
+        assertTrue(serializedEvent.contains("\"reason\":\"CANCELLED_BY_BANK\""))
+        val deserializedEvent: CloudEvent<OfferRejected> = cloudEvent(serializedEvent)
+        assertEquals(originalEvent, deserializedEvent)
     }
 }
