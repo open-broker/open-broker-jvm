@@ -309,7 +309,8 @@ object TestObjectsJson {
 			    "brokerReference": {
 				    "id": "12345",
 					"issuer": "io.klira"
-				}
+				},
+				"reason": "NEW_APPLICATION_SUBMITTED"
 			}
         }
 
@@ -380,7 +381,7 @@ object TestObjectsJson {
 		""".trimIndent()
 
     @JvmField
-    internal val rejectOfferWithReason =
+    internal val rejectOfferWithBankReason =
         """
         {
             "cloudEventsVersion" : "0.1",
@@ -395,7 +396,36 @@ object TestObjectsJson {
                     "id": "12345",
                     "issuer": "io.klira"
                 },
-                "reason": "NEW_APPLICATION_SUBMITTED"
+                "reason": "CANCELLED_BY_BANK",
+                "bankReason": "Occupation"
+            }
+        }
+        """.trimIndent()
+
+    @JvmField
+    internal val loanOfferingWithCondition =
+        """
+        {
+            "cloudEventsVersion" : "0.1",
+            "eventType" : "org.open-broker.v0.no.PrivateUnsecuredLoanOffering",
+            "eventTypeVersion" : "v0",
+            "source" : "/mycontext",
+            "eventID" : "C234-1234-1236",
+            "eventTime" : "2018-04-05T17:31:00Z",
+            "contentType" : "application/json",
+            "data": {
+                "brokerReference": {
+                    "id": "9",
+                    "issuer": "io.klira"
+                },
+                "offer": {
+                    "offeredCredit": 67000,
+                    "arrangementFee": 50,
+                    "termFee": 12,
+                    "invoiceFee": 19,
+                    "creditorProduct": "UNSECURED_LOAN",
+                    "condition": "CO_APPLICANT_NEEDED"
+                }
             }
         }
         """.trimIndent()

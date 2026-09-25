@@ -22,7 +22,8 @@ data class Offer(
     val termMonths: Int? = null,
     val amortizationType: AmortizationType? = null,
     val customerUrl: String? = null,
-    val creditorProduct: CreditorProduct = CreditorProduct.UNSECURED_LOAN
+    val creditorProduct: CreditorProduct = CreditorProduct.UNSECURED_LOAN,
+    val condition: OfferCondition? = null
 ) {
     init {
         val interestRateRegex = Regex("^0\\.([1-9]\\d?|\\d[1-9])(\\d+)?\$")

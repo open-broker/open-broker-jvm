@@ -112,7 +112,8 @@ object TestObjectsKotlin {
 
         val offerRejected: CloudEvent<OfferRejected> = openBrokerEvent(
             event = OfferRejected(
-                brokerReference = reference
+                brokerReference = reference,
+                reason = OfferRejectedReason.NEW_APPLICATION_SUBMITTED
             ),
             source = "http://broker.org"
         )
