@@ -309,7 +309,8 @@ object TestObjectsJson {
 			    "brokerReference": {
 				    "id": "12345",
 					"issuer": "io.klira"
-				}
+				},
+				"reason": "NEW_APPLICATION_SUBMITTED"
 			}
         }
 
@@ -378,4 +379,54 @@ object TestObjectsJson {
             }
         }
 		""".trimIndent()
+
+    @JvmField
+    internal val rejectOfferWithReasonDetails =
+        """
+        {
+            "cloudEventsVersion" : "0.1",
+            "eventType" : "org.open-broker.v0.no.PrivateUnsecuredLoanOfferRejected",
+            "eventTypeVersion" : "v0",
+            "source" : "/mycontext",
+            "eventID" : "C234-1234-1235",
+            "eventTime" : "2018-04-05T17:31:00Z",
+            "contentType" : "application/json",
+            "data": {
+                "brokerReference": {
+                    "id": "12345",
+                    "issuer": "io.klira"
+                },
+                "reason": "CANCELLED_BY_BANK",
+                "reasonDetails": "Occupation"
+            }
+        }
+        """.trimIndent()
+
+    @JvmField
+    internal val loanOfferingWithCondition =
+        """
+        {
+            "cloudEventsVersion" : "0.1",
+            "eventType" : "org.open-broker.v0.no.PrivateUnsecuredLoanOffering",
+            "eventTypeVersion" : "v0",
+            "source" : "/mycontext",
+            "eventID" : "C234-1234-1236",
+            "eventTime" : "2018-04-05T17:31:00Z",
+            "contentType" : "application/json",
+            "data": {
+                "brokerReference": {
+                    "id": "9",
+                    "issuer": "io.klira"
+                },
+                "offer": {
+                    "offeredCredit": 67000,
+                    "arrangementFee": 50,
+                    "termFee": 12,
+                    "invoiceFee": 19,
+                    "creditorProduct": "UNSECURED_LOAN",
+                    "condition": "CO_APPLICANT_NEEDED"
+                }
+            }
+        }
+        """.trimIndent()
 }
