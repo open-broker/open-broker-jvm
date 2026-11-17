@@ -54,13 +54,15 @@ public class OpenBrokerCreateTest {
     @Test
     public void testOfferBuilderWithRequiredFieldsOnly() {
         Offer offer = Offer.builder()
+            .effectiveInterestRate("0.0919")
+            .nominalInterestRate("0.0899")
             .offeredCredit(150_000)
             .arrangementFee(0)
             .termFee(30)
             .invoiceFee(0)
             .build();
 
-        assertEquals(new Offer(150_000, 0, 30, 0), offer);
+        assertEquals(new Offer("0.0919", "0.0899", 150_000, 0, 30, 0), offer);
         assertEquals(OfferType.STANDARD, offer.getType());
         assertEquals(OfferStatus.NEW, offer.getStatus());
         assertEquals(CreditorProduct.UNSECURED_LOAN, offer.getCreditorProduct());
@@ -77,6 +79,8 @@ public class OpenBrokerCreateTest {
             .build();
 
         Offer offer = Offer.builder()
+            .effectiveInterestRate("0.0919")
+            .nominalInterestRate("0.0899")
             .offeredCredit(150_000)
             .arrangementFee(0)
             .termFee(30)
@@ -100,7 +104,14 @@ public class OpenBrokerCreateTest {
     @Test
     public void testBuildersRequireMandatoryFields() {
         assertThrows(IllegalArgumentException.class, () ->
-            Offer.builder().arrangementFee(0).termFee(30).invoiceFee(0).build());
+            Offer.builder().effectiveInterestRate("0.0919").nominalInterestRate("0.0899")
+                .arrangementFee(0).termFee(30).invoiceFee(0).build());
+        assertThrows(IllegalArgumentException.class, () ->
+            Offer.builder().nominalInterestRate("0.0899")
+                .offeredCredit(150_000).arrangementFee(0).termFee(30).invoiceFee(0).build());
+        assertThrows(IllegalArgumentException.class, () ->
+            Offer.builder().effectiveInterestRate("0.0919")
+                .offeredCredit(150_000).arrangementFee(0).termFee(30).invoiceFee(0).build());
         assertThrows(IllegalArgumentException.class, () ->
             LoanPart.builder().topUpAmount(30_000).build());
     }
@@ -108,7 +119,8 @@ public class OpenBrokerCreateTest {
     @Test
     public void testBuildersRunValidation() {
         assertThrows(IllegalArgumentException.class, () ->
-            Offer.builder().offeredCredit(150_000).arrangementFee(0).termFee(30).invoiceFee(0)
+            Offer.builder().effectiveInterestRate("0.0919").nominalInterestRate("0.0899")
+                .offeredCredit(150_000).arrangementFee(0).termFee(30).invoiceFee(0)
                 .issuedAt("2026-11-05").build());
         assertThrows(IllegalArgumentException.class, () ->
             LoanPart.builder().type(LoanPartType.COMBO).offeredCredit(0).build());

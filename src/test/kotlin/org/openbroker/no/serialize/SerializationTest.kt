@@ -23,6 +23,7 @@ import org.openbroker.no.privateunsecuredloan.events.Message
 import org.openbroker.no.privateunsecuredloan.events.OfferAccepted
 import org.openbroker.no.privateunsecuredloan.events.OfferRejected
 import org.openbroker.no.privateunsecuredloan.events.Offering
+import java.time.Instant
 import org.openbroker.no.privateunsecuredloan.model.*
 
 class SerializationTest {
@@ -198,6 +199,10 @@ class SerializationTest {
                 existingLoanAtCreditor = existingLoanAtCreditor
             )
         assertThrows(IllegalArgumentException::class.java) { offer(issuedAt = "2026-11-05") }
+        val noSeconds = assertThrows(IllegalArgumentException::class.java) { offer(issuedAt = "2026-12-05T00:00Z") }
+        assertTrue(noSeconds.message!!.contains("issuedAt"))
+        assertEquals("2026-12-05T00:00:00Z", offer(issuedAt = Instant.parse("2026-12-05T00:00:00Z").toString()).issuedAt)
+        assertEquals("2026-11-09t07:00:06z", offer(issuedAt = "2026-11-09t07:00:06z").issuedAt)
         assertThrows(IllegalArgumentException::class.java) { offer(brokerOfferId = "") }
         assertThrows(IllegalArgumentException::class.java) { offer(existingLoanAtCreditor = -1) }
         assertThrows(IllegalArgumentException::class.java) { LoanPart(type = LoanPartType.COMBO, offeredCredit = 0) }

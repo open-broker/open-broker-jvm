@@ -1,7 +1,7 @@
 package org.openbroker.no.privateunsecuredloan.model
 
-import org.openbroker.cloudevents.validateEventTime
 import org.openbroker.common.model.AmortizationType
+import org.openbroker.common.requireDateTime
 import org.openbroker.common.requireInRange
 import org.openbroker.common.requireLessThanOrEqual
 import org.openbroker.common.requireMatchRegex
@@ -53,8 +53,8 @@ data class Offer @JvmOverloads constructor(
         invoiceFee.requireMin(0, "invoiceFee")
         termMonths?.requireMin(1, "termMonths")
         brokerOfferId?.requireNotEmpty("brokerOfferId")
-        issuedAt?.let { validateEventTime(it) }
-        validUntil?.let { validateEventTime(it) }
+        issuedAt?.requireDateTime("issuedAt")
+        validUntil?.requireDateTime("validUntil")
         existingLoanAtCreditor.requireMin(0, "existingLoanAtCreditor")
     }
 
@@ -114,8 +114,8 @@ data class Offer @JvmOverloads constructor(
         fun loanParts(value: List<LoanPart>): Builder = apply { loanParts = value }
 
         fun build(): Offer = Offer(
-            effectiveInterestRate = effectiveInterestRate,
-            nominalInterestRate = nominalInterestRate,
+            effectiveInterestRate = requireNotNull(effectiveInterestRate) { "effectiveInterestRate is required" },
+            nominalInterestRate = requireNotNull(nominalInterestRate) { "nominalInterestRate is required" },
             minOfferedCredit = minOfferedCredit,
             offeredCredit = requireNotNull(offeredCredit) { "offeredCredit is required" },
             maxOfferedCredit = maxOfferedCredit,
