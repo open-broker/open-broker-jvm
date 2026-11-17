@@ -11,5 +11,6 @@ data class Offering @JvmOverloads constructor(
     override val brokerReference: Reference,
     val offerId: Reference? = null,
     val offer: Offer,
-    val loanInsuranceOffer: LoanInsuranceOffer? = null
+    val loanInsuranceOffer: LoanInsuranceOffer? = null,
+    val supplementaryOffers: List<Offer> = emptyList()
 ): PrivateUnsecuredLoanEvent

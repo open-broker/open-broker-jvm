@@ -4,6 +4,7 @@ import org.openbroker.common.model.Reference
 import org.openbroker.common.obfuscateDigits
 import org.openbroker.common.requireMatchRegex
 import org.openbroker.common.requireMin
+import org.openbroker.common.requireNotEmpty
 
 data class OfferAccepted @JvmOverloads constructor(
     override val brokerReference: Reference,
@@ -14,7 +15,8 @@ data class OfferAccepted @JvmOverloads constructor(
     val ssn: String? = null,
     val ssnCoapplicant: String? = null,
     val emailAddress: String? = null,
-    val emailAddressCoapplicant: String? = null
+    val emailAddressCoapplicant: String? = null,
+    val brokerOfferId: String? = null
 ) : PrivateUnsecuredLoanEvent {
     init {
         requestedCredit.requireMin(1, "requestedCredit")
@@ -23,6 +25,7 @@ data class OfferAccepted @JvmOverloads constructor(
         val ssnRegex = Regex("^[0-9]{11}$")
         ssn?.requireMatchRegex(ssnRegex, "ssn")
         ssnCoapplicant?.requireMatchRegex(ssnRegex, "ssnCoapplicant")
+        brokerOfferId?.requireNotEmpty("brokerOfferId")
 
     }
 }
