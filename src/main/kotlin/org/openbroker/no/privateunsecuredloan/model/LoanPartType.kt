@@ -7,9 +7,9 @@ package org.openbroker.no.privateunsecuredloan.model
 enum class LoanPartType {
     /**
      * The new money added to a loan the customer already has at this
-     * creditor. It is included in the offer amounts. `offeredCredit` and
-     * `topUpAmount` are both the new money, and the rates and costs are for
-     * the new money alone.
+     * creditor. It is included in the offer amounts. `topUpAmount` is the new
+     * money. `offeredCredit`, rates and costs, when sent, are for the new
+     * money alone.
      */
     TOP_UP,
 

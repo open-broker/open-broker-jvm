@@ -64,6 +64,16 @@ class DeserializationTest {
     }
 
     @Test
+    fun parseTopUpNoDetailOffering() {
+        val part = offering("PrivateUnsecuredLoanOffering_TopUpNoDetail").offer.loanParts.single()
+        assertEquals(LoanPartType.TOP_UP, part.type)
+        assertEquals(21_728, part.topUpAmount)
+        assertNull(part.offeredCredit)
+        assertNull(part.effectiveInterestRate)
+        assertNull(part.nominalInterestRate)
+    }
+
+    @Test
     fun parseComboOffering() {
         val part = offering("PrivateUnsecuredLoanOffering_Combo").offer.loanParts.single()
         assertEquals(LoanPartType.COMBO, part.type)
