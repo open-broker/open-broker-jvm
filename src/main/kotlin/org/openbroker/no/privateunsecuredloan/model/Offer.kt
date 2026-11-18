@@ -88,8 +88,8 @@ data class Offer @JvmOverloads constructor(
         private var existingLoanAtCreditor: Int? = null
         private var loanParts: List<LoanPart> = emptyList()
 
-        fun effectiveInterestRate(value: String?): Builder = apply { effectiveInterestRate = value }
-        fun nominalInterestRate(value: String?): Builder = apply { nominalInterestRate = value }
+        fun effectiveInterestRate(value: String): Builder = apply { effectiveInterestRate = value }
+        fun nominalInterestRate(value: String): Builder = apply { nominalInterestRate = value }
         fun minOfferedCredit(value: Int?): Builder = apply { minOfferedCredit = value }
         fun offeredCredit(value: Int): Builder = apply { offeredCredit = value }
         fun maxOfferedCredit(value: Int?): Builder = apply { maxOfferedCredit = value }
