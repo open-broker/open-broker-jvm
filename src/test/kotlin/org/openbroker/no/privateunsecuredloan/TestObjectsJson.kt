@@ -419,6 +419,8 @@ object TestObjectsJson {
                     "issuer": "io.klira"
                 },
                 "offer": {
+                    "effectiveInterestRate": "0.125",
+                    "nominalInterestRate": "0.118",
                     "offeredCredit": 67000,
                     "arrangementFee": 50,
                     "termFee": 12,

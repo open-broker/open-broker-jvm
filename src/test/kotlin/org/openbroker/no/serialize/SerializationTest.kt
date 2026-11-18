@@ -151,10 +151,22 @@ class SerializationTest {
     }
 
     @Test
+    fun testDeserializeOfferingWithoutInterestRatesFails() {
+        val withoutEffective = TestObjectsJson.loanOffering1.replace("\"effectiveInterestRate\": \"0.125\",", "")
+        val withoutNominal = TestObjectsJson.loanOffering1.replace("\"nominalInterestRate\": \"0.118\",", "")
+        assertNotEquals(TestObjectsJson.loanOffering1, withoutEffective)
+        assertNotEquals(TestObjectsJson.loanOffering1, withoutNominal)
+        assertThrows(Exception::class.java) { cloudEvent<Offering>(withoutEffective) }
+        assertThrows(Exception::class.java) { cloudEvent<Offering>(withoutNominal) }
+    }
+
+    @Test
     fun testSerializeAndDeserializeOfferingWithLoanPartsAndSupplementaryOffers() {
         val offering = Offering(
             brokerReference = Reference("1", "org.example"),
             offer = Offer(
+                effectiveInterestRate = "0.0919",
+                nominalInterestRate = "0.0899",
                 offeredCredit = 50_000,
                 arrangementFee = 0,
                 termFee = 0,
@@ -167,6 +179,8 @@ class SerializationTest {
             ),
             supplementaryOffers = listOf(
                 Offer(
+                    effectiveInterestRate = "0.1229",
+                    nominalInterestRate = "0.1189",
                     offeredCredit = 80_000,
                     arrangementFee = 0,
                     termFee = 0,
@@ -190,6 +204,8 @@ class SerializationTest {
     fun testOfferRejectsInvalidNewFields() {
         fun offer(issuedAt: String? = null, brokerOfferId: String? = null, existingLoanAtCreditor: Int? = null) =
             Offer(
+                effectiveInterestRate = "0.0919",
+                nominalInterestRate = "0.0899",
                 offeredCredit = 50_000,
                 arrangementFee = 0,
                 termFee = 0,
@@ -223,6 +239,8 @@ class SerializationTest {
         val offering = Offering(
             brokerReference = Reference("1", "org.example"),
             offer = Offer(
+                effectiveInterestRate = "0.0919",
+                nominalInterestRate = "0.0899",
                 offeredCredit = 50_000,
                 arrangementFee = 0,
                 termFee = 0,
