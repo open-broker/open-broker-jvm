@@ -1,5 +1,7 @@
 package org.openbroker.common
 
+import org.openbroker.cloudevents.validateEventTime
+
 internal fun Int?.requireMin(min: Int, propertyName: String? = null) {
     if(this == null)
         return
@@ -36,6 +38,13 @@ internal fun String.requireNotEmpty(propertyName: String) {
 internal fun String.requireMatchRegex(regex: Regex, propertyName: String) {
     require(this.matches(regex)) {
         composeMessage("Invalid $propertyName value, does not match regex. $propertyName: $this.")
+    }
+}
+
+// RFC 3339 allows lowercase 't' and 'z'; validateEventTime does not.
+internal fun String.requireDateTime(propertyName: String) {
+    require(runCatching { validateEventTime(this.toUpperCase()) }.isSuccess) {
+        composeMessage("Invalid $propertyName value, must be an RFC 3339 date-time with seconds. $propertyName: $this.")
     }
 }
 

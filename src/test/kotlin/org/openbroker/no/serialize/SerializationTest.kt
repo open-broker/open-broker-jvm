@@ -20,8 +20,10 @@ import org.openbroker.no.privateunsecuredloan.TestObjectsJson
 import org.openbroker.no.privateunsecuredloan.events.ApplicationCreated
 import org.openbroker.no.privateunsecuredloan.events.ContractSigned
 import org.openbroker.no.privateunsecuredloan.events.Message
+import org.openbroker.no.privateunsecuredloan.events.OfferAccepted
 import org.openbroker.no.privateunsecuredloan.events.OfferRejected
 import org.openbroker.no.privateunsecuredloan.events.Offering
+import java.time.Instant
 import org.openbroker.no.privateunsecuredloan.model.*
 
 class SerializationTest {
@@ -138,6 +140,92 @@ class SerializationTest {
         assertEquals(70_000, offer.maxOfferedCredit)
         assertEquals(AmortizationType.ANNUITY, offer.amortizationType)
         assertNull(offer.condition)
+        assertEquals(OfferType.STANDARD, offer.type)
+        assertEquals(OfferStatus.NEW, offer.status)
+        assertNull(offer.brokerOfferId)
+        assertNull(offer.issuedAt)
+        assertNull(offer.validUntil)
+        assertNull(offer.existingLoanAtCreditor)
+        assertTrue(offer.loanParts.isEmpty())
+        assertTrue(event.data!!.supplementaryOffers.isEmpty())
+    }
+
+    @Test
+    fun testDeserializeOfferingWithoutInterestRatesFails() {
+        val withoutEffective = TestObjectsJson.loanOffering1.replace("\"effectiveInterestRate\": \"0.125\",", "")
+        val withoutNominal = TestObjectsJson.loanOffering1.replace("\"nominalInterestRate\": \"0.118\",", "")
+        assertNotEquals(TestObjectsJson.loanOffering1, withoutEffective)
+        assertNotEquals(TestObjectsJson.loanOffering1, withoutNominal)
+        assertThrows(Exception::class.java) { cloudEvent<Offering>(withoutEffective) }
+        assertThrows(Exception::class.java) { cloudEvent<Offering>(withoutNominal) }
+    }
+
+    @Test
+    fun testSerializeAndDeserializeOfferingWithLoanPartsAndSupplementaryOffers() {
+        val offering = Offering(
+            brokerReference = Reference("1", "org.example"),
+            offer = Offer(
+                effectiveInterestRate = "0.0919",
+                nominalInterestRate = "0.0899",
+                offeredCredit = 50_000,
+                arrangementFee = 0,
+                termFee = 0,
+                invoiceFee = 0,
+                brokerOfferId = "a1",
+                issuedAt = "2026-11-05T08:40:45.249493602Z",
+                validUntil = "2026-12-05T08:40:45Z",
+                existingLoanAtCreditor = 20_000,
+                loanParts = listOf(LoanPart(type = LoanPartType.TOP_UP, topUpAmount = 30_000, offeredCredit = 30_000))
+            ),
+            supplementaryOffers = listOf(
+                Offer(
+                    effectiveInterestRate = "0.1229",
+                    nominalInterestRate = "0.1189",
+                    offeredCredit = 80_000,
+                    arrangementFee = 0,
+                    termFee = 0,
+                    invoiceFee = 0,
+                    type = OfferType.DUAL,
+                    brokerOfferId = "a2",
+                    status = OfferStatus.REVISED
+                )
+            )
+        )
+        val originalEvent: CloudEvent<Offering> = openBrokerEvent(event = offering, source = "org.something")
+        val serializedEvent: String = jsonString(originalEvent)
+        assertTrue(serializedEvent.contains("\"type\":\"TOP_UP\""))
+        assertTrue(serializedEvent.contains("\"type\":\"DUAL\""))
+        assertTrue(serializedEvent.contains("\"status\":\"REVISED\""))
+        val deserializedEvent: CloudEvent<Offering> = cloudEvent(serializedEvent)
+        assertEquals(originalEvent, deserializedEvent)
+    }
+
+    @Test
+    fun testOfferRejectsInvalidNewFields() {
+        fun offer(issuedAt: String? = null, brokerOfferId: String? = null, existingLoanAtCreditor: Int? = null) =
+            Offer(
+                effectiveInterestRate = "0.0919",
+                nominalInterestRate = "0.0899",
+                offeredCredit = 50_000,
+                arrangementFee = 0,
+                termFee = 0,
+                invoiceFee = 0,
+                issuedAt = issuedAt,
+                brokerOfferId = brokerOfferId,
+                existingLoanAtCreditor = existingLoanAtCreditor
+            )
+        assertThrows(IllegalArgumentException::class.java) { offer(issuedAt = "2026-11-05") }
+        val noSeconds = assertThrows(IllegalArgumentException::class.java) { offer(issuedAt = "2026-12-05T00:00Z") }
+        assertTrue(noSeconds.message!!.contains("issuedAt"))
+        assertEquals("2026-12-05T00:00:00Z", offer(issuedAt = Instant.parse("2026-12-05T00:00:00Z").toString()).issuedAt)
+        assertEquals("2026-11-09t07:00:06z", offer(issuedAt = "2026-11-09t07:00:06z").issuedAt)
+        assertThrows(IllegalArgumentException::class.java) { offer(brokerOfferId = "") }
+        assertThrows(IllegalArgumentException::class.java) { offer(existingLoanAtCreditor = -1) }
+        assertThrows(IllegalArgumentException::class.java) { LoanPart(type = LoanPartType.COMBO, offeredCredit = 0) }
+        assertThrows(IllegalArgumentException::class.java) { LoanPart(type = LoanPartType.COMBO, nominalInterestRate = "12%") }
+        assertThrows(IllegalArgumentException::class.java) {
+            OfferAccepted(brokerReference = Reference("1", "org.example"), brokerOfferId = "")
+        }
     }
 
     @Test
@@ -151,6 +239,8 @@ class SerializationTest {
         val offering = Offering(
             brokerReference = Reference("1", "org.example"),
             offer = Offer(
+                effectiveInterestRate = "0.0919",
+                nominalInterestRate = "0.0899",
                 offeredCredit = 50_000,
                 arrangementFee = 0,
                 termFee = 0,
