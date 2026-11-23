@@ -124,7 +124,7 @@ class DeserializationTest {
     fun parseComboDisbursed() {
         val disbursed = parseJsonFromFile<Disbursed>("no/privateunsecuredloan/PrivateUnsecuredLoanDisbursed_Combo").data!!
         assertEquals(LoanPartType.COMBO, disbursed.type)
-        assertEquals("ASdh78ao8wiogf6", disbursed.offerId!!.id)
+        assertEquals("2000002", disbursed.offerId!!.id)
         assertEquals(110_000, disbursed.amountDisbursed)
         assertEquals(110_000, disbursed.amountBrokered)
     }

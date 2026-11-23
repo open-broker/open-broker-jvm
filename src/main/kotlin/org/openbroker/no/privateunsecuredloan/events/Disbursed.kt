@@ -12,8 +12,9 @@ import org.openbroker.no.privateunsecuredloan.model.LoanPartType
  *
  * There is one event for the offer's own loan, with no `type`, and one for each
  * [LoanPartType.COMBO] or [LoanPartType.COMBO_TOP_UP] part of the accepted offer.
- * They can come in any order. The amounts are for that loan alone. `offerId` is
- * the id of the offer in every event; the loan is identified by `type`.
+ * They can come in any order. The amounts are for that loan alone. For a loan
+ * part, `offerId` is the part's `creditorOfferId`, or the id of the offer when
+ * the part has none. The loan is identified by `type`, not by `offerId`.
  */
 data class Disbursed @JvmOverloads constructor(
     override val brokerReference: Reference,
