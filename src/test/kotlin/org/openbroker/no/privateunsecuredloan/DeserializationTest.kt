@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import org.openbroker.no.privateunsecuredloan.events.ContractSigned
+import org.openbroker.no.privateunsecuredloan.events.Disbursed
 import org.openbroker.no.privateunsecuredloan.events.OfferAccepted
 import org.openbroker.no.privateunsecuredloan.events.Offering
 import org.openbroker.no.privateunsecuredloan.model.LoanPartType
@@ -97,5 +99,33 @@ class DeserializationTest {
         val accepted = parseJsonFromFile<OfferAccepted>("no/privateunsecuredloan/PrivateUnsecuredLoanOfferAccepted").data!!
         assertEquals("9a4e1c7b-3d2f-4b8a-8e5c-6f1d0a2b7c93", accepted.brokerOfferId)
         assertEquals("12345678901", accepted.bankAccount)
+    }
+
+    @Test
+    fun parseContractSigned() {
+        val signed = parseJsonFromFile<ContractSigned>("no/privateunsecuredloan/PrivateUnsecuredLoanContractSigned").data!!
+        assertNull(signed.type)
+    }
+
+    @Test
+    fun parseComboContractSigned() {
+        val signed = parseJsonFromFile<ContractSigned>("no/privateunsecuredloan/PrivateUnsecuredLoanContractSigned_Combo").data!!
+        assertEquals(LoanPartType.COMBO, signed.type)
+    }
+
+    @Test
+    fun parseDisbursed() {
+        val disbursed = parseJsonFromFile<Disbursed>("no/privateunsecuredloan/PrivateUnsecuredLoanDisbursed").data!!
+        assertNull(disbursed.type)
+        assertEquals(150_000, disbursed.amountDisbursed)
+    }
+
+    @Test
+    fun parseComboDisbursed() {
+        val disbursed = parseJsonFromFile<Disbursed>("no/privateunsecuredloan/PrivateUnsecuredLoanDisbursed_Combo").data!!
+        assertEquals(LoanPartType.COMBO, disbursed.type)
+        assertEquals("2000002", disbursed.offerId!!.id)
+        assertEquals(110_000, disbursed.amountDisbursed)
+        assertEquals(110_000, disbursed.amountBrokered)
     }
 }

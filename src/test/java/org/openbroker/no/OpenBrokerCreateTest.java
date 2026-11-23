@@ -5,6 +5,8 @@ import org.openbroker.cloudevents.CloudEvent;
 import org.openbroker.common.OpenBrokerEventKt;
 import org.openbroker.common.model.AmortizationType;
 import org.openbroker.common.model.Reference;
+import org.openbroker.no.privateunsecuredloan.events.ContractSigned;
+import org.openbroker.no.privateunsecuredloan.events.Disbursed;
 import org.openbroker.no.privateunsecuredloan.events.OfferAccepted;
 import org.openbroker.no.privateunsecuredloan.model.CreditorProduct;
 import org.openbroker.no.privateunsecuredloan.model.LoanPart;
@@ -124,5 +126,23 @@ public class OpenBrokerCreateTest {
                 .issuedAt("2026-11-05").build());
         assertThrows(IllegalArgumentException.class, () ->
             LoanPart.builder().type(LoanPartType.COMBO).offeredCredit(0).build());
+    }
+
+    // Integrations call these constructors without a loan part type; they must keep compiling.
+    @Test
+    public void testCreateContractSignedAndDisbursedWithoutLoanPartType() {
+        Reference reference = new Reference("1", "io.klira");
+
+        assertNull(new ContractSigned(reference).getType());
+        assertNull(new Disbursed(reference, new Reference("123", "com.creditor"), 150_000, 150_000).getType());
+    }
+
+    @Test
+    public void testCreateContractSignedAndDisbursedForLoanPart() {
+        Reference reference = new Reference("1", "io.klira");
+
+        assertEquals(LoanPartType.COMBO, new ContractSigned(reference, LoanPartType.COMBO).getType());
+        assertEquals(LoanPartType.COMBO,
+            new Disbursed(reference, new Reference("123", "com.creditor"), 110_000, 110_000, LoanPartType.COMBO).getType());
     }
 }

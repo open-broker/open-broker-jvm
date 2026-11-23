@@ -1,15 +1,24 @@
 package org.openbroker.no.privateunsecuredloan.events
 
+import com.fasterxml.jackson.annotation.JsonInclude
 import org.openbroker.common.model.Reference
 import org.openbroker.common.requireLessThanOrEqual
 import org.openbroker.common.requireMin
+import org.openbroker.common.requireNotEqual
+import org.openbroker.no.privateunsecuredloan.model.LoanPartType
 
 /**
  * An event indicating that a private unsecured loan has been disbursed
+ *
+ * There is one event for the offer's own loan, with no `type`, and one for each
+ * [LoanPartType.COMBO] or [LoanPartType.COMBO_TOP_UP] part of the accepted offer.
+ * They can come in any order. The amounts are for that loan alone. For a loan
+ * part, `offerId` is the part's `creditorOfferId`, or the id of the offer when
+ * the part has none. The loan is identified by `type`, not by `offerId`.
  */
-data class Disbursed(
+data class Disbursed @JvmOverloads constructor(
     override val brokerReference: Reference,
-    val offerId: Reference? = null,
+    @field:JsonInclude(JsonInclude.Include.NON_NULL) val offerId: Reference? = null,
 
     /**
      * The total amount disbursed to the customer of the loan being brokered
@@ -21,11 +30,13 @@ data class Disbursed(
      * brokered. For example, the amount disbursed exclusive
      * of loans refinanced within the lender.
      */
-    val amountBrokered: Int
+    val amountBrokered: Int,
+    @field:JsonInclude(JsonInclude.Include.NON_NULL) val type: LoanPartType? = null
 ): PrivateUnsecuredLoanEvent {
     init {
         amountDisbursed.requireMin(1, "amountDisbursed")
         amountBrokered.requireMin(0, "amountBrokered")
         amountBrokered.requireLessThanOrEqual(amountDisbursed, "amountDisbursed", "amountBrokered")
+        type.requireNotEqual(LoanPartType.TOP_UP, "type")
     }
 }
