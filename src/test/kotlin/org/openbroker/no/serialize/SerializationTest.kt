@@ -19,6 +19,7 @@ import org.openbroker.no.model.MaritalStatus
 import org.openbroker.no.privateunsecuredloan.TestObjectsJson
 import org.openbroker.no.privateunsecuredloan.events.ApplicationCreated
 import org.openbroker.no.privateunsecuredloan.events.ContractSigned
+import org.openbroker.no.privateunsecuredloan.events.Disbursed
 import org.openbroker.no.privateunsecuredloan.events.Message
 import org.openbroker.no.privateunsecuredloan.events.OfferAccepted
 import org.openbroker.no.privateunsecuredloan.events.OfferRejected
@@ -318,5 +319,43 @@ class SerializationTest {
         assertTrue(serializedEvent.contains("\"reasonDetails\":\"Occupation\""))
         val deserializedEvent: CloudEvent<OfferRejected> = cloudEvent(serializedEvent)
         assertEquals(originalEvent, deserializedEvent)
+    }
+
+    @Test
+    fun testSerializeAndDeserializeDisbursedWithLoanPartType() {
+        val disbursed = Disbursed(
+            brokerReference = Reference("1", "org.example"),
+            offerId = Reference("2", "org.example"),
+            amountDisbursed = 110_000,
+            amountBrokered = 110_000,
+            type = LoanPartType.COMBO_TOP_UP
+        )
+        val originalEvent: CloudEvent<Disbursed> = openBrokerEvent(event = disbursed, source = "org.something")
+        val serializedEvent: String = jsonString(originalEvent)
+        assertTrue(serializedEvent.contains("\"type\":\"COMBO_TOP_UP\""))
+        val deserializedEvent: CloudEvent<Disbursed> = cloudEvent(serializedEvent)
+        assertEquals(originalEvent, deserializedEvent)
+    }
+
+    @Test
+    fun testTopUpIsNotALoanPartTypeOfContractSignedOrDisbursed() {
+        val reference = Reference("1", "org.example")
+        assertThrows(IllegalArgumentException::class.java) { ContractSigned(reference, LoanPartType.TOP_UP) }
+        assertThrows(IllegalArgumentException::class.java) {
+            Disbursed(reference, amountDisbursed = 1, amountBrokered = 1, type = LoanPartType.TOP_UP)
+        }
+        val json = """
+            {
+                "cloudEventsVersion" : "0.1",
+                "eventType" : "org.open-broker.v0.no.PrivateUnsecuredLoanContractSigned",
+                "eventTypeVersion" : "v0",
+                "source" : "/mycontext",
+                "eventID" : "C234-1234-1236",
+                "eventTime" : "2018-04-05T17:31:00Z",
+                "contentType" : "application/json",
+                "data": { "brokerReference": { "id": "12345", "issuer": "io.klira" }, "type": "TOP_UP" }
+            }
+        """.trimIndent()
+        assertThrows(Exception::class.java) { cloudEvent<ContractSigned>(json) }
     }
 }

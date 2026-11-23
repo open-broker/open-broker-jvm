@@ -23,6 +23,12 @@ internal fun Int.requireLessThanOrEqual(compareTo: Int, compareToPropertyName: S
     }
 }
 
+internal fun <T> T?.requireNotEqual(forbidden: T, propertyName: String) {
+    require(this != forbidden) {
+        composeMessage("Value $forbidden is not allowed for $propertyName.")
+    }
+}
+
 internal fun String.requireNotBlank(propertyName: String) {
     require(this.isNotBlank()) {
         composeMessage("$propertyName cannot be blank.")
