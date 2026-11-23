@@ -1,5 +1,6 @@
 package org.openbroker.no.privateunsecuredloan.events
 
+import com.fasterxml.jackson.annotation.JsonInclude
 import org.openbroker.common.model.Reference
 import org.openbroker.common.requireNotEqual
 import org.openbroker.no.privateunsecuredloan.model.LoanPartType
@@ -13,7 +14,7 @@ import org.openbroker.no.privateunsecuredloan.model.LoanPartType
  */
 data class ContractSigned @JvmOverloads constructor(
     override val brokerReference: Reference,
-    val type: LoanPartType? = null
+    @field:JsonInclude(JsonInclude.Include.NON_NULL) val type: LoanPartType? = null
 ): PrivateUnsecuredLoanEvent {
     init {
         type.requireNotEqual(LoanPartType.TOP_UP, "type")

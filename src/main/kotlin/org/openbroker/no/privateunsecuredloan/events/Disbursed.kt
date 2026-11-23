@@ -1,5 +1,6 @@
 package org.openbroker.no.privateunsecuredloan.events
 
+import com.fasterxml.jackson.annotation.JsonInclude
 import org.openbroker.common.model.Reference
 import org.openbroker.common.requireLessThanOrEqual
 import org.openbroker.common.requireMin
@@ -16,7 +17,7 @@ import org.openbroker.no.privateunsecuredloan.model.LoanPartType
  */
 data class Disbursed @JvmOverloads constructor(
     override val brokerReference: Reference,
-    val offerId: Reference? = null,
+    @field:JsonInclude(JsonInclude.Include.NON_NULL) val offerId: Reference? = null,
 
     /**
      * The total amount disbursed to the customer of the loan being brokered
@@ -29,7 +30,7 @@ data class Disbursed @JvmOverloads constructor(
      * of loans refinanced within the lender.
      */
     val amountBrokered: Int,
-    val type: LoanPartType? = null
+    @field:JsonInclude(JsonInclude.Include.NON_NULL) val type: LoanPartType? = null
 ): PrivateUnsecuredLoanEvent {
     init {
         amountDisbursed.requireMin(1, "amountDisbursed")

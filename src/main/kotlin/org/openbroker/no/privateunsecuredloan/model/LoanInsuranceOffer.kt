@@ -1,11 +1,12 @@
 package org.openbroker.no.privateunsecuredloan.model
 
+import com.fasterxml.jackson.annotation.JsonInclude
 import org.openbroker.common.requireMin
 
 data class LoanInsuranceOffer @JvmOverloads constructor(
     val insuredAmount: Int,
     val monthlyPremium: Int,
-    val descriptiveText: String? = null
+    @field:JsonInclude(JsonInclude.Include.NON_NULL) val descriptiveText: String? = null
 ) {
     init {
         insuredAmount.requireMin(1, "insuredAmount")

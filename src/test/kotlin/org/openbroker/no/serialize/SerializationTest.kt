@@ -1,6 +1,8 @@
 package org.openbroker.no.serialize
 
 import org.junit.jupiter.api.Assertions.*
+import com.fasterxml.jackson.databind.JsonNode
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.Test
 import org.openbroker.cloudevents.CloudEvent
 import org.openbroker.cloudevents.cloudEvent
@@ -24,6 +26,7 @@ import org.openbroker.no.privateunsecuredloan.events.Message
 import org.openbroker.no.privateunsecuredloan.events.OfferAccepted
 import org.openbroker.no.privateunsecuredloan.events.OfferRejected
 import org.openbroker.no.privateunsecuredloan.events.Offering
+import org.openbroker.no.privateunsecuredloan.events.PrivateUnsecuredLoanEvent
 import java.time.Instant
 import org.openbroker.no.privateunsecuredloan.model.*
 
@@ -357,5 +360,41 @@ class SerializationTest {
             }
         """.trimIndent()
         assertThrows(Exception::class.java) { cloudEvent<ContractSigned>(json) }
+    }
+
+    @Test
+    fun testNullIsLeftOutOnlyWhereSchemaDoesNotAllowIt() {
+        val reference = Reference("1", "org.example")
+        val offer = Offer(
+            effectiveInterestRate = "0.0919",
+            nominalInterestRate = "0.0899",
+            offeredCredit = 150_000,
+            arrangementFee = 0,
+            termFee = 30,
+            invoiceFee = 0
+        )
+
+        val contractSigned = data(ContractSigned(reference))
+        assertFalse(contractSigned.has("type"))
+
+        val disbursed = data(Disbursed(reference, amountDisbursed = 150_000, amountBrokered = 150_000))
+        assertFalse(disbursed.has("offerId"))
+        assertFalse(disbursed.has("type"))
+
+        val offering = data(Offering(reference, offer = offer, loanInsuranceOffer = LoanInsuranceOffer(100_000, 500)))
+        assertFalse(offering["loanInsuranceOffer"].has("descriptiveText"))
+        assertTrue(offering["offerId"].isNull)
+        assertTrue(offering["offer"]["minOfferedCredit"].isNull)
+
+        val offerRejected = data(OfferRejected(reference, reason = OfferRejectedReason.NEW_APPLICATION_SUBMITTED))
+        assertTrue(offerRejected["offerId"].isNull)
+        assertTrue(offerRejected["reasonDetails"].isNull)
+    }
+
+    private fun data(event: PrivateUnsecuredLoanEvent): JsonNode {
+        val originalEvent: CloudEvent<PrivateUnsecuredLoanEvent> = openBrokerEvent(event = event, source = "org.something")
+        val serializedEvent: String = jsonString(originalEvent)
+        assertEquals(originalEvent, parseOpenBrokerEvent(serializedEvent))
+        return ObjectMapper().readTree(serializedEvent)["data"]
     }
 }
